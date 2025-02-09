@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+package-lock.json  # Added this line to ignore package-lock.json
 
 # testing
 /coverage
