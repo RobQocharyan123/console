@@ -1,0 +1,71 @@
+
+
+.boost{
+    font-family: "Inria Serif", serif;
+    height: 100vh;
+}
+
+.boost h2{
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    color: #AFFCB4;
+    margin: 0;
+}
+
+.boost nav{
+    margin-top: 40px;
+}
+
+
+.boost nav ul{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.boost nav li{
+    list-style-type: none;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #F9F7F7;
+    padding: 8px 15px;
+    position: relative;
+    z-index: 1;
+
+}
+
+.boost nav ul .activePage{
+    position: relative;
+    background-color: transparent;
+    color: #AFFCB4;
+    border-bottom: 0.3px solid rgba(175, 252, 180, 0.6);
+
+}
+
+.boost nav ul .activePage:after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #AFFCB4;
+    filter: blur(25px);
+    pointer-events: none;
+    border-radius: 50px;
+
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+  }
+
+  nav ul li {
+  }
+
