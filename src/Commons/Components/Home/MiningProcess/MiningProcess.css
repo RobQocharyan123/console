@@ -1,0 +1,107 @@
+
+
+.mining{
+    border-radius: 23px;
+    padding: 20px 12px 14px 13px;
+    background-color: rgba(159, 160, 172, 0.2);
+    margin-top: 14px;
+}
+
+.mining .miningText{
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: #F9F7F7;
+    margin: 0;
+}
+
+.mining .squares{
+
+}
+
+.mining .miningTime{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.miningTime span{
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: #F9F7F7;
+}
+
+.miningTime span:nth-child(1){
+    font-family: "Instrument Sans", serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #F9F7F7;
+}
+
+.mining .miningCompleted{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+}
+
+
+.miningCompleted .completed{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 13px;
+}
+
+.miningCompleted .completed img{
+
+}
+
+
+.miningCompleted .completed .completedText{
+
+}
+
+.miningCompleted .completed .completedText p{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+
+
+
+
+
+.mining .miningCompleted button{
+    font-weight: 700;
+    font-size: 16px;
+    color: #02040F;
+    line-height: 20px;
+    width: 101px;
+    height: 26px;
+    border-radius: 18px;
+    background: linear-gradient(to right, #3F4050, #D5D7E9, #424459);
+    position: relative;
+    border: none;
+    z-index: 2;
+}
+
+
+.mining .miningCompleted button::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(to right, #3F4050, #D5D7E9, #424459);
+    z-index: -1;
+    border-radius: inherit;
+    filter: blur(10px);
+}
