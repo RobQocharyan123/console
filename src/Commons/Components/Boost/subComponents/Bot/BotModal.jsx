@@ -25,7 +25,6 @@ const BotModal = ({ setShowModal,title,description,price }) => {
               <img src={cristalIcon} alt="cristalIcon" />
               <p>{price}</p>
             </div>
-            <img src={arrowBottom} alt="arrowBottom" />
           </div>
         </div>
 

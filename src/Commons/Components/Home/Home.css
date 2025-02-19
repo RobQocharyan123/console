@@ -1,9 +1,11 @@
 
 
 .home{
-    padding: 30px 26px 126px 26px;
+    padding: 30px 26px;
     user-select: none;
-    overflow: scroll;
+    overflow-y: auto;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 .home::-webkit-scrollbar {
@@ -169,19 +171,19 @@ input,button,p,span,h2{
     border: none;
     outline: none;
     background-color: transparent;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 28px;
-    color: #F9F7F7;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: rgba(249, 247, 247, 0.7);
     position: relative;
     z-index: 2;
 }
 
 .todayCode .todayContent input::placeholder{
-    color: #F9F7F7;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 28px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: rgba(249, 247, 247, 0.7);
 }
 
 .todayCode .todayContent button{
@@ -218,6 +220,7 @@ input,button,p,span,h2{
     border-radius: 23px;
     background-clip: padding-box;
     margin-top: 18px;
+    margin-bottom: 110px;
 }
 
 

@@ -1,0 +1,100 @@
+
+
+.upgrade{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 37px;
+    padding-bottom: 150px;
+}
+
+.upgrade .upgradeText{
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    gap: 8px;
+
+}
+
+.upgrade .upgradeText p{
+    margin: 0;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #F9F7F7;
+}
+
+
+.upgrade  .freeItem{
+    border-radius: 32px;
+    padding: 8px  10px 4px 13px;
+    background-color: rgba(217, 217, 217, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    border: 1px solid #AFFCB4;
+
+}
+
+.home .freeItem h2{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #F9F7F7;
+    margin-top: 0;
+}
+
+.freeItem p{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    color: rgba(249, 247, 247, 0.7);
+    font-family: "Instrument Sans", serif;
+    letter-spacing: -0.3px;
+    margin: 0;
+    margin-top: 2px;
+}
+
+.freeItem .freeItemText{
+    margin-left: 18px;
+}
+.freeItem .buy{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-left: 41px;
+}
+
+.freeItem .buy .upgradeIcons{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.freeItem button{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    width: 101px;
+    height: 26px;
+    color: #02040F;
+    border-radius: 18px;
+    background-color: rgba(175, 252, 180, 1);
+    position: relative;
+    border: none;
+    z-index: 3;
+}
+
+
+
+/* line */
+
+.greenLine{
+    height: 0.3px;
+    background-color: rgba(175, 252, 180, 0.6);
+    width: 100%;
+    margin-top: 34px;
+}
