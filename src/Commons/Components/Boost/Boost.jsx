@@ -1,13 +1,11 @@
 import "./Boost.css";
 import { useState } from "react";
-import Free from "./subComponents/Free/Free";
+import Upgrade from "./subComponents/Upgrade/Upgrade";
 import Bot from "./subComponents/Bot/Bot";
 import BoostPage from "./subComponents/BoostPage/BoostPage";
 
 const Boost = () => {
-  const [page, setPage] = useState("free");
-
-
+  const [page, setPage] = useState("upgrade");
 
   return (
     <div className="boost">
@@ -16,10 +14,10 @@ const Boost = () => {
       <nav>
         <ul>
           <li
-            className={page === "free" ? "activePage" : ""}
-            onClick={() => setPage("free")}
+            className={page === "upgrade" ? "activePage" : ""}
+            onClick={() => setPage("upgrade")}
           >
-            Free
+            Upgrade
           </li>
           <li
             className={page === "bot" ? "activePage" : ""}
@@ -36,7 +34,7 @@ const Boost = () => {
         </ul>
       </nav>
 
-      {page === "free" && <Free />}
+      {page === "upgrade" && <Upgrade />}
       {page === "bot" && <Bot />}
       {page === "bosts" && <BoostPage />}
     </div>

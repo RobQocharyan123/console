@@ -1,9 +1,11 @@
 import "./MiningProcess.css";
 import miningLogo from "../../../../Assets/Home/home-logo.svg";
 import { useEffect, useState } from "react";
+import Success from "./../../Success/Success";
 
 const MiningProcess = () => {
   const [time, setTime] = useState(new Date());
+  const [cancel, setCancel] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -37,8 +39,9 @@ const MiningProcess = () => {
             <p>Blocks: 5/8</p>
           </div>
         </div>
-        <button>Claim</button>
+        <button onClick={() => setCancel(true)}>Claim</button>
       </div>
+      {cancel && <Success setCancel={setCancel} />}
     </div>
   );
 };
