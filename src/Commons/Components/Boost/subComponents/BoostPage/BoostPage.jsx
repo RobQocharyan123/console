@@ -13,7 +13,7 @@ const arr = [
     description: "Farming Booster:",
     descriptionSmall: "x2 for  3 days.",
     imgText: "X2",
-    boostPrice: "1 TON"
+    boostPrice: "1"
   },
   {
     id: "2",
@@ -22,7 +22,7 @@ const arr = [
     description: "Farming Booster:",
     descriptionSmall: "x3 for  7 days. ",
     imgText: "X3",
-    boostPrice: "1 TON"
+    boostPrice: "1"
   },
   {
     id: "3",
@@ -31,7 +31,7 @@ const arr = [
     description: "Farming Booster:",
     descriptionSmall: "x4 for  30 days. ",
     imgText: "X4",
-    boostPrice: "1 TON"
+    boostPrice: "1"
   },
   {
     id: "4",
@@ -40,7 +40,7 @@ const arr = [
     description: "For each block, you will",
     descriptionSmall: "receive 150 points.",
     imgText: "X2",
-    boostPrice: "1 TON"
+    boostPrice: "1"
   },
   {
     id: "5",
@@ -49,7 +49,7 @@ const arr = [
     description: "",
     descriptionSmall: "receive 150 points.",
     imgText: "X2",
-    boostPrice: "1 TON"
+    boostPrice: "1"
   },
   {
     id: "5",
@@ -58,7 +58,7 @@ const arr = [
     description: "",
     descriptionSmall: "receive 150 points.",
     imgText: "X2",
-    boostPrice: "1 TON"
+    boostPrice: "1"
   },
   {
     id: "5",
@@ -67,7 +67,7 @@ const arr = [
     description: "",
     descriptionSmall: "receive 150 points.",
     imgText: "X2",
-    boostPrice: "1 TON"
+    boostPrice: "1"
   },
   {
     id: "5",
@@ -76,10 +76,8 @@ const arr = [
     description: "",
     descriptionSmall: "receive 150 points.",
     imgText: "X2",
-    boostPrice: "1 TON"
-  },
-  
-
+    boostPrice: "1"
+  }
 ];
 
 const BoostPage = () => {

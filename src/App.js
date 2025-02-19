@@ -4,7 +4,8 @@ import Header from "./Commons/Components/Header/Header";
 import Home from "./Commons/Components/Home/Home";
 import NavBar from "./Commons/Components/NavBar/NavBar";
 import Boost from "./Commons/Components/Boost/Boost";
-import LogoAnimation from './Commons/Components/LogoAnimation/LogoAnimation';
+import LogoAnimation from "./Commons/Components/LogoAnimation/LogoAnimation";
+import Tasks from "./Commons/Components/Tasks/Tasks";
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
         <Route path="/" element={<LogoAnimation />}></Route>
 
         {/* Other routes go here */}
+
+        <Route path="/tasks" element={<Tasks />}>
+          <Route path="boost" element={<Boost />} />
+        </Route>
       </Routes>
       <NavBar />
     </div>
