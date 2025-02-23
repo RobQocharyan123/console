@@ -3,7 +3,14 @@ import miningLogo from "../../../../Assets/Home/home-logo.svg";
 import { useEffect, useState } from "react";
 import Success from "./../../Success/Success";
 
+
+
 const MiningProcess = () => {
+  // squars
+
+  const [squares, setSquares] = useState(Array(8).fill(false));
+  const [timer, setTimer] = useState(0);
+
   const [time, setTime] = useState(new Date());
   const [cancel, setCancel] = useState(false);
 
@@ -22,24 +29,72 @@ const MiningProcess = () => {
     return `${hours}:${minutes}:${seconds}`;
   };
 
+  // squars logic
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimer((prev) => prev + 1);
+    }, 3600000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (timer > 0 && timer <= 8) {
+      setSquares((prev) => {
+        const nextSquares = [...prev];
+        nextSquares[timer - 1] = true;
+        return nextSquares;
+      });
+    }
+  }, [timer]);
+
+  const handleClaim = () => {
+    if (squares.every(Boolean)) {
+      setCancel(true);
+      setSquares(Array(8).fill(false));
+      setTimer(0);
+    }
+  };
+  const completedCount = squares.filter(Boolean).length;
+
+
   return (
     <div className="mining">
       <p className="miningText">Mining Process</p>
-      <div className="squares"></div>
+
+      <div className="squares">
+        {Array.isArray(squares) &&
+          squares.map((item, index) => {
+            return (
+              <div
+                key={index}
+                className="squareItem"
+                style={{
+                  background: item ? "#AFFCB4" : "transparent",
+                  border: "1px solid #AFFCB4"
+                }}
+              ></div>
+            );
+          })}
+      </div>
+
       <div className="miningTime">
         <span>Next block complete in:</span>
         <span>{formatTime(time)}</span>
       </div>
 
       <div className="miningCompleted">
-        <div className="completed">
+        <div className="squareCompleted">
           <img src={miningLogo} alt="miningLogo" />
           <div className="completedText">
             <p>Completed</p>
-            <p>Blocks: 5/8</p>
+            <p>Blocks: {completedCount} /8</p>
           </div>
         </div>
-        <button onClick={() => setCancel(true)}>Claim</button>
+        <button onClick={handleClaim} disabled={!squares.every(Boolean)}>
+          Claim
+        </button>
       </div>
       {cancel && <Success setCancel={setCancel} />}
     </div>

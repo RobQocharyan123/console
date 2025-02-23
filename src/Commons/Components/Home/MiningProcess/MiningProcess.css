@@ -16,8 +16,23 @@
 }
 
 .mining .squares{
-
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    z-index: 2;
+    margin-top: 22px;
 }
+
+.mining .squares .squareItem{
+    width: 33px;
+    height: 30px;
+    background-color: #AFFCB4;
+    border: 1px solid #AFFCB4;
+    border-radius: 6px;
+}
+
 
 .mining .miningTime{
     display: flex;
@@ -49,23 +64,23 @@
 }
 
 
-.miningCompleted .completed{
+.miningCompleted .squareCompleted{
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 13px;
 }
 
-.miningCompleted .completed img{
+.miningCompleted .squareCompleted img{
 
 }
 
 
-.miningCompleted .completed .completedText{
+.miningCompleted .squareCompleted .completedText{
 
 }
 
-.miningCompleted .completed .completedText p{
+.miningCompleted .squareCompleted .completedText p{
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;

@@ -13,7 +13,8 @@ const arr = [
     text: "For each block, you will  receive 225 points.",
     logo: upgradeLogoIcon,
     ton: upgradeTonIcon,
-    bonus: upgrade1
+    bonus: upgrade1,
+    border: false
   },
   {
     id: "2",
@@ -21,7 +22,8 @@ const arr = [
     text: "For each block, you will  receive 450 points.",
     logo: upgradeLogoIcon,
     ton: upgradeTonIcon,
-    bonus: upgrade1
+    bonus: upgrade1,
+    border: true
   }
 ];
 
@@ -37,7 +39,7 @@ const Upgrade = () => {
       {arr.map((i, index) => {
         return (
           <>
-            <div key={index} className="freeItem">
+            <div key={index} className={`freeItem ${i.border ? "border" : ""}`}>
               <img src={i.bonus} alt="bonus" />
               <div className="freeItemText">
                 <h2>{i.title}</h2>

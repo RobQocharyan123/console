@@ -1,0 +1,234 @@
+.fon{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+
+
+.friends{
+    padding: 30px 26px;
+    user-select: none;
+    overflow-y: auto;
+    min-height: calc(100vh - 115px);
+    box-sizing: border-box;
+    padding-bottom: 150px;
+}
+
+
+.friends h2{
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    color: #F9F7F7;
+}
+
+.friends .myFriends{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 61px;
+    margin-top: 32px;
+}
+
+.friends .myFriends .myFriendsText p{
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #F9F7F7;
+    margin: 0;
+}
+
+
+.friends .myFriends .myFriendsClaim{
+    font-family: "Instrument Sans", serif;
+
+}
+
+.friends .myFriends .myFriendsClaim button{
+    width: 94px;
+    height: 29px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #02040F;
+    border-radius: 18px;
+    background-color: rgba(175, 252, 180, 1);
+    box-shadow: rgba(175, 252, 180, 0.5) 3.95px 3.95px 0.6px;
+    position: relative;
+    border: none;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+}
+
+.friends .myFriends .myFriendsClaim p{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #AFFCB4;
+}
+
+
+.friends .friendsItems{
+    height: 348px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: scroll;
+    margin-top: 30px;
+    padding-right: 12px;
+    position: relative;
+    z-index: 2;
+}
+
+
+.friends .friendsItems::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  .friends .friendsItems::-webkit-scrollbar-track {
+    background: #A0A1B1;
+  }
+
+  .friends .friendsItems::-webkit-scrollbar-thumb {
+    background: #AFFCB4;
+
+    border-radius: 1.5px;
+  }
+
+  .friends .friendsItems::-webkit-scrollbar-thumb:hover {
+    background: #AFFCB4;
+
+  }
+
+
+.friends .friendsItems .friend{
+    background-color: rgba(217, 217, 217, 0.2);
+    padding: 14px 36px 15px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 23px;
+}
+
+
+.friendsItems .friend .friendIntro{
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.friendIntro .friendText p {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #F9F7F7;
+    margin: 0;
+}
+
+
+.friendIntro .friendImg{
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #D9D9D9;
+}
+
+.friendIntro .friendImg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+}
+
+
+
+
+
+
+.friendsItems .friend .friendCp p{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #F9F7F7;
+    font-family: "Instrument Sans", serif;
+}
+
+
+.friends .friendPointSuccess{
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 6px;
+
+}
+
+.friends .friendPointSuccess img{
+
+}
+
+.friends .friendPointSuccess p{
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF;
+}
+
+.friends .friendsButton{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 22px;
+}
+
+.friends .friendsButton .copy{
+    width: 215px;
+    height: 46px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #02040F;
+    border-radius: 18px;
+    background-color: rgba(175, 252, 180, 1);
+    box-shadow: rgba(175, 252, 180, 0.5) 3.95px 3.95px 0.6px;
+    border: none;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.friends .friendsButton .invite{
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 215px;
+    height: 46px;
+    border-radius: 18px;
+    background: linear-gradient(to right, #3F4050, #D5D7E9, #424459);
+    position: relative;
+    border: none;
+    z-index: 2;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 18px;
+    color: #02040F;
+    line-height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -6,6 +6,11 @@ import NavBar from "./Commons/Components/NavBar/NavBar";
 import Boost from "./Commons/Components/Boost/Boost";
 import LogoAnimation from "./Commons/Components/LogoAnimation/LogoAnimation";
 import Tasks from "./Commons/Components/Tasks/Tasks";
+import AirDrop from "./Commons/Components/AirDrop/AirDrop";
+import Profile from "./Commons/Components/Profile/Profile";
+import Friends from "./Commons/Components/Friends/Friends";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -22,8 +27,13 @@ function App() {
         <Route path="/tasks" element={<Tasks />}>
           <Route path="boost" element={<Boost />} />
         </Route>
+
+        <Route path="/airDrop" element={<AirDrop />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
+        <Route path="/friends" element={<Friends />}></Route>
       </Routes>
       <NavBar />
+      <ToastContainer />
     </div>
   );
 }
