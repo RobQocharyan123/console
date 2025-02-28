@@ -5,6 +5,7 @@ import fon from "../../../Assets/fon.png";
 import { useState } from "react";
 import friendSuccessIcon from "../../../Assets/Friends/friend-success.svg";
 import friendsCancelIcon from "../../../Assets/Friends/friend-cancel.svg";
+import "share-api-polyfill";
 
 const Friends = () => {
   const [arr, setArr] = useState(Array(8).fill(false));
@@ -12,33 +13,69 @@ const Friends = () => {
 
   const copyReferalLink = () => {
     const referralLink = window.location.href;
-    navigator.clipboard
-      .writeText(referralLink)
-      .then(() => {
-        setLinkCopied(referralLink);
-        toast.success(
-          <div className="friendsSuccessDiv">
-            <p className="friendSuccess">Success</p>
-            <p className="friendSuccessText">Your link copied!</p>
-          </div>,
-          {
-            icon: <img src={friendSuccessIcon} alt="friendSuccessIcon" />,
-            closeButton: false
-          }
-        );
-      })
-      .catch((err) => {
-        toast.error(
-          <div className="friendsSuccessDiv">
-            <p className="friendCancel">Cancel</p>
-            <p className="friendSuccessText">Something went wrong!</p>
-          </div>,
-          {
-            icon: <img src={friendsCancelIcon} alt="friendsCancelIcon" />,
-            closeButton: false
-          }
-        );
-      });
+
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "Check out this referral link!",
+          text: "Use my referral link to sign up:",
+          url: referralLink,
+        })
+        .then(() => {
+          setLinkCopied(referralLink);
+          toast.success(
+            <div className="friendsSuccessDiv">
+              <p className="friendSuccess">Success</p>
+              <p className="friendSuccessText">Link shared successfully!</p>
+            </div>,
+            {
+              icon: <img src={friendSuccessIcon} alt="friendSuccessIcon" />,
+              closeButton: false,
+            },
+          );
+        })
+        .catch((err) => {
+          toast.error(
+            <div className="friendsSuccessDiv">
+              <p className="friendCancel">Cancel</p>
+              <p className="friendSuccessText">Something went wrong!</p>
+            </div>,
+            {
+              icon: <img src={friendsCancelIcon} alt="friendsCancelIcon" />,
+              closeButton: false,
+            },
+          );
+        });
+    } else {
+      // Fallback to clipboard copy if Web Share API isn't available
+      navigator.clipboard
+        .writeText(referralLink)
+        .then(() => {
+          setLinkCopied(referralLink);
+          toast.success(
+            <div className="friendsSuccessDiv">
+              <p className="friendSuccess">Success</p>
+              <p className="friendSuccessText">Your link copied!</p>
+            </div>,
+            {
+              icon: <img src={friendSuccessIcon} alt="friendSuccessIcon" />,
+              closeButton: false,
+            },
+          );
+        })
+        .catch((err) => {
+          toast.error(
+            <div className="friendsSuccessDiv">
+              <p className="friendCancel">Cancel</p>
+              <p className="friendSuccessText">Something went wrong!</p>
+            </div>,
+            {
+              icon: <img src={friendsCancelIcon} alt="friendsCancelIcon" />,
+              closeButton: false,
+            },
+          );
+        });
+    }
   };
   return (
     <>
@@ -105,7 +142,7 @@ const Friends = () => {
             style={{
               pointerEvents: linkCopied ? "auto" : "none",
               opacity: linkCopied ? 1 : 0.5,
-              cursor: linkCopied ? "pointer" : "not-allowed"
+              cursor: linkCopied ? "pointer" : "not-allowed",
             }}
           >
             Invite Friends
