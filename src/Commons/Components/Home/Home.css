@@ -5,6 +5,7 @@
     user-select: none;
     overflow-y: auto;
     box-sizing: border-box;
+    min-height: 100vh;
 }
 
 .home::-webkit-scrollbar {
