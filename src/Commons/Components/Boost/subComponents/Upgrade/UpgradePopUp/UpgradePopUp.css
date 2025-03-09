@@ -24,7 +24,7 @@
     top: 50%;
     left: 50%;
     z-index: 5;
-    border: 1px solid rgba(175, 252, 180, 0.5);
+    border: 1px solid rgba(100, 255, 255, 0.5);
     transform: translate(-50%, -50%);
 }
 
@@ -126,8 +126,8 @@
     line-height: 22px;
     color: #02040F;
     border-radius: 18px;
-    background-color: #AFFCB4;
-    box-shadow:rgba(175, 252, 180, 0.5) 3.95px 3.95px 0.6px;
+    background-color: #64FFFF ;
+    box-shadow:rgba(100, 255, 255, 0.5) 3.95px 3.95px 0.6px;
     border: none;
     position: relative;
     z-index: 2;

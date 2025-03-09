@@ -1,7 +1,7 @@
 
 
 .bot{
-    border: 1px solid #AFFCB4;
+    border: 1px solid #64FFFF ;
     border-radius: 32px;
     background-color: #02040F;
     padding: 16px;
@@ -33,7 +33,7 @@
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;
-    color: #AFFCB4;
+    color: #64FFFF ;
 }
 
 .bot .assistant .assistantText p{
@@ -57,8 +57,8 @@
     height: 26px;
     color: #02040F;
     border-radius: 18px;
-    background-color: rgba(175, 252, 180, 1);
-    box-shadow:rgba(175, 252, 180, 0.5) 3.95px 3.95px 0.6px;
+    background-color: #64FFFF ;
+    box-shadow:rgba(100, 255, 255, 0.5) 3.95px 3.95px 0.6px;
     position: relative;
     border: none;
     z-index: 2;
@@ -90,8 +90,9 @@
     left: 0;
     z-index: 5;
     width: -webkit-fill-available;
-    height: 400px;
-    border: 1px solid #AFFCB4;
+    height: calc(90% - 100px);
+
+    border: 1px solid #64FFFF ;
   }
 
   .botModal .modalText{
@@ -170,8 +171,8 @@
     height:43px;
     color: #02040F;
     border-radius: 18px;
-    background-color: rgba(175, 252, 180, 1);
-    box-shadow:rgba(175, 252, 180, 0.5) 3.95px 3.95px 0.6px;
+    background-color: #64FFFF ;
+    box-shadow:rgba(100, 255, 255, 0.5) 3.95px 3.95px 0.6px;
     position: absolute;
     bottom: 30px;
     left: 50%;

@@ -1,39 +1,46 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Header from "./Commons/Components/Header/Header";
-import Home from "./Commons/Components/Home/Home";
-import NavBar from "./Commons/Components/NavBar/NavBar";
-import Boost from "./Commons/Components/Boost/Boost";
-import LogoAnimation from "./Commons/Components/LogoAnimation/LogoAnimation";
-import Tasks from "./Commons/Components/Tasks/Tasks";
-import AirDrop from "./Commons/Components/AirDrop/AirDrop";
-import Profile from "./Commons/Components/Profile/Profile";
-import Friends from "./Commons/Components/Friends/Friends";
+import { Suspense, lazy } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
+// Lazy load components
+const Header = lazy(() => import("./Commons/Components/Header/Header"));
+const Home = lazy(() => import("./Commons/Components/Home/Home"));
+const NavBar = lazy(() => import("./Commons/Components/NavBar/NavBar"));
+const Boost = lazy(() => import("./Commons/Components/Boost/Boost"));
+const LogoAnimation = lazy(() =>
+  import("./Commons/Components/LogoAnimation/LogoAnimation"),
+);
+const Tasks = lazy(() => import("./Commons/Components/Tasks/Tasks"));
+const AirDrop = lazy(() => import("./Commons/Components/AirDrop/AirDrop"));
+const Profile = lazy(() => import("./Commons/Components/Profile/Profile"));
+const Friends = lazy(() => import("./Commons/Components/Friends/Friends"));
 
 function App() {
   return (
     <div className="app">
-      <Header />
-      <Routes>
-        <Route path="/home" element={<Home />}>
-          <Route path="boost" element={<Boost />} />
-        </Route>
-        <Route path="/" element={<LogoAnimation />}></Route>
+      <Suspense fallback={<LogoAnimation />}>
+        <Header />
+        <Routes>
+          <Route path="/home" element={<Home />}>
+            <Route path="boost" element={<Boost />} />
+          </Route>
+          <Route path="/" element={<LogoAnimation />}></Route>
 
-        {/* Other routes go here */}
+          {/* Other routes go here */}
 
-        <Route path="/tasks" element={<Tasks />}>
-          <Route path="boost" element={<Boost />} />
-        </Route>
+          <Route path="/tasks" element={<Tasks />}>
+            <Route path="boost" element={<Boost />} />
+          </Route>
 
-        <Route path="/airDrop" element={<AirDrop />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
-        <Route path="/friends" element={<Friends />}></Route>
-      </Routes>
-      <NavBar />
-      <ToastContainer />
+          <Route path="/airDrop" element={<AirDrop />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/friends" element={<Friends />}></Route>
+        </Routes>
+        <NavBar />
+        <ToastContainer />
+      </Suspense>
     </div>
   );
 }

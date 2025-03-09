@@ -1,9 +1,9 @@
-import React, {  useEffect } from "react";
+import React, { useEffect } from "react";
 import "./LogoAnimation.css";
 import { motion, useCycle } from "framer-motion";
 
 const LogoAnimation = () => {
-  const colors = ["#AFFCB4", "#FFFFFF"];
+  const colors = ["#64FFFF ", "#FFFFFF"];
   const [color, cycleColor] = useCycle(...colors);
 
   useEffect(() => {

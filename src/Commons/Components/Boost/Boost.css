@@ -8,8 +8,9 @@
     font-weight: 700;
     font-size: 32px;
     line-height: 38px;
-    color: #AFFCB4;
+    color: #64FFFF ;
     margin: 0;
+
 }
 
 .boost nav{
@@ -39,7 +40,7 @@
 .boost nav ul .activePage{
     position: relative;
     background-color: transparent;
-    color: #AFFCB4;
+    color: #64FFFF ;
     border-bottom: 0.3px solid rgba(175, 252, 180, 0.6);
 
 }
@@ -51,7 +52,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: #AFFCB4;
+    background: #64FFFF ;
     filter: blur(25px);
     pointer-events: none;
     border-radius: 50px;

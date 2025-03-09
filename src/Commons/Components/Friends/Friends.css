@@ -56,8 +56,8 @@
     line-height: 20px;
     color: #02040F;
     border-radius: 18px;
-    background-color: rgba(175, 252, 180, 1);
-    box-shadow: rgba(175, 252, 180, 0.5) 3.95px 3.95px 0.6px;
+    background-color: #64FFFF ;
+    box-shadow: rgba(100, 255, 255, 0.5) 3.95px 3.95px 0.6px;
     position: relative;
     border: none;
     z-index: 2;
@@ -71,7 +71,7 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
-    color: #AFFCB4;
+    color: #64FFFF ;
 }
 
 
@@ -97,13 +97,13 @@
   }
 
   .friends .friendsItems::-webkit-scrollbar-thumb {
-    background: #AFFCB4;
+    background: #64FFFF ;
 
     border-radius: 1.5px;
   }
 
   .friends .friendsItems::-webkit-scrollbar-thumb:hover {
-    background: #AFFCB4;
+    background: #64FFFF ;
 
   }
 
@@ -201,8 +201,8 @@
     line-height: 22px;
     color: #02040F;
     border-radius: 18px;
-    background-color: rgba(175, 252, 180, 1);
-    box-shadow: rgba(175, 252, 180, 0.5) 3.95px 3.95px 0.6px;
+    background-color: #64FFFF ;
+    box-shadow: rgba(100, 255, 255, 0.5) 3.95px 3.95px 0.6px;
     border: none;
     position: relative;
     z-index: 2;

@@ -81,7 +81,7 @@ input,button,p,span,h2{
 .task nav ul .activePage{
     position: relative;
     background-color: transparent;
-    color: #AFFCB4;
+    color: #64FFFF ;
     border-bottom: 0.3px solid rgba(175, 252, 180, 0.6);
 
 }
@@ -93,7 +93,7 @@ input,button,p,span,h2{
     left: 0;
     right: 0;
     bottom: 0;
-    background: #AFFCB4;
+    background: #64FFFF ;
     filter: blur(25px);
     pointer-events: none;
     border-radius: 50px;

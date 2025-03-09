@@ -24,7 +24,7 @@
     top: 50%;
     left: 50%;
     z-index: 5;
-    border: 1px solid #AFFCB4;
+    border: 1px solid #64FFFF ;
     gap: 18px;
     transform: translate(-50%, -50%);
 }
@@ -33,7 +33,7 @@
     font-weight: 700;
     font-size: 32px;
     line-height: 38px;
-    color: #AFFCB4;
+    color: #64FFFF ;
 }
 
 .success p{
@@ -52,8 +52,8 @@
     height:29px;
     color: #02040F;
     border-radius: 18px;
-    background-color: rgba(175, 252, 180, 1);
-    box-shadow:rgba(175, 252, 180, 0.5) 3.95px 3.95px 0.6px;
+    background-color: #64FFFF ;
+    box-shadow:rgba(100, 255, 255, 0.5)3.95px 3.95px 0.6px;
     position: relative;
     border: none;
     z-index: 2;

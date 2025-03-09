@@ -4,7 +4,6 @@
     padding: 30px 26px;
     user-select: none;
     overflow-y: auto;
-    min-height: 100vh;
     box-sizing: border-box;
 }
 
@@ -125,8 +124,8 @@ input,button,p,span,h2{
     height: 26px;
     color: #02040F;
     border-radius: 18px;
-    background-color: rgba(175, 252, 180, 1);
-    box-shadow:rgba(175, 252, 180, 0.5) 3.95px 3.95px 0.6px;
+    background-color: #64FFFF ;
+    box-shadow:rgba(100, 255, 255, 0.5) 3.95px 3.95px 0.6px;
     position: relative;
     right: -40px;
     bottom: -10px;
@@ -194,8 +193,8 @@ input,button,p,span,h2{
     height: 26px;
     color: #02040F;
     border-radius: 18px;
-    background-color: rgba(175, 252, 180, 1);
-    box-shadow:rgba(175, 252, 180, 0.5) 3.95px 3.95px 0.6px;
+    background-color: #64FFFF ;
+    box-shadow:rgba(100, 255, 255, 0.5) 3.95px 3.95px 0.6px;
     border: none;
     position: relative;
     z-index: 2;
@@ -248,8 +247,8 @@ input,button,p,span,h2{
     height: 26px;
     color: #02040F;
     border-radius: 18px;
-    background-color: rgba(175, 252, 180, 1);
-    box-shadow:rgba(175, 252, 180, 0.5) 3.95px 3.95px 0.6px;
+    background-color: #64FFFF ;
+    box-shadow:rgba(100, 255, 255, 0.5) 3.95px 3.95px 0.6px;
     border: none;
     position: relative;
     z-index: 2;

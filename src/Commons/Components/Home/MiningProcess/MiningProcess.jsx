@@ -3,8 +3,6 @@ import miningLogo from "../../../../Assets/Home/home-logo.svg";
 import { useEffect, useState } from "react";
 import Success from "./../../Success/Success";
 
-
-
 const MiningProcess = () => {
   // squars
 
@@ -58,7 +56,6 @@ const MiningProcess = () => {
   };
   const completedCount = squares.filter(Boolean).length;
 
-
   return (
     <div className="mining">
       <p className="miningText">Mining Process</p>
@@ -71,8 +68,8 @@ const MiningProcess = () => {
                 key={index}
                 className="squareItem"
                 style={{
-                  background: item ? "#AFFCB4" : "transparent",
-                  border: "1px solid #AFFCB4"
+                  background: item ? "#64FFFF " : "transparent",
+                  border: "1px solid #64FFFF ",
                 }}
               ></div>
             );

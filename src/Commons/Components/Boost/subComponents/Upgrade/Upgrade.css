@@ -37,7 +37,7 @@
 }
 
 .upgrade  .border{
-    border: 1px solid #AFFCB4;
+    border: 1px solid #64FFFF ;
 }
 
 .home .freeItem h2{
@@ -85,7 +85,7 @@
     height: 26px;
     color: #02040F;
     border-radius: 18px;
-    background-color: rgba(175, 252, 180, 1);
+    background-color: #64FFFF ;
     position: relative;
     border: none;
     z-index: 3;
