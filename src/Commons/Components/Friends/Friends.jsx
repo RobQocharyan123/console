@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import fon from "../../../Assets/fon.png";
 import { useState } from "react";
 import friendSuccessIcon from "../../../Assets/Friends/friend-success.svg";
+import friendSuccessIconCopy from "../../../Assets/Friends/friend-success-copy.svg";
 import friendsCancelIcon from "../../../Assets/Friends/friend-cancel.svg";
 import "share-api-polyfill";
 
@@ -116,7 +117,7 @@ const Friends = () => {
         </div>
 
         <div className="friendPointSuccess">
-          <img src={friendSuccessIcon} alt="friendSuccessIcon" />
+          <img src={friendSuccessIconCopy} alt="friendSuccessIconCopy" />
           <p>+200 Points for every successful referral</p>
         </div>
 
