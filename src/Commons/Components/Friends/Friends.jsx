@@ -10,10 +10,9 @@ import "share-api-polyfill";
 const Friends = () => {
   const [arr, setArr] = useState(Array(8).fill(false));
   const [linkCopied, setLinkCopied] = useState("");
+  const [referralLink, setReferralLink] = useState(window.location.href);
 
   const copyReferalLink = () => {
-    const referralLink = window.location.href;
-
     if (navigator.share) {
       navigator
         .share({
@@ -47,7 +46,6 @@ const Friends = () => {
           );
         });
     } else {
-      // Fallback to clipboard copy if Web Share API isn't available
       navigator.clipboard
         .writeText(referralLink)
         .then(() => {
@@ -77,6 +75,7 @@ const Friends = () => {
         });
     }
   };
+
   return (
     <>
       <img src={fon} alt="fon" className="fon" />
@@ -126,27 +125,19 @@ const Friends = () => {
             Copy referral link
           </button>
           <a
-            className={`invite ${!linkCopied ? "disabled" : ""}`}
-            href={linkCopied ? `https://t.me/share/url?url=${linkCopied}` : "#"}
+            className="invite"
+            href={`https://t.me/share/url?url=${encodeURIComponent(
+              referralLink,
+            )}`}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(e) => {
-              if (!linkCopied) {
-                e.preventDefault();
-              }
-            }}
-            style={{
-              pointerEvents: linkCopied ? "auto" : "none",
-              opacity: linkCopied ? 1 : 0.5,
-              cursor: linkCopied ? "pointer" : "not-allowed",
-            }}
           >
             Invite Friends
           </a>
         </div>
       </div>
-      ;
     </>
   );
 };
+
 export default Friends;
