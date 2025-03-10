@@ -90,7 +90,7 @@
     left: 0;
     z-index: 5;
     width: -webkit-fill-available;
-    height: calc(90% - 100px);
+    height: calc(55% - 100px);
 
     border: 1px solid #64FFFF ;
   }

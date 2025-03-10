@@ -84,10 +84,10 @@ const MiningProcess = () => {
       <div className="miningCompleted">
         <div className="squareCompleted">
           <img src={miningLogo} alt="miningLogo" />
-          <div className="completedText">
+          {/* <div className="completedText">
             <p>Completed</p>
             <p>Blocks: {completedCount} /8</p>
-          </div>
+          </div> */}
         </div>
         <button onClick={handleClaim} disabled={!squares.every(Boolean)}>
           Claim

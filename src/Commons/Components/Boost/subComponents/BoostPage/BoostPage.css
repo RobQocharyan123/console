@@ -14,12 +14,19 @@
     gap: 8px;
 }
 
+.boostPageSuccess .boostTexts{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 
 .boostPageSuccess p{
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
     color: #F9F7F7;
+    margin: 0;
+
 }
 
 

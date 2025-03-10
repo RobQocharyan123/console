@@ -5,7 +5,7 @@ import fon from "../../../Assets/fon.png";
 import MiningProcess from "./MiningProcess/MiningProcess";
 import { useLocation, Outlet, useNavigate } from "react-router-dom";
 import Success from "../Success/Success";
-import { useState } from 'react';
+import { useState } from "react";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -13,10 +13,9 @@ const Home = () => {
 
   const isBoostPage = location.pathname.includes("boost");
 
-
   return (
     <>
-      <img src={fon} alt="fon" className="fon" />
+      {/* <img src={fon} alt="fon" className="fon" /> */}
       <div className="home">
         {!isBoostPage && (
           <>
@@ -44,7 +43,6 @@ const Home = () => {
               <div className="todayContent">
                 <input type="text" placeholder="Input code here" />
                 <button>Check</button>
-
               </div>
             </div>
 

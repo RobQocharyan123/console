@@ -127,11 +127,7 @@ const Friends = () => {
           </button>
           <a
             className={`invite ${!linkCopied ? "disabled" : ""}`}
-            href={
-              linkCopied
-                ? `https://t.me/share/url?url=https://${linkCopied}`
-                : "#"
-            }
+            href={linkCopied ? `https://t.me/share/url?url=${linkCopied}` : "#"}
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => {

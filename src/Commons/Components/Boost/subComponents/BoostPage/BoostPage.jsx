@@ -13,71 +13,8 @@ const arr = [
     description: "Farming Booster:",
     descriptionSmall: "x2 for  3 days.",
     imgText: "X2",
-    boostPrice: "1"
+    boostPrice: "1",
   },
-  {
-    id: "2",
-    img: null,
-    title: "Block Boost",
-    description: "Farming Booster:",
-    descriptionSmall: "x3 for  7 days. ",
-    imgText: "X3",
-    boostPrice: "1"
-  },
-  {
-    id: "3",
-    img: null,
-    title: "Block Boost",
-    description: "Farming Booster:",
-    descriptionSmall: "x4 for  30 days. ",
-    imgText: "X4",
-    boostPrice: "1"
-  },
-  {
-    id: "4",
-    img: boostRocketIcon,
-    title: "Block Upgrade",
-    description: "For each block, you will",
-    descriptionSmall: "receive 150 points.",
-    imgText: "X2",
-    boostPrice: "1"
-  },
-  {
-    id: "5",
-    img: boostRocketIcon,
-    title: "Block Upgrade",
-    description: "",
-    descriptionSmall: "receive 150 points.",
-    imgText: "X2",
-    boostPrice: "1"
-  },
-  {
-    id: "5",
-    img: boostRocketIcon,
-    title: "Block Upgrade",
-    description: "",
-    descriptionSmall: "receive 150 points.",
-    imgText: "X2",
-    boostPrice: "1"
-  },
-  {
-    id: "5",
-    img: boostRocketIcon,
-    title: "Block Upgrade",
-    description: "",
-    descriptionSmall: "receive 150 points.",
-    imgText: "X2",
-    boostPrice: "1"
-  },
-  {
-    id: "5",
-    img: boostRocketIcon,
-    title: "Block Upgrade",
-    description: "",
-    descriptionSmall: "receive 150 points.",
-    imgText: "X2",
-    boostPrice: "1"
-  }
 ];
 
 const BoostPage = () => {
@@ -87,7 +24,13 @@ const BoostPage = () => {
     <div className="boostPage">
       <div className="boostPageSuccess">
         <img src={boostSuccessIcon} alt="boostSuccessIcon" />
-        <p>Buying a booster will significantly increase your CP farming</p>
+        <div className="boostTexts">
+          <p>Boost your CP farming with a powerful booster!</p>
+          <p>
+            You can use only one booster at a time. While one is active, others
+            will be disabled.
+          </p>
+        </div>
       </div>
 
       <div className="boostPageContent">

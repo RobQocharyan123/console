@@ -82,7 +82,7 @@ input,button,p,span,h2{
     position: relative;
     background-color: transparent;
     color: #64FFFF ;
-    border-bottom: 0.3px solid rgba(175, 252, 180, 0.6);
+    border-bottom: 0.3px solid #64FFFF;
 
 }
 
