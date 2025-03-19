@@ -10,19 +10,22 @@ const Home = lazy(() => import("./Commons/Components/Home/Home"));
 const NavBar = lazy(() => import("./Commons/Components/NavBar/NavBar"));
 const Boost = lazy(() => import("./Commons/Components/Boost/Boost"));
 const LogoAnimation = lazy(() =>
-  import("./Commons/Components/LogoAnimation/LogoAnimation"),
+  import("./Commons/Components/LogoAnimation/LogoAnimation")
 );
 const Tasks = lazy(() => import("./Commons/Components/Tasks/Tasks"));
 const AirDrop = lazy(() => import("./Commons/Components/AirDrop/AirDrop"));
 const Profile = lazy(() => import("./Commons/Components/Profile/Profile"));
 const Friends = lazy(() => import("./Commons/Components/Friends/Friends"));
+const TelegramLogin = lazy(() => import("./Commons/TelegramLogin/index.js"));
 
 function App() {
   return (
     <div className="app">
+      <TelegramLogin />
       <Suspense fallback={<LogoAnimation />}>
         <Header />
         <Routes>
+          <Route path="/" element={<TelegramLogin />} />
           <Route path="/home" element={<Home />}>
             <Route path="boost" element={<Boost />} />
           </Route>
