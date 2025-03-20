@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 const getBaseURL = () => process.env.REACT_APP_URL;
 
 const pureClient = axios.create({

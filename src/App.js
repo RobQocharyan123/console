@@ -1,8 +1,11 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
-import { Suspense, lazy } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { Suspense, lazy, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { loginPostUserData } from "./Commons/Services/homePageService.js";
+import { useDispatch, useSelector } from "react-redux";
+import { getHomePageDataThunk, loginTelegramBotThunk } from "./Store/Middlewares/homePageData.js";
 
 // Lazy load components
 const Header = lazy(() => import("./Commons/Components/Header/Header"));
@@ -16,16 +19,40 @@ const Tasks = lazy(() => import("./Commons/Components/Tasks/Tasks"));
 const AirDrop = lazy(() => import("./Commons/Components/AirDrop/AirDrop"));
 const Profile = lazy(() => import("./Commons/Components/Profile/Profile"));
 const Friends = lazy(() => import("./Commons/Components/Friends/Friends"));
-const TelegramLogin = lazy(() => import("./Commons/TelegramLogin/index.js"));
 
 function App() {
+  const navigate = useNavigate();
+
+  const tg = window.Telegram.WebApp;
+  tg.expand();
+
+  const dispatch = useDispatch()
+
+  const isSuccess = useSelector((state) => state?.telegramLogin?.isSuccess);
+
+  useEffect(() => {
+    navigate("/home")
+    dispatch(getHomePageDataThunk)
+  }, []);
+
+
+  useEffect(()=>{
+
+
+    
+    const userData = tg.initDataUnsafe.user;
+    console.log(userData);
+    
+    if(userData){
+      dispatch(loginTelegramBotThunk(userData))
+    }
+  },[])
   return (
     <div className="app">
-      <TelegramLogin />
       <Suspense fallback={<LogoAnimation />}>
         <Header />
         <Routes>
-          <Route path="/" element={<TelegramLogin />} />
+          {/* <Route path="/" element={<TelegramLogin />} /> */}
           <Route path="/home" element={<Home />}>
             <Route path="boost" element={<Boost />} />
           </Route>

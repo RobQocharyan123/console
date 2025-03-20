@@ -6,20 +6,22 @@ import MiningProcess from "./MiningProcess/MiningProcess";
 import { useLocation, Outlet, useNavigate } from "react-router-dom";
 import Success from "../Success/Success";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Home = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const dispatch = useDispatch()
+
   const isBoostPage = location.pathname.includes("boost");
   const isSuccess = useSelector((state) => state?.telegramLogin?.isSuccess);
-
-  useEffect(() => {}, [isSuccess]);
+  const homeData = useSelector((state) => state?.homePage?.homeData);
+console.log(homeData,"This is home  Data");
 
   return (
     <>
-      <img src={fon} alt="fon" className="fon" />
+      {/* <img src={fon} alt="fon" className="fon" /> */}
       <div className="home">
         {!isBoostPage && (
           <>
