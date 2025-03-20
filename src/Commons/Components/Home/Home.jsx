@@ -17,6 +17,7 @@ const Home = () => {
   const isBoostPage = location.pathname.includes("boost");
   const isSuccess = useSelector((state) => state?.telegramLogin?.isSuccess);
   const homeData = useSelector((state) => state?.homePage?.homeData);
+  
 console.log(homeData,"This is home  Data");
 
   return (
@@ -31,7 +32,7 @@ console.log(homeData,"This is home  Data");
                   <img src={pointsIcon} alt="pointsIcon" />
                   <span>Points</span>
                 </div>
-                <p>11,540</p>
+                <p>{homeData?.total_balance}</p>
               </div>
               <div className="boost">
                 <div>
@@ -48,7 +49,7 @@ console.log(homeData,"This is home  Data");
               </div>
               <div className="todayContent">
                 <input type="text" placeholder="Input code here" />
-                <button>Check</button>
+                <button disabled={homeData?.is_used_daily_code}>Check</button>
               </div>
             </div>
 
@@ -58,7 +59,7 @@ console.log(homeData,"This is home  Data");
             <div className="dailyClaim">
               <p>Daily Treasure Claim</p>
               <p>Claim your daily reward</p>
-              <button>100</button>
+              <button disabled={homeData?.is_used_daily_claim}>{homeData?.daily_claim_point}</button>
             </div>
           </>
         )}
