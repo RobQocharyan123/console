@@ -91,6 +91,22 @@
     z-index: 3;
 }
 
+.upgradeBonus{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.upgradeBonus h3{
+    margin: 0;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 11%;
+    color: #F9F7F7;
+}
+
+
 
 
 /* line */

@@ -35,7 +35,7 @@ export const loginPostUserData = async (userData) => {
       last_name: userData.last_name || "",
       username: userData.username || "",
       language: userData.language_code,
-      photo_url: userData.photo_url || "", // Sending photo_url if available
+      photo_url: userData.photo_url || "", 
       hash: userData.hash || "",
     });
 
@@ -57,3 +57,28 @@ export const homePageGetData = async () => {
 };
 
 
+export const homePageDailyCode = async (data) => {
+  
+  try {
+    const response = await pureClient.put(`/users/daily-code`,{
+      code:data.code
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data from /telegram:", error);
+    throw error;
+  }
+};
+
+
+export const homePageDailyPoint = async () => {
+  
+  try {
+    const response = await pureClient.put(`/users/daily-claim`,{
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data from /telegram:", error);
+    throw error;
+  }
+};

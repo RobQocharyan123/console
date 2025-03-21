@@ -2,24 +2,28 @@ import "./MiningProcess.css";
 import miningLogo from "../../../../Assets/Home/home-logo.svg";
 import { useEffect, useState } from "react";
 import Success from "./../../Success/Success";
+import { useSelector } from "react-redux";
+
 
 const MiningProcess = () => {
   // squars
+  const homeData = useSelector((state) => state?.homePage?.homeData);
+  const userMiningData = homeData?.user_mining_data || {};
+  const showSuccess = useSelector((state) => state?.homePage?.showSuccess);
 
   const [squares, setSquares] = useState(Array(8).fill(false));
   const [timer, setTimer] = useState(0);
 
   const [time, setTime] = useState(new Date());
-  const [cancel, setCancel] = useState(false);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(new Date());
-    }, 1000);
-
+    }, 1000 / userMiningData?.boostSpeed); 
+  
     return () => clearInterval(interval);
-  }, []);
-
+  }, [userMiningData?.boostSpeed]);
   const formatTime = (date) => {
     const hours = String(date.getHours()).padStart(2, "0");
     const minutes = String(date.getMinutes()).padStart(2, "0");
@@ -32,10 +36,10 @@ const MiningProcess = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setTimer((prev) => prev + 1);
-    }, 3600000);
+    }, 360000 / userMiningData?.boostSpeed);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [userMiningData?.boostSpeed]);
 
   useEffect(() => {
     if (timer > 0 && timer <= 8) {
@@ -49,7 +53,7 @@ const MiningProcess = () => {
 
   const handleClaim = () => {
     if (squares.every(Boolean)) {
-      setCancel(true);
+
       setSquares(Array(8).fill(false));
       setTimer(0);
     }
@@ -84,16 +88,16 @@ const MiningProcess = () => {
       <div className="miningCompleted">
         <div className="squareCompleted">
           <img src={miningLogo} alt="miningLogo" />
-          {/* <div className="completedText">
-            <p>Completed</p>
-            <p>Blocks: {completedCount} /8</p>
-          </div> */}
+         
         </div>
+        <div className="completedText">
+            <p> {userMiningData?.miningPoints} </p>
+          </div>
         <button onClick={handleClaim} disabled={!squares.every(Boolean)}>
           Claim
         </button>
       </div>
-      {cancel && <Success setCancel={setCancel} />}
+      {showSuccess && <Success  />}
     </div>
   );
 };

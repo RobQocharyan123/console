@@ -3,9 +3,12 @@ import { useState } from "react";
 import Upgrade from "./subComponents/Upgrade/Upgrade";
 import Bot from "./subComponents/Bot/Bot";
 import BoostPage from "./subComponents/BoostPage/BoostPage";
+import { useSelector } from "react-redux";
 
 const Boost = () => {
   const [page, setPage] = useState("upgrade");
+  const homeData = useSelector((state) => state?.homePage?.homeData);
+
 
   return (
     <div className="boost">
@@ -34,9 +37,9 @@ const Boost = () => {
         </ul>
       </nav>
 
-      {page === "upgrade" && <Upgrade />}
-      {page === "bot" && <Bot />}
-      {page === "bosts" && <BoostPage />}
+      {page === "upgrade" && <Upgrade data={homeData?.booster?.upgrades} />}
+      {page === "bot" && <Bot  data={homeData?.booster?.bot}  />}
+      {page === "bosts" && <BoostPage  data={homeData?.booster?.boosts}  />}
     </div>
   );
 };

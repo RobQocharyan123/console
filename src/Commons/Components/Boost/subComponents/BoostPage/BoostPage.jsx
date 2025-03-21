@@ -1,23 +1,23 @@
-import "./BoostPage.css";
-import boostRocketIcon from "../../../../../Assets/Home/boost-roket-icon.svg";
-import boostSuccessIcon from "../../../../../Assets/Home/boost-success-icon.svg";
-import boostCristalIcon from "../../../../../Assets/Home/cristal-icon.svg";
-import BotModal from "./../Bot/BotModal";
-import { useState } from "react";
+import './BoostPage.css';
+import boostRocketIcon from '../../../../../Assets/Home/boost-roket-icon.svg';
+import boostSuccessIcon from '../../../../../Assets/Home/boost-success-icon.svg';
+import boostCristalIcon from '../../../../../Assets/Home/cristal-icon.svg';
+import BotModal from './../Bot/BotModal';
+import { useState } from 'react';
 
 const arr = [
   {
-    id: "1",
+    id: '1',
     img: null,
-    title: "Block Boost",
-    description: "Farming Booster:",
-    descriptionSmall: "x2 for  3 days.",
-    imgText: "X2",
-    boostPrice: "1",
+    title: 'Block Boost',
+    description: 'Farming Booster:',
+    descriptionSmall: 'x2 for  3 days.',
+    imgText: 'X2',
+    boostPrice: '1',
   },
 ];
 
-const BoostPage = () => {
+const BoostPage = ({ data }) => {
   const [selectedBoost, setSelectedBoost] = useState(null);
 
   return (
@@ -63,7 +63,7 @@ const BoostPage = () => {
           setShowModal={() => setSelectedBoost(null)}
           title={selectedBoost.title}
           description={
-            selectedBoost.description + " " + selectedBoost.descriptionSmall
+            selectedBoost.description + ' ' + selectedBoost.descriptionSmall
           }
           price={selectedBoost.boostPrice}
         />

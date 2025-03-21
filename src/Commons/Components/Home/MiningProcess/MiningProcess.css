@@ -64,13 +64,6 @@
 }
 
 
-.miningCompleted .squareCompleted{
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 13px;
-}
-
 .miningCompleted .squareCompleted img{
 
 }
@@ -80,7 +73,7 @@
 
 }
 
-.miningCompleted .squareCompleted .completedText p{
+.miningCompleted .completedText p{
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;
