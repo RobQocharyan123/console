@@ -9,7 +9,6 @@ const Boost = () => {
   const [page, setPage] = useState("upgrade");
   const homeData = useSelector((state) => state?.homePage?.homeData);
 
-
   return (
     <div className="boost">
       <h2>Boost Your CP</h2>
@@ -38,8 +37,8 @@ const Boost = () => {
       </nav>
 
       {page === "upgrade" && <Upgrade data={homeData?.booster?.upgrades} />}
-      {page === "bot" && <Bot  data={homeData?.booster?.bot}  />}
-      {page === "bosts" && <BoostPage  data={homeData?.booster?.boosts}  />}
+      {page === "bot" && <Bot data={homeData?.booster?.bot} />}
+      {page === "bosts" && <BoostPage data={homeData?.booster?.boosts} />}
     </div>
   );
 };

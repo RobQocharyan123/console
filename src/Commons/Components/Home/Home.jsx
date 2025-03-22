@@ -1,43 +1,41 @@
-import './Home.css';
-import boosterIcon from '../../../Assets/Home/booster-icon.svg';
-import pointsIcon from '../../../Assets/Home/point-icon.svg';
-import fon from '../../../Assets/fon.png';
-import MiningProcess from './MiningProcess/MiningProcess';
-import { useLocation, Outlet, useNavigate } from 'react-router-dom';
-import Success from '../Success/Success';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import "./Home.css";
+import boosterIcon from "../../../Assets/Home/booster-icon.svg";
+import pointsIcon from "../../../Assets/Home/point-icon.svg";
+import fon from "../../../Assets/fon.png";
+import MiningProcess from "./MiningProcess/MiningProcess";
+import { useLocation, Outlet, useNavigate } from "react-router-dom";
+import Success from "../Success/Success";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   sendDailyCodeThunk,
-  sendDailyPointThunk,
-} from '../../../Store/Middlewares/homePageData';
+  sendDailyPointThunk
+} from "../../../Store/Middlewares/homePageData";
 
 const Home = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [dailyCode, setDailyCode] = useState('');
+  const [dailyCode, setDailyCode] = useState("");
   const dispatch = useDispatch();
 
-  const isBoostPage = location.pathname.includes('boost');
+  const isBoostPage = location.pathname.includes("boost");
   const isSuccess = useSelector((state) => state?.telegramLogin?.isSuccess);
   const homeData = useSelector((state) => state?.homePage?.homeData);
   const showSuccess = useSelector((state) => state?.homePage?.showSuccess);
-  console.log(showSuccess, 'hhhhhhhhhhhhhhhhh');
 
   const handleSendDailyCode = () => {
     // id:homeData?.id, harcnel id petq a lini te che
     const data = {
-      code: dailyCode,
+      code: dailyCode
     };
     dispatch(sendDailyCodeThunk(data));
 
-    setDailyCode('');
+    setDailyCode("");
   };
 
   const handleDailyPoint = () => {
     dispatch(sendDailyPointThunk());
   };
-  console.log(homeData, 'This is home  Data');
 
   return (
     <>
@@ -60,7 +58,7 @@ const Home = () => {
                   <img src={boosterIcon} alt="boosterIcon" />
                   <span>Booster</span>
                 </div>
-                <button onClick={() => navigate('boost')}>Boost</button>
+                <button onClick={() => navigate("boost")}>Boost</button>
               </div>
             </div>
 
@@ -76,7 +74,7 @@ const Home = () => {
                   value={dailyCode}
                 />
                 <button
-                  disabled={homeData?.is_used_daily_code}
+                  disabled={!homeData?.is_used_daily_code}
                   onClick={handleSendDailyCode}
                 >
                   Check
@@ -91,7 +89,7 @@ const Home = () => {
               <p>Daily Treasure Claim</p>
               <p>Claim your daily reward</p>
               <button
-                disabled={homeData?.is_used_daily_claim}
+                disabled={!homeData?.is_used_daily_claim}
                 onClick={handleDailyPoint}
               >
                 {homeData?.daily_claim_point}

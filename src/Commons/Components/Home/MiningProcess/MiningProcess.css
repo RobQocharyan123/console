@@ -15,6 +15,20 @@
     margin: 0;
 }
 
+.mining .miningHeader{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 14px;
+}
+
+.mining .miningHeader span{
+    font-weight: 700;
+    font-size: 14px;
+    color: #64FFFF;
+    margin-left: 6px;
+}
+
 .mining .squares{
     position: relative;
     display: flex;

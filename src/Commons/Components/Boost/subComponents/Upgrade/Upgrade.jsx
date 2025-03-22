@@ -1,10 +1,10 @@
-import './Upgrade.css';
-import upgrade1 from '../../../../../Assets/Home/Upgrade/upgrade-1.svg';
-import upgradeLogoIcon from '../../../../../Assets/Home/Upgrade/upgrade-logo.svg';
-import upgradeTonIcon from '../../../../../Assets/Home/Upgrade/upgrade-ton.svg';
-import upgradeSuccessIcon from '../../../../../Assets/Home/Upgrade/upgrade-success.svg';
-import { useState } from 'react';
-import UpgradePopUp from './UpgradePopUp/UpgradePopUp';
+import "./Upgrade.css";
+import upgrade1 from "../../../../../Assets/Home/Upgrade/upgrade-1.svg";
+import upgradeLogoIcon from "../../../../../Assets/Home/Upgrade/upgrade-logo.svg";
+import upgradeTonIcon from "../../../../../Assets/Home/Upgrade/upgrade-ton.svg";
+import upgradeSuccessIcon from "../../../../../Assets/Home/Upgrade/upgrade-success.svg";
+import { useState } from "react";
+import UpgradePopUp from "./UpgradePopUp/UpgradePopUp";
 
 // const arr = [
 //   {
@@ -39,7 +39,7 @@ const Upgrade = ({ data }) => {
       {data.map((i, index) => {
         return (
           <>
-            <div key={i.id} className={`freeItem ${i.border ? 'border' : ''}`}>
+            <div key={i.id} className={`freeItem ${i.border ? "border" : ""}`}>
               <div className="upgradeBonus">
                 <img src={upgrade1} alt="bonus" />
                 {i?.speed > 1 && <h3>X {i?.speed}</h3>}

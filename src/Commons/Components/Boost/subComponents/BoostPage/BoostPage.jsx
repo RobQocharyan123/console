@@ -1,21 +1,21 @@
-import './BoostPage.css';
-import boostRocketIcon from '../../../../../Assets/Home/boost-roket-icon.svg';
-import boostSuccessIcon from '../../../../../Assets/Home/boost-success-icon.svg';
-import boostCristalIcon from '../../../../../Assets/Home/cristal-icon.svg';
-import BotModal from './../Bot/BotModal';
-import { useState } from 'react';
+import "./BoostPage.css";
+import boostRocketIcon from "../../../../../Assets/Home/boost-roket-icon.svg";
+import boostSuccessIcon from "../../../../../Assets/Home/boost-success-icon.svg";
+import boostCristalIcon from "../../../../../Assets/Home/cristal-icon.svg";
+import BotModal from "./../Bot/BotModal";
+import { useState } from "react";
 
-const arr = [
-  {
-    id: '1',
-    img: null,
-    title: 'Block Boost',
-    description: 'Farming Booster:',
-    descriptionSmall: 'x2 for  3 days.',
-    imgText: 'X2',
-    boostPrice: '1',
-  },
-];
+// const arr = [
+//   {
+//     id: '1',
+//     img: null,
+//     title: 'Block Boost',
+//     description: 'Farming Booster:',
+//     descriptionSmall: 'x2 for  3 days.',
+//     imgText: 'X2',
+//     boostPrice: '1',
+//   },
+// ];
 
 const BoostPage = ({ data }) => {
   const [selectedBoost, setSelectedBoost] = useState(null);
@@ -34,15 +34,19 @@ const BoostPage = ({ data }) => {
       </div>
 
       <div className="boostPageContent">
-        {arr.map((item) => (
+        {data.map((item) => (
           <div className="boostItem" key={item.id}>
-            {item.img && (
-              <img src={item.img} alt={item.img} className="rocket" />
-            )}
+            <img
+              src={boostRocketIcon}
+              alt={boostRocketIcon}
+              className="rocket"
+            />
 
-            <div className="boostDoubling">{item.imgText}</div>
+            {item.speed > 1 && (
+              <div className="boostDoubling">X {item.speed}</div>
+            )}
             <div className="boostItemText">
-              <h2>{item.title}</h2>
+              <h2> {item.asd}</h2>
               <p>{item.description}</p>
               <p>{item.descriptionSmall}</p>
             </div>
@@ -63,7 +67,7 @@ const BoostPage = ({ data }) => {
           setShowModal={() => setSelectedBoost(null)}
           title={selectedBoost.title}
           description={
-            selectedBoost.description + ' ' + selectedBoost.descriptionSmall
+            selectedBoost.description + " " + selectedBoost.descriptionSmall
           }
           price={selectedBoost.boostPrice}
         />
