@@ -50,7 +50,8 @@ const initialState = {
     }
   },
   loading: false,
-  showSuccess: false
+  showSuccess: false,
+  token: ""
 };
 
 const homePageSlice = createSlice({
@@ -70,6 +71,7 @@ const homePageSlice = createSlice({
       .addCase(getHomePageDataThunk.fulfilled, (state, action) => {
         state.loading = false;
         state.homeData = action.payload;
+        state.token = action.payload.token;
       })
       .addCase(getHomePageDataThunk.rejected, (state, action) => {
         state.loading = false;

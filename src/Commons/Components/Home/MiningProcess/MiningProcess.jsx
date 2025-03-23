@@ -5,10 +5,16 @@ import { useEffect, useState } from "react";
 import Success from "./../../Success/Success";
 import { useSelector, useDispatch } from "react-redux";
 import { getHomePageDataThunk } from "../../../../Store/Middlewares/homePageData";
+import axios from "axios";
 
 const MiningProcess = () => {
   const homeData = useSelector((state) => state?.homePage?.homeData);
-  const userMiningData = homeData?.user_mining_data || {};
+  const token = useSelector((state) => state?.homePage?.token);
+  // const userMiningData = homeData?.user_mining_data || {};
+
+  const [userMiningData, setUserMiningData] = useState(
+    homeData?.user_mining_data || {}
+  );
   const showSuccess = useSelector((state) => state?.homePage?.showSuccess);
   // const {
   //   miningPoints = 365,
@@ -106,7 +112,6 @@ const MiningProcess = () => {
     const nextFilledCount = Math.floor(
       (miningDuration - miningTimeLeft) / fillIntervalTime
     );
-    console.log(nextFilledCount);
 
     setSquares((prev) => {
       return prev.map(
@@ -116,10 +121,21 @@ const MiningProcess = () => {
     });
   }, [miningTimeLeft]);
 
-  const handleClaim = () => {
-    setSquares(Array(totalSquares).fill(false));
+  const handleClaim = async () => {
+    try {
+      const response = await axios.put("YOUR_API_ENDPOINT", {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setSquares(Array(totalSquares).fill(false));
 
-    dispatch(getHomePageDataThunk());
+      setUserMiningData(response.data);
+    } catch (error) {
+      console.error("Error in PUT request:", error);
+    }
+
+    // dispatch(getHomePageDataThunk());
   };
 
   return (

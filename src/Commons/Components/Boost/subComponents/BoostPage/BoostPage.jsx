@@ -18,7 +18,18 @@ import { useState } from "react";
 // ];
 
 const BoostPage = ({ data }) => {
-  const [selectedBoost, setSelectedBoost] = useState(null);
+  const [selectedBoost, setSelectedBoost] = useState(data);
+
+  const formatTime = (minutes) => {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+
+    return hours > 0
+      ? `${hours} hour${hours > 1 ? "s" : ""} ${remainingMinutes} minute${
+          remainingMinutes > 1 ? "s" : ""
+        }`.trim()
+      : `${remainingMinutes} minute${remainingMinutes > 1 ? "s" : ""}`;
+  };
 
   return (
     <div className="boostPage">
@@ -35,43 +46,44 @@ const BoostPage = ({ data }) => {
 
       <div className="boostPageContent">
         {data.map((item) => (
-          <div className="boostItem" key={item.id}>
-            <img
-              src={boostRocketIcon}
-              alt={boostRocketIcon}
-              className="rocket"
-            />
+          <>
+            <div className="boostItem" key={item.id}>
+              <img
+                src={boostRocketIcon}
+                alt={boostRocketIcon}
+                className="rocket"
+              />
 
-            {item.speed > 1 && (
-              <div className="boostDoubling">X {item.speed}</div>
-            )}
-            <div className="boostItemText">
-              <h2> {item.asd}</h2>
-              <p>{item.description}</p>
-              <p>{item.descriptionSmall}</p>
-            </div>
-
-            <div className="boostPrice">
-              <div>
-                <img src={boostCristalIcon} alt="boostCristalIcon" />
-                <p>{item.boostPrice}</p>
+              {item.speed > 1 && (
+                <div className="boostDoubling">X {item.speed}</div>
+              )}
+              <div className="boostItemText">
+                <h2> Block Boost</h2>
+                <p>Farming Booster: </p>
+                <p>
+                  X{item.speed} for {formatTime(item?.duration)}{" "}
+                </p>
               </div>
-              <button onClick={() => setSelectedBoost(item)}>Buy</button>
+
+              <div className="boostPrice">
+                <div>
+                  <img src={boostCristalIcon} alt="boostCristalIcon" />
+                  <p>{item?.ton_price}</p>
+                </div>
+                <button onClick={() => setSelectedBoost(item)}>
+                  {item?.is_free ? "Free" : "Buy"}
+                </button>
+              </div>
             </div>
-          </div>
+            {selectedBoost && (
+              <BotModal
+                setShowModal={() => setSelectedBoost(null)}
+                data={item}
+              />
+            )}
+          </>
         ))}
       </div>
-
-      {selectedBoost && (
-        <BotModal
-          setShowModal={() => setSelectedBoost(null)}
-          title={selectedBoost.title}
-          description={
-            selectedBoost.description + " " + selectedBoost.descriptionSmall
-          }
-          price={selectedBoost.boostPrice}
-        />
-      )}
     </div>
   );
 };
