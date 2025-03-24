@@ -22,6 +22,7 @@ export const getHomePageDataThunk = createAsyncThunk(
   async () => {
     try {
       const response = await homePageGetData();
+      
       return response.data;
     } catch (err) {
       console.error(err);

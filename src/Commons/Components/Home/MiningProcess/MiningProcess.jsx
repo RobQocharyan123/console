@@ -123,12 +123,15 @@ const MiningProcess = () => {
 
   const handleClaim = async () => {
     try {
-      const response = await axios.put("YOUR_API_ENDPOINT", {
+      const response = await axios.put("http://localhost:3030/api-docs/user/mining-claim",{
+       
+      },{ 
         headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      setSquares(Array(totalSquares).fill(false));
+        Authorization: `Bearer ${token}`
+      }});
+      setSquares(Array(totalSquares).fill(false));  
+      console.log(token,"hhhhhhhhhhhhh");
+      
 
       setUserMiningData(response.data);
     } catch (error) {

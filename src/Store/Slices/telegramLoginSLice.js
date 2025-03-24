@@ -4,7 +4,7 @@ import { loginTelegramBotThunk } from "../Middlewares/homePageData";
 const initialState = {
   userData: null,
   loading: false,
-  isSuccess: true,
+  isSuccess: false,
 
 };
 

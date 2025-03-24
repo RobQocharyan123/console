@@ -29,24 +29,21 @@ function App() {
   const dispatch = useDispatch()
 
   const isSuccess = useSelector((state) => state?.telegramLogin?.isSuccess);
-
+  
   useEffect(() => {
+    dispatch(getHomePageDataThunk())
     navigate("/home")
-    dispatch(getHomePageDataThunk)
-  }, []);
+  }, [dispatch, isSuccess, navigate]);
 
 
   useEffect(()=>{
-
-
-    
     const userData = tg.initDataUnsafe.user;
-    console.log(userData);
+    // console.log(userData);
     
     if(userData){
       dispatch(loginTelegramBotThunk(userData))
     }
-  },[])
+  },[dispatch, tg.initDataUnsafe.user])
   return (
     <div className="app">
       <Suspense fallback={<LogoAnimation />}>

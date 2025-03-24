@@ -30,7 +30,7 @@ export const loginPostUserData = async (userData) => {
 
   try {
     const response = await axios.post(
-      "https://your-backend.com/api/user-info",
+      "http://localhost:3030/api-docs/auth/telegram",
       {
         id: userData.id,
         first_name: userData.first_name,
@@ -41,8 +41,9 @@ export const loginPostUserData = async (userData) => {
         hash: userData.hash || ""
       }
     );
+    console.log(response,"ssssssssssssssssss");
 
-    console.log("User info sent successfully:", response.data);
+    return response?.data
   } catch (err) {
     console.error("Error sending user info:", err);
   }
@@ -50,7 +51,8 @@ export const loginPostUserData = async (userData) => {
 
 export const homePageGetData = async () => {
   try {
-    const response = await pureClient.get(`/telegram`);
+    const response = await pureClient.get(`/user`);
+    
     return response.data;
   } catch (error) {
     console.error("Error fetching data from /telegram:", error);
