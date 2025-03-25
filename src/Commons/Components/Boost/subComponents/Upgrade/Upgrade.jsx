@@ -36,32 +36,36 @@ const Upgrade = ({ data }) => {
         <img src={upgradeSuccessIcon} alt="upgradeSuccessIcon" />
         <p>Upgrading these blocks will apply the selected option permanently</p>
       </div>
-      {data.map((i, index) => {
-        return (
-          <>
-            <div key={i.id} className={`freeItem ${i.border ? "border" : ""}`}>
-              <div className="upgradeBonus">
-                <img src={upgrade1} alt="bonus" />
-                {i?.speed > 1 && <h3>X {i?.speed}</h3>}
-              </div>
-              <div className="freeItemText">
-                <h2>Block Upgrade</h2>
-                <p>For each block, you will receive {i.point} points.</p>
-              </div>
-
-              <div className="buy">
-                <div className="upgradeIcons">
-                  <img src={upgradeLogoIcon} alt="logo" />
-                  <img src={upgradeTonIcon} alt="Ton" />
+      {Array.isArray(data) &&
+        data.map((i, index) => {
+          return (
+            <>
+              <div
+                key={i.id}
+                className={`freeItem ${i.border ? "border" : ""}`}
+              >
+                <div className="upgradeBonus">
+                  <img src={upgrade1} alt="bonus" />
+                  {i?.speed > 1 && <h3>X {i?.speed}</h3>}
                 </div>
-                <button onClick={() => setShow(true)}>Buy</button>
+                <div className="freeItemText">
+                  <h2>Block Upgrade</h2>
+                  <p>For each block, you will receive {i.point} points.</p>
+                </div>
+
+                <div className="buy">
+                  <div className="upgradeIcons">
+                    <img src={upgradeLogoIcon} alt="logo" />
+                    <img src={upgradeTonIcon} alt="Ton" />
+                  </div>
+                  <button onClick={() => setShow(true)}>Buy</button>
+                </div>
               </div>
-            </div>
-            {index < data.length - 1 && <div className="greenLine"></div>}
-            {show && <UpgradePopUp setShow={setShow} data={i} />}
-          </>
-        );
-      })}
+              {index < data.length - 1 && <div className="greenLine"></div>}
+              {show && <UpgradePopUp setShow={setShow} data={i} />}
+            </>
+          );
+        })}
     </div>
   );
 };

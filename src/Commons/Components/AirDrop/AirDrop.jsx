@@ -1,6 +1,6 @@
 import "./AirDrop.css";
 import fon from "../../../Assets/fon.png";
-import airdropImg from "../../../Assets/airdrop/airdrop.svg";
+import airdropImg from "../../../Assets/airdrop/airdrop.png";
 import { useState } from "react";
 import LogoAnimation from "./../LogoAnimation/LogoAnimation";
 

@@ -57,6 +57,9 @@ const MiningProcess = () => {
   // };
 
   const formatRemainingTime = (milisecond) => {
+    if (!milisecond) {
+      return "00:00:00";
+    }
     const seconds = Math.floor(milisecond / 1000);
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -123,15 +126,17 @@ const MiningProcess = () => {
 
   const handleClaim = async () => {
     try {
-      const response = await axios.put("http://localhost:3030/api-docs/user/mining-claim",{
-       
-      },{ 
-        headers: {
-        Authorization: `Bearer ${token}`
-      }});
-      setSquares(Array(totalSquares).fill(false));  
-      console.log(token,"hhhhhhhhhhhhh");
-      
+      const response = await axios.put(
+        "http://localhost:3030/api-docs/user/mining-claim",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+      setSquares(Array(totalSquares).fill(false));
+      console.log(token, "hhhhhhhhhhhhh");
 
       setUserMiningData(response.data);
     } catch (error) {

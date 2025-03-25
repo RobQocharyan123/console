@@ -5,29 +5,28 @@ const initialState = {
   userData: null,
   loading: false,
   isSuccess: false,
-
+  token: null
 };
 
 const telegramLoginSLice = createSlice({
   name: "telegramLogin",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(loginTelegramBotThunk.pending, (state) => {
         state.loading = true;
-        // state.isSuccess = true;
         state.error = null;
       })
       .addCase(loginTelegramBotThunk.fulfilled, (state, action) => {
         state.loading = false;
-        state.isSuccess = true;
         state.userData = action.payload;
+        state.isSuccess = true;
+        state.token = action.payload.accessToken;
       })
       .addCase(loginTelegramBotThunk.rejected, (state, action) => {
         state.loading = false;
-        // state.isSuccess = false;
+        state.isSuccess = false;
         state.error = action.payload;
       });
   }

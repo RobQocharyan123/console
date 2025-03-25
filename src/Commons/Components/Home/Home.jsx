@@ -17,6 +17,7 @@ const Home = () => {
   const location = useLocation();
   const [dailyCode, setDailyCode] = useState("");
   const dispatch = useDispatch();
+  const token = useSelector((state) => state?.telegramLogin?.token);
 
   const isBoostPage = location.pathname.includes("boost");
   const isSuccess = useSelector((state) => state?.telegramLogin?.isSuccess);
@@ -28,13 +29,13 @@ const Home = () => {
     const data = {
       code: dailyCode
     };
-    dispatch(sendDailyCodeThunk(data));
+    dispatch(sendDailyCodeThunk({ data, token }));
 
     setDailyCode("");
   };
 
   const handleDailyPoint = () => {
-    dispatch(sendDailyPointThunk());
+    dispatch(sendDailyPointThunk({ token }));
   };
 
   return (
@@ -92,7 +93,9 @@ const Home = () => {
                 disabled={!homeData?.is_used_daily_claim}
                 onClick={handleDailyPoint}
               >
-                {homeData?.daily_claim_point}
+                {homeData?.daily_claim_point
+                  ? homeData?.daily_claim_point
+                  : "0"}
               </button>
             </div>
           </>

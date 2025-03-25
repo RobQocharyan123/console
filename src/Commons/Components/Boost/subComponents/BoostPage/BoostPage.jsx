@@ -45,44 +45,45 @@ const BoostPage = ({ data }) => {
       </div>
 
       <div className="boostPageContent">
-        {data.map((item) => (
-          <>
-            <div className="boostItem" key={item.id}>
-              <img
-                src={boostRocketIcon}
-                alt={boostRocketIcon}
-                className="rocket"
-              />
+        {Array.isArray(data) &&
+          data.map((item) => (
+            <>
+              <div className="boostItem" key={item.id}>
+                <img
+                  src={boostRocketIcon}
+                  alt={boostRocketIcon}
+                  className="rocket"
+                />
 
-              {item.speed > 1 && (
-                <div className="boostDoubling">X {item.speed}</div>
-              )}
-              <div className="boostItemText">
-                <h2> Block Boost</h2>
-                <p>Farming Booster: </p>
-                <p>
-                  X{item.speed} for {formatTime(item?.duration)}{" "}
-                </p>
-              </div>
-
-              <div className="boostPrice">
-                <div>
-                  <img src={boostCristalIcon} alt="boostCristalIcon" />
-                  <p>{item?.ton_price}</p>
+                {item.speed > 1 && (
+                  <div className="boostDoubling">X {item.speed}</div>
+                )}
+                <div className="boostItemText">
+                  <h2> Block Boost</h2>
+                  <p>Farming Booster: </p>
+                  <p>
+                    X{item.speed} for {formatTime(item?.duration)}{" "}
+                  </p>
                 </div>
-                <button onClick={() => setSelectedBoost(item)}>
-                  {item?.is_free ? "Free" : "Buy"}
-                </button>
+
+                <div className="boostPrice">
+                  <div>
+                    <img src={boostCristalIcon} alt="boostCristalIcon" />
+                    <p>{item?.ton_price}</p>
+                  </div>
+                  <button onClick={() => setSelectedBoost(item)}>
+                    {item?.is_free ? "Free" : "Buy"}
+                  </button>
+                </div>
               </div>
-            </div>
-            {selectedBoost && (
-              <BotModal
-                setShowModal={() => setSelectedBoost(null)}
-                data={item}
-              />
-            )}
-          </>
-        ))}
+              {selectedBoost && (
+                <BotModal
+                  setShowModal={() => setSelectedBoost(null)}
+                  data={item}
+                />
+              )}
+            </>
+          ))}
       </div>
     </div>
   );

@@ -5,7 +5,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { loginPostUserData } from "./Commons/Services/homePageService.js";
 import { useDispatch, useSelector } from "react-redux";
-import { getHomePageDataThunk, loginTelegramBotThunk } from "./Store/Middlewares/homePageData.js";
+import {
+  getHomePageDataThunk,
+  loginTelegramBotThunk
+} from "./Store/Middlewares/homePageData.js";
 
 // Lazy load components
 const Header = lazy(() => import("./Commons/Components/Header/Header"));
@@ -26,24 +29,26 @@ function App() {
   const tg = window.Telegram.WebApp;
   tg.expand();
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const isSuccess = useSelector((state) => state?.telegramLogin?.isSuccess);
-  
+  const token = useSelector((state) => state?.telegramLogin?.token);
   useEffect(() => {
-    dispatch(getHomePageDataThunk())
-    navigate("/home")
-  }, [dispatch, isSuccess, navigate]);
-
-
-  useEffect(()=>{
     const userData = tg.initDataUnsafe.user;
     // console.log(userData);
-    
-    if(userData){
-      dispatch(loginTelegramBotThunk(userData))
+
+    if (userData) {
+      dispatch(loginTelegramBotThunk(userData));
     }
-  },[dispatch, tg.initDataUnsafe.user])
+  }, [dispatch, tg.initDataUnsafe.user]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(getHomePageDataThunk({ token }));
+      navigate("/home");
+    }
+  }, [isSuccess]);
+
   return (
     <div className="app">
       <Suspense fallback={<LogoAnimation />}>

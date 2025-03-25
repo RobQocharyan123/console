@@ -1,8 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { homePageDailyCode, homePageDailyPoint, homePageGetData, loginPostUserData } from "./../../Commons/Services/homePageService";
+import {
+  homePageDailyCode,
+  homePageDailyPoint,
+  homePageGetData,
+  loginPostUserData
+} from "./../../Commons/Services/homePageService";
 import Success from "../../Commons/Components/Success/Success";
-
-
 
 export const loginTelegramBotThunk = createAsyncThunk(
   "post/login/userData",
@@ -14,48 +17,41 @@ export const loginTelegramBotThunk = createAsyncThunk(
       console.error(err);
     }
   }
-
-)
+);
 
 export const getHomePageDataThunk = createAsyncThunk(
   "get/home/data",
-  async () => {
+  async (token) => {
     try {
-      const response = await homePageGetData();
-      
+      const response = await homePageGetData(token);
+
       return response.data;
     } catch (err) {
       console.error(err);
     }
   }
 );
-
-
 
 export const sendDailyCodeThunk = createAsyncThunk(
   "put/home/dailyCode",
-  async (data) => {
+  async ({ data, token }) => {
     try {
-      const response = await homePageDailyCode(data);
+      const response = await homePageDailyCode(data, token);
       return response.data;
     } catch (err) {
       console.error(err);
     }
   }
 );
-
-
 
 export const sendDailyPointThunk = createAsyncThunk(
   "put/home/dailyPoint",
-  async () => {
+  async ({ token }) => {
     try {
-      const response = await homePageDailyPoint();
+      const response = await homePageDailyPoint(token);
       return response.data;
     } catch (err) {
       console.error(err);
     }
   }
 );
-
-
