@@ -24,8 +24,7 @@ export const getHomePageDataThunk = createAsyncThunk(
   async (token) => {
     try {
       const response = await homePageGetData(token);
-
-      return response.data;
+      return response;
     } catch (err) {
       console.error(err);
     }
@@ -49,7 +48,7 @@ export const sendDailyPointThunk = createAsyncThunk(
   async ({ token }) => {
     try {
       const response = await homePageDailyPoint(token);
-      return response.data;
+      return response;
     } catch (err) {
       console.error(err);
     }

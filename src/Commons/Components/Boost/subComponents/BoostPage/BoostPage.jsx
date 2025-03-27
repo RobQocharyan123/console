@@ -5,20 +5,9 @@ import boostCristalIcon from "../../../../../Assets/Home/cristal-icon.svg";
 import BotModal from "./../Bot/BotModal";
 import { useState } from "react";
 
-// const arr = [
-//   {
-//     id: '1',
-//     img: null,
-//     title: 'Block Boost',
-//     description: 'Farming Booster:',
-//     descriptionSmall: 'x2 for  3 days.',
-//     imgText: 'X2',
-//     boostPrice: '1',
-//   },
-// ];
-
 const BoostPage = ({ data }) => {
-  const [selectedBoost, setSelectedBoost] = useState(data);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [show, setShow] = useState(false);
 
   const formatTime = (minutes) => {
     const hours = Math.floor(minutes / 60);
@@ -29,6 +18,11 @@ const BoostPage = ({ data }) => {
           remainingMinutes > 1 ? "s" : ""
         }`.trim()
       : `${remainingMinutes} minute${remainingMinutes > 1 ? "s" : ""}`;
+  };
+
+  const handleOPenPopUp = (item) => {
+    setShow(true);
+    setSelectedItem(item);
   };
 
   return (
@@ -71,17 +65,12 @@ const BoostPage = ({ data }) => {
                     <img src={boostCristalIcon} alt="boostCristalIcon" />
                     <p>{item?.ton_price}</p>
                   </div>
-                  <button onClick={() => setSelectedBoost(item)}>
+                  <button onClick={() => handleOPenPopUp(item)}>
                     {item?.is_free ? "Free" : "Buy"}
                   </button>
                 </div>
               </div>
-              {selectedBoost && (
-                <BotModal
-                  setShowModal={() => setSelectedBoost(null)}
-                  data={item}
-                />
-              )}
+              {show && <BotModal setShowModal={setShow} data={selectedItem} />}
             </>
           ))}
       </div>

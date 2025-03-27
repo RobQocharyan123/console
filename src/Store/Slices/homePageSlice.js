@@ -6,7 +6,7 @@ import {
 } from "../Middlewares/homePageData";
 
 const initialState = {
-  homeData: null,
+  homeData: [],
   loading: false,
   showSuccess: false,
   token: ""

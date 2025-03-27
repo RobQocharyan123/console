@@ -8,7 +8,8 @@ import { useSelector } from "react-redux";
 const Boost = () => {
   const [page, setPage] = useState("upgrade");
   const homeData = useSelector((state) => state?.homePage?.homeData);
-
+  const boostData = useSelector((state) => state?.boosts?.boostData);
+  console.log(boostData, "this is boost Data");
   return (
     <div className="boost">
       <h2>Boost Your CP</h2>

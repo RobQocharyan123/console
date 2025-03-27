@@ -38,7 +38,6 @@ export const loginPostUserData = async (userData) => {
       photo_url: userData.photo_url || "",
       hash: userData.hash || ""
     });
-    console.log(response, "this is responses");
 
     return response;
   } catch (err) {
@@ -70,7 +69,7 @@ export const homePageGetData = async ({ token }) => {
 export const homePageDailyCode = async (data, token) => {
   try {
     const response = await pureClient.put(
-      `/users/daily-code`,
+      `/user/daily-code`,
       { code: data.code },
       {
         headers: { Authorization: `Bearer ${token}` }
@@ -78,7 +77,7 @@ export const homePageDailyCode = async (data, token) => {
     );
     return response.data;
   } catch (error) {
-    console.error("Error fetching data from /users/daily-code:", error);
+    console.error("Error fetching data from /user/daily-code:", error);
     throw error;
   }
 };
@@ -86,13 +85,13 @@ export const homePageDailyCode = async (data, token) => {
 export const homePageDailyPoint = async (token) => {
   try {
     const response = await pureClient.put(
-      `/users/daily-claim`,
+      `/user/daily-claim`,
       {},
       {
         headers: { Authorization: `Bearer ${token}` }
       }
     );
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error fetching data from /telegram:", error);
     throw error;

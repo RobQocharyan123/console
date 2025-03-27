@@ -6,29 +6,14 @@ import upgradeSuccessIcon from "../../../../../Assets/Home/Upgrade/upgrade-succe
 import { useState } from "react";
 import UpgradePopUp from "./UpgradePopUp/UpgradePopUp";
 
-// const arr = [
-//   {
-//     id: "1",
-//     title: "Block Upgrade",
-//     text: "For each block, you will  receive 225 points.",
-//     logo: upgradeLogoIcon,
-//     ton: upgradeTonIcon,
-//     bonus: upgrade1,
-//     border: false
-//   },
-//   {
-//     id: "2",
-//     title: "Block Upgrade",
-//     text: "For each block, you will  receive 450 points.",
-//     logo: upgradeLogoIcon,
-//     ton: upgradeTonIcon,
-//     bonus: upgrade1,
-//     border: true
-//   }
-// ];
-
 const Upgrade = ({ data }) => {
   const [show, setShow] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const handleOPenPopUp = (item) => {
+    setShow(true);
+    setSelectedItem(item);
+  };
 
   return (
     <div className="upgrade">
@@ -58,14 +43,14 @@ const Upgrade = ({ data }) => {
                     <img src={upgradeLogoIcon} alt="logo" />
                     <img src={upgradeTonIcon} alt="Ton" />
                   </div>
-                  <button onClick={() => setShow(true)}>Buy</button>
+                  <button onClick={() => handleOPenPopUp(i)}>Buy</button>
                 </div>
               </div>
               {index < data.length - 1 && <div className="greenLine"></div>}
-              {show && <UpgradePopUp setShow={setShow} data={i} />}
             </>
           );
         })}
+      {show && <UpgradePopUp setShow={setShow} data={selectedItem} />}
     </div>
   );
 };

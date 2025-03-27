@@ -1,8 +1,8 @@
-import './UpgradePopUp.css';
-import upgradePopUpLogoIcon from '../../../../../../Assets/Home/Upgrade/upgrade-popup-logo.svg';
-import upgradeCancelIcon from '../../../../../../Assets/Home/Upgrade/upgrade-cancel.svg';
-import upgradeLogoIcon from '../../../../../../Assets/Home/Upgrade/upgrade-logo.svg';
-import upgradeTonIcon from '../../../../../../Assets/Home/Upgrade/upgrade-ton.svg';
+import "./UpgradePopUp.css";
+import upgradePopUpLogoIcon from "../../../../../../Assets/Home/Upgrade/upgrade-popup-logo.svg";
+import upgradeCancelIcon from "../../../../../../Assets/Home/Upgrade/upgrade-cancel.svg";
+import upgradeLogoIcon from "../../../../../../Assets/Home/Upgrade/upgrade-logo.svg";
+import upgradeTonIcon from "../../../../../../Assets/Home/Upgrade/upgrade-ton.svg";
 
 const UpgradePopUp = ({ setShow, data }) => {
   return (

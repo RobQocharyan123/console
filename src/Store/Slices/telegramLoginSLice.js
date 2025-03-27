@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { loginTelegramBotThunk } from "../Middlewares/homePageData";
 
 const initialState = {
-  userData: null,
+  userData: [],
   loading: false,
   isSuccess: false,
   token: null

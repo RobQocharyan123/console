@@ -34,6 +34,8 @@ const Home = () => {
     setDailyCode("");
   };
 
+  console.log(homeData, "home poage data");
+
   const handleDailyPoint = () => {
     dispatch(sendDailyPointThunk({ token }));
   };
@@ -73,9 +75,10 @@ const Home = () => {
                   placeholder="Input code here"
                   onChange={(e) => setDailyCode(e.target.value)}
                   value={dailyCode}
+                  disabled={homeData?.is_used_daily_code}
                 />
                 <button
-                  disabled={!homeData?.is_used_daily_code}
+                  disabled={homeData?.is_used_daily_code}
                   onClick={handleSendDailyCode}
                 >
                   Check
@@ -90,7 +93,7 @@ const Home = () => {
               <p>Daily Treasure Claim</p>
               <p>Claim your daily reward</p>
               <button
-                disabled={!homeData?.is_used_daily_claim}
+                disabled={homeData?.is_used_daily_claim}
                 onClick={handleDailyPoint}
               >
                 {homeData?.daily_claim_point

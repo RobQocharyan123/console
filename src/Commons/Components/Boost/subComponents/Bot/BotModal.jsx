@@ -1,6 +1,8 @@
 import "./Bot.css";
 import modalCancelIcon from "../../../../../Assets/Home/cancel-assistant-icon.svg";
 import cristalIcon from "../../../../../Assets/Home/cristal-icon.svg";
+import assistanIcon from "../../../../../Assets/Home/assistant-icon.svg";
+import botLogoIcon from "../../../../../Assets/bot/bot-logo-icon.svg";
 
 const BotModal = ({ setShowModal, data }) => {
   const formatTime = (minutes) => {
@@ -17,31 +19,25 @@ const BotModal = ({ setShowModal, data }) => {
     <>
       <div className="botOverlay" onClick={() => setShowModal(false)}></div>
       <div className="botModal">
+        <img
+          src={modalCancelIcon}
+          alt="modalCancelIcon"
+          onClick={() => setShowModal(false)}
+          className="cancelBotModal"
+        />
         <div className="modalText">
-          <div className="modalTextIntro">
-            <h2>Block Boost</h2>
-            <p>
-              Farming Booster: X{data?.speed} for {formatTime(data?.duration)}{" "}
-            </p>
+          <div className="modalIconBlock">
+            <img src={assistanIcon} alt={assistanIcon} />
           </div>
-          <img
-            src={modalCancelIcon}
-            alt="modalCancelIcon"
-            onClick={() => setShowModal(false)}
-          />
+          <h2>Worked for you</h2>
         </div>
 
-        <div className="modalToken">
-          <h2>Token</h2>
-          <div className="selectToken">
-            <div className="textAndImg">
-              <img src={cristalIcon} alt="cristalIcon" />
-              <p>{data?.ton_price}</p>
-            </div>
-          </div>
+        <div className="botLogoPoint">
+          <img src={botLogoIcon} alt={botLogoIcon} />
+          <p>2525252525</p>
         </div>
 
-        <button>Buy</button>
+        <button>Claim</button>
       </div>
     </>
   );
