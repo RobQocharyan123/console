@@ -4,40 +4,33 @@ import miningBosstSpeedIcon from "../../../../Assets/Home/boost-roket-icon.svg";
 import { useEffect, useState } from "react";
 import Success from "./../../Success/Success";
 import { useSelector, useDispatch } from "react-redux";
-import { getHomePageDataThunk } from "../../../../Store/Middlewares/homePageData";
 import axios from "axios";
+import { setUpdateHomeData } from "../../../../Store/Slices/homePageSlice";
+import { getHomePageDataThunk } from "../../../../Store/Middlewares/homePageData";
+import { toast } from "react-toastify";
 
-const MiningProcess = () => {
-  const homeData = useSelector((state) => state?.homePage?.homeData);
-  const token = useSelector((state) => state?.homePage?.token);
-  // const userMiningData = homeData?.user_mining_data || {};
-
-  const [userMiningData, setUserMiningData] = useState(
-    homeData?.user_mining_data || {}
-  );
+const MiningProcess = ({ homeData }) => {
+  console.log(homeData, "llllllllll");
+  const token = useSelector((state) => state?.telegramLogin?.token);
   const showSuccess = useSelector((state) => state?.homePage?.showSuccess);
-  // const {
-  //   miningPoints = 365,
-  //   blockPoint = 80,
-  //   miningLeftSecond = 60,
-  //   upgradeSpeed = 1
-  // } = userMiningData;
 
-  // const miningPoints = 100;
-  // const blockPoint = 100;
-  // const miningLeftSecond = 60;
-  // const upgradeSpeed = 1;
   const totalSquares = 8;
 
   const miningDuration =
-    userMiningData?.miningLeftSecond / userMiningData?.upgradeSpeed;
+    homeData?.user_mining_data?.mining_left_second /
+    homeData?.user_mining_data?.boost_speed;
   const initialFilledSquares = Math.min(
-    Math.floor(userMiningData?.miningPoints / userMiningData?.blockPoint)
+    Math.floor(
+      homeData?.user_mining_data?.mining_points /
+        homeData?.user_mining_data?.block_point
+    )
   );
 
   const emptySquares = totalSquares - initialFilledSquares;
   const fillInterval =
-    emptySquares > 0 ? userMiningData?.miningLeftSecond / emptySquares : 0;
+    emptySquares > 0
+      ? homeData?.user_mining_data?.mining_left_second / emptySquares
+      : 0;
 
   const dispatch = useDispatch();
   const [squares, setSquares] = useState(
@@ -46,15 +39,11 @@ const MiningProcess = () => {
       .map((_, index) => index < initialFilledSquares)
   );
 
-  const [miningTimeLeft, setMiningTimeLeft] = useState(miningDuration);
-  const [miningInterval, setMiningInterval] = useState(null);
+  const [miningTimeLeft, setMiningTimeLeft] = useState(
+    miningDuration ? miningDuration : 1
+  );
 
-  // const formatRemainingTime = (seconds) => {
-  //   const hours = Math.floor(seconds / 3600);
-  //   const minutes = Math.floor((seconds % 3600) / 60);
-  //   const remainingSeconds = seconds % 60;
-  //   return `${hours}h ${minutes}m ${remainingSeconds}s`;
-  // };
+  const [miningInterval, setMiningInterval] = useState(null);
 
   const formatRemainingTime = (milisecond) => {
     if (!milisecond) {
@@ -73,6 +62,9 @@ const MiningProcess = () => {
 
       const interval = setInterval(() => {
         setMiningTimeLeft((prevTime) => {
+          if (prevTime === 1) {
+            return;
+          }
           const newTime = prevTime - 1000;
           if (newTime <= 0) {
             clearInterval(interval);
@@ -90,7 +82,6 @@ const MiningProcess = () => {
       };
     }
   }, []);
-
   useEffect(() => {
     if (miningTimeLeft > 0 && initialFilledSquares < totalSquares) {
       const fillIntervalTime = miningDuration / emptySquares;
@@ -107,7 +98,7 @@ const MiningProcess = () => {
         );
       });
     }
-  }, [miningTimeLeft]);
+  }, [miningTimeLeft, homeData]);
 
   useEffect(() => {
     const fillIntervalTime = miningDuration / emptySquares;
@@ -122,12 +113,12 @@ const MiningProcess = () => {
           index < Math.min(initialFilledSquares + nextFilledCount, totalSquares)
       );
     });
-  }, [miningTimeLeft]);
+  }, [miningTimeLeft, homeData]);
 
   const handleClaim = async () => {
     try {
       const response = await axios.put(
-        "http://localhost:3030/api-docs/user/mining-claim",
+        "http://localhost:3030/user/mining-claim",
         {},
         {
           headers: {
@@ -135,67 +126,101 @@ const MiningProcess = () => {
           }
         }
       );
+
       setSquares(Array(totalSquares).fill(false));
-      console.log(token, "hhhhhhhhhhhhh");
 
-      setUserMiningData(response.data);
+      dispatch(setUpdateHomeData(response.data));
+
+      const newMiningDuration =
+        response.data?.user_mining_data?.mining_left_second /
+        response.data?.user_mining_data?.upgrade_speed;
+
+      setMiningTimeLeft(newMiningDuration ? newMiningDuration : 1);
+      startMining(newMiningDuration);
     } catch (error) {
-      console.error("Error in PUT request:", error);
+      const message =
+        error?.response?.data?.msg || "An unexpected error occurred";
+      toast.error(message);
+      console.log(error);
     }
-
-    // dispatch(getHomePageDataThunk());
   };
 
+  const startMining = (duration) => {
+    if (duration > 0) {
+      setMiningTimeLeft(duration);
+      const interval = setInterval(() => {
+        setMiningTimeLeft((prevTime) => {
+          if (prevTime <= 1000) {
+            clearInterval(interval);
+            return 0;
+          }
+          return prevTime - 1000;
+        });
+      }, 1000);
+      setMiningInterval(interval);
+    }
+  };
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getHomePageDataThunk({ token }));
+    }
+  }, []);
+
   return (
-    <div className="mining">
-      <div className="miningHeader">
-        <p className="miningText">Mining Process</p>
-        <div className="miningSpeed">
-          {userMiningData?.boostSpeed > 1 && (
-            <>
-              <img src={miningBosstSpeedIcon} alt="miningBosstSpeedIcon" />
-              <span>X {userMiningData?.boostSpeed}</span>
-            </>
-          )}
-        </div>
-      </div>
-
-      <div className="squares">
-        {squares.map((item, index) => {
-          return (
-            <div
-              key={index}
-              className="squareItem"
-              style={{
-                background: item ? "#64FFFF" : "transparent",
-                border: "1px solid #64FFFF"
-              }}
-            ></div>
-          );
-        })}
-      </div>
-
-      <div className="miningTime">
-        <span>Blocks complete in:</span>
-        <span>{formatRemainingTime(miningTimeLeft)}</span>
-      </div>
-
-      <div className="miningCompleted">
-        <div className="squareCompleted">
-          <img src={miningLogo} alt="miningLogo" />
-        </div>
-        <div className="completedText">
-          <p>{userMiningData?.miningPoints}</p>
-        </div>
-        <button
-          onClick={handleClaim}
-          disabled={squares.every((square) => !square)}
-        >
-          Claim
-        </button>
-      </div>
+    <>
       {showSuccess && <Success />}
-    </div>
+
+      <div className="mining">
+        <div className="miningHeader">
+          <p className="miningText">Mining Process</p>
+          <div className="miningSpeed">
+            {homeData?.user_mining_data?.boost_speed > 1 && (
+              <>
+                <img src={miningBosstSpeedIcon} alt="miningBosstSpeedIcon" />
+                <span>X {homeData?.user_mining_data?.boost_speed}</span>
+              </>
+            )}
+          </div>
+        </div>
+
+        <div className="squares">
+          {squares.map((item, index) => {
+            return (
+              <div
+                key={index}
+                className="squareItem"
+                style={{
+                  background: item ? "#64FFFF" : "transparent",
+                  border: "1px solid #64FFFF"
+                }}
+              ></div>
+            );
+          })}
+        </div>
+
+        <div className="miningTime">
+          <span>Blocks complete in:</span>
+          <span>{formatRemainingTime(miningTimeLeft)}</span>
+        </div>
+
+        <div className="miningCompleted">
+          <div className="squareCompleted">
+            <img src={miningLogo} alt="miningLogo" />
+          </div>
+          <div className="completedText">
+            <p>{homeData?.user_mining_data?.mining_points}</p>
+          </div>
+          <button
+            onClick={handleClaim}
+            disabled={squares.every((square) => !square)}
+          >
+            Claim
+          </button>
+        </div>
+        {showSuccess && <Success />}
+      </div>
+    </>
   );
 };
 

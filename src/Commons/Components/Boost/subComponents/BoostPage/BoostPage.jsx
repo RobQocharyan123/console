@@ -3,11 +3,16 @@ import boostRocketIcon from "../../../../../Assets/Home/boost-roket-icon.svg";
 import boostSuccessIcon from "../../../../../Assets/Home/boost-success-icon.svg";
 import boostCristalIcon from "../../../../../Assets/Home/cristal-icon.svg";
 import BotModal from "./../Bot/BotModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Success from "./../../../Success/Success";
+import { getHomePageDataThunk } from "../../../../../Store/Middlewares/homePageData";
+import { useDispatch, useSelector } from "react-redux";
 
 const BoostPage = ({ data }) => {
   const [selectedItem, setSelectedItem] = useState(null);
-  const [show, setShow] = useState(false);
+  const token = useSelector((state) => state?.telegramLogin?.token);
+  const dispatch = useDispatch();
+  const showSuccess = useSelector((state) => state?.homePage?.showSuccess);
 
   const formatTime = (minutes) => {
     const hours = Math.floor(minutes / 60);
@@ -21,7 +26,6 @@ const BoostPage = ({ data }) => {
   };
 
   const handleOPenPopUp = (item) => {
-    setShow(true);
     setSelectedItem(item);
   };
 
@@ -65,12 +69,15 @@ const BoostPage = ({ data }) => {
                     <img src={boostCristalIcon} alt="boostCristalIcon" />
                     <p>{item?.ton_price}</p>
                   </div>
-                  <button onClick={() => handleOPenPopUp(item)}>
+                  <button
+                    onClick={() => handleOPenPopUp(item)}
+                    disabled={item?.is_active}
+                  >
                     {item?.is_free ? "Free" : "Buy"}
                   </button>
                 </div>
               </div>
-              {show && <BotModal setShowModal={setShow} data={selectedItem} />}
+              {showSuccess && <Success data={selectedItem} />}
             </>
           ))}
       </div>

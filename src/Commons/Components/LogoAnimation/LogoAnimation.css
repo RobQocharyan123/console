@@ -1,15 +1,18 @@
-
-
-.logoAnimation{
+.logoAnimation {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 1;
-    background-color: #02040F;
     height: 100vh;
-}
+    background-color: #000;
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .loadingVideo {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }

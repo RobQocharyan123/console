@@ -8,9 +8,11 @@ import Success from "../Success/Success";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getHomePageDataThunk,
   sendDailyCodeThunk,
   sendDailyPointThunk
 } from "../../../Store/Middlewares/homePageData";
+import LogoAnimation from "../LogoAnimation/LogoAnimation";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -18,10 +20,9 @@ const Home = () => {
   const [dailyCode, setDailyCode] = useState("");
   const dispatch = useDispatch();
   const token = useSelector((state) => state?.telegramLogin?.token);
-
   const isBoostPage = location.pathname.includes("boost");
-  const isSuccess = useSelector((state) => state?.telegramLogin?.isSuccess);
   const homeData = useSelector((state) => state?.homePage?.homeData);
+  const loading = useSelector((state) => state?.homePage?.loading);
   const showSuccess = useSelector((state) => state?.homePage?.showSuccess);
 
   const handleSendDailyCode = () => {
@@ -34,17 +35,23 @@ const Home = () => {
     setDailyCode("");
   };
 
-  console.log(homeData, "home poage data");
-
   const handleDailyPoint = () => {
     dispatch(sendDailyPointThunk({ token }));
   };
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getHomePageDataThunk({ token }));
+    }
+  }, [showSuccess]);
 
   return (
     <>
       {showSuccess && <Success />}
 
       {/* <img src={fon} alt="fon" className="fon" /> */}
+
+      {loading && <LogoAnimation />}
       <div className="home">
         {!isBoostPage && (
           <>
@@ -75,10 +82,16 @@ const Home = () => {
                   placeholder="Input code here"
                   onChange={(e) => setDailyCode(e.target.value)}
                   value={dailyCode}
-                  disabled={homeData?.is_used_daily_code}
+                  disabled={
+                    homeData?.is_used_daily_code ||
+                    homeData?.is_used_daily_code === undefined
+                  }
                 />
                 <button
-                  disabled={homeData?.is_used_daily_code}
+                  disabled={
+                    homeData?.is_used_daily_code ||
+                    homeData?.is_used_daily_code === undefined
+                  }
                   onClick={handleSendDailyCode}
                 >
                   Check
@@ -86,14 +99,17 @@ const Home = () => {
               </div>
             </div>
 
-            <MiningProcess />
+            <MiningProcess homeData={homeData} />
 
             <h2>Daily Claim</h2>
             <div className="dailyClaim">
               <p>Daily Treasure Claim</p>
               <p>Claim your daily reward</p>
               <button
-                disabled={homeData?.is_used_daily_claim}
+                disabled={
+                  homeData?.is_used_daily_claim ||
+                  homeData?.is_used_daily_claim === undefined
+                }
                 onClick={handleDailyPoint}
               >
                 {homeData?.daily_claim_point

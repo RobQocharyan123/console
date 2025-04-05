@@ -6,10 +6,9 @@ import {
 } from "../Middlewares/homePageData";
 
 const initialState = {
-  homeData: [],
+  homeData: null,
   loading: false,
-  showSuccess: false,
-  token: ""
+  showSuccess: false
 };
 
 const homePageSlice = createSlice({
@@ -18,18 +17,20 @@ const homePageSlice = createSlice({
   reducers: {
     setCloseSuccess: (state) => {
       state.showSuccess = false;
+    },
+    setUpdateHomeData: (state, action) => {
+      state.homeData = action.payload;
+      state.showSuccess = action.payload?.mining_claim_points;
     }
   },
   extraReducers: (builder) => {
     builder
       .addCase(getHomePageDataThunk.pending, (state) => {
         state.loading = true;
-        state.error = null;
       })
       .addCase(getHomePageDataThunk.fulfilled, (state, action) => {
         state.loading = false;
         state.homeData = action.payload;
-        state.token = action.payload?.token;
       })
       .addCase(getHomePageDataThunk.rejected, (state, action) => {
         state.loading = false;
@@ -37,7 +38,7 @@ const homePageSlice = createSlice({
       })
       // daily code
       .addCase(sendDailyCodeThunk.fulfilled, (state, action) => {
-        state.showSuccess = action.payload;
+        state.showSuccess = action.payload?.dailyCodePoint;
       })
 
       .addCase(sendDailyCodeThunk.rejected, (state, action) => {
@@ -55,6 +56,6 @@ const homePageSlice = createSlice({
   }
 });
 
-export const { setCloseSuccess } = homePageSlice.actions;
+export const { setCloseSuccess, setUpdateHomeData } = homePageSlice.actions;
 
 export default homePageSlice.reducer;

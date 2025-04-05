@@ -1,15 +1,25 @@
 import "./Boost.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Upgrade from "./subComponents/Upgrade/Upgrade";
 import Bot from "./subComponents/Bot/Bot";
 import BoostPage from "./subComponents/BoostPage/BoostPage";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getHomePageDataThunk } from "../../../Store/Middlewares/homePageData";
 
 const Boost = () => {
   const [page, setPage] = useState("upgrade");
   const homeData = useSelector((state) => state?.homePage?.homeData);
   const boostData = useSelector((state) => state?.boosts?.boostData);
-  console.log(boostData, "this is boost Data");
+  const token = useSelector((state) => state?.telegramLogin?.token);
+
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   if (token) {
+  //     dispatch(getHomePageDataThunk({ token }));
+  //   }
+  // }, []);
+
   return (
     <div className="boost">
       <h2>Boost Your CP</h2>

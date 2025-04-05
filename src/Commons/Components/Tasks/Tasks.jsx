@@ -1,12 +1,22 @@
 import "./Tasks.css";
 import fon from "../../../Assets/fon.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import New from "./New/New";
 import Completed from "./Completed/Completed";
+import { useDispatch, useSelector } from "react-redux";
+import { getHomePageDataThunk } from "../../../Store/Middlewares/homePageData";
 
 const Tasks = () => {
   const [page, setPage] = useState("new");
+  const token = useSelector((state) => state?.telegramLogin?.token);
 
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   if (token) {
+  //     dispatch(getHomePageDataThunk({ token }));
+  //   }
+  // }, []);
   return (
     <>
       <img src={fon} alt="fon" className="fon" />

@@ -19,7 +19,6 @@ if (typeof window.Telegram === "undefined") {
       }
     }
   };
-  console.log("Mocked Telegram WebApp for testing.");
 }
 
 export const loginPostUserData = async (userData) => {

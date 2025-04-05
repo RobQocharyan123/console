@@ -30,7 +30,7 @@ const UpgradePopUp = ({ setShow, data }) => {
               className="upgradeLogoIcon"
             />
             <p>{data?.native_price}</p>
-            <button>Claim</button>
+            <button>Buy</button>
           </div>
           <div className="rightClaim">
             <img
@@ -39,7 +39,7 @@ const UpgradePopUp = ({ setShow, data }) => {
               className="upgradeTonIcon"
             />
             <p>{data?.ton_price}</p>
-            <button>Claim</button>
+            <button>Buy</button>
           </div>
         </div>
       </div>

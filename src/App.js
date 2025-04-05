@@ -30,13 +30,14 @@ function App() {
   tg.expand();
 
   const dispatch = useDispatch();
+  const homeData = useSelector((state) => state?.homePage?.homeData);
 
   const isSuccess = useSelector((state) => state?.telegramLogin?.isSuccess);
   const token = useSelector((state) => state?.telegramLogin?.token);
+  console.log(homeData);
+
   useEffect(() => {
     const userData = tg.initDataUnsafe.user;
-    // console.log(userData);
-
     if (userData) {
       dispatch(loginTelegramBotThunk(userData));
     }
@@ -47,7 +48,11 @@ function App() {
       dispatch(getHomePageDataThunk({ token }));
       navigate("/home");
     }
-  }, [isSuccess]);
+  }, [isSuccess, dispatch]);
+
+  if (!homeData) {
+    return <LogoAnimation />;
+  }
 
   return (
     <div className="app">

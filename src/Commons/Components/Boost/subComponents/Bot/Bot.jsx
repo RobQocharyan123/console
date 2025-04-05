@@ -1,10 +1,10 @@
 import "./Bot.css";
 import assistanIcon from "../../../../../Assets/Home/assistant-icon.svg";
-import { useState } from 'react';
-import BotModal from './BotModal';
+import { useState } from "react";
+import BotModal from "./BotModal";
+import BotFirstModal from "./botModal/BotFirstModal";
 const Bot = () => {
-  const[showModal,setShowModal] = useState(false);
-
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <>
@@ -21,10 +21,19 @@ const Bot = () => {
             </p>
           </div>
         </div>
-        <button onClick={()=>setShowModal(true)}>Buy</button>
+        <button onClick={() => setShowModal(true)}>Buy</button>
       </div>
 
-      {showModal && <BotModal setShowModal={setShowModal} title={"Assistant"} description={"Your personal assistant will automatically start farming and claiming rewards"} price={"1 TON"} />}
+      {showModal && (
+        <BotFirstModal
+          setShowModal={setShowModal}
+          title={"Assistant"}
+          description={
+            "Your personal assistant will automatically start farming and claiming rewards"
+          }
+          price={"1 TON"}
+        />
+      )}
     </>
   );
 };
