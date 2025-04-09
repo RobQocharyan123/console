@@ -3,8 +3,30 @@ import upgradePopUpLogoIcon from "../../../../../../Assets/Home/Upgrade/upgrade-
 import upgradeCancelIcon from "../../../../../../Assets/Home/Upgrade/upgrade-cancel.svg";
 import upgradeLogoIcon from "../../../../../../Assets/Home/Upgrade/upgrade-logo.svg";
 import upgradeTonIcon from "../../../../../../Assets/Home/Upgrade/upgrade-ton.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { upgradeBuyThunk } from "../../../../../../Store/Middlewares/upgradeServiceBuy";
+// import TonWeb from "tonweb";
+import { upgradeServicePost } from "./../../../../../Services/upgradeService";
+import { setUpdateUbgradeData } from "../../../../../../Store/Slices/homePageSlice";
+import TonWallet from "./../../../../TonConnect/TonWallet";
+
+// const tonweb = new TonWeb();
+// new TonWeb.providers.HttpProvider("https://toncenter.com/api/v2/jsonRPC")
 
 const UpgradePopUp = ({ setShow, data }) => {
+  const disptach = useDispatch();
+  const token = useSelector((state) => state?.telegramLogin?.token);
+
+  const handleClickeBuyNative = async () => {
+    const obj = {
+      id: data?.id,
+      type: "native"
+    };
+    const response = await upgradeServicePost({ obj, token });
+    disptach(setUpdateUbgradeData(response?.data));
+    setShow(false);
+  };
+
   return (
     <>
       <div className="upgradeOverlay" onClick={() => setShow(false)}></div>
@@ -30,7 +52,9 @@ const UpgradePopUp = ({ setShow, data }) => {
               className="upgradeLogoIcon"
             />
             <p>{data?.native_price}</p>
-            <button>Buy</button>
+            <button disabled={data?.is_active} onClick={handleClickeBuyNative}>
+              Buy
+            </button>
           </div>
           <div className="rightClaim">
             <img
@@ -39,7 +63,8 @@ const UpgradePopUp = ({ setShow, data }) => {
               className="upgradeTonIcon"
             />
             <p>{data?.ton_price}</p>
-            <button>Buy</button>
+            {/* <button>Buy</button> */}
+            <TonWallet text={"buy"} />
           </div>
         </div>
       </div>

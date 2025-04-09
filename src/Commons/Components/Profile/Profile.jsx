@@ -2,8 +2,11 @@ import "./Profile.css";
 import fon from "../../../Assets/fon.png";
 import profileDefaultImg from "../../../Assets/Profile/profil-default.svg";
 import profileWalletCancelIcon from "../../../Assets/Profile/profile-cancel.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProfileModal from "./ProfileModal";
+import { useDispatch, useSelector } from "react-redux";
+import { getHomePageDataThunk } from "../../../Store/Middlewares/homePageData";
+import TonWallet from "./../TonConnect/TonWallet";
 
 const Profile = () => {
   const [arr, setArr] = useState([{ id: "1", title: "52U...1hd.." }]);
@@ -11,6 +14,16 @@ const Profile = () => {
 
   const [profileImg, setProfileImg] = useState(profileDefaultImg);
   const [showModal, setShowModal] = useState(false);
+
+  const token = useSelector((state) => state?.telegramLogin?.token);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getHomePageDataThunk({ token }));
+    }
+  }, []);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -74,8 +87,7 @@ const Profile = () => {
             <p>You have no wallet connected.</p>
           )}
         </div>
-
-        <button>TON Connect</button>
+        <TonWallet text={"TON Connect"} isProfile={true} />
       </div>
       {showModal && (
         <ProfileModal setShowModal={setShowModal} handleDelete={handleDelete} />

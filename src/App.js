@@ -50,9 +50,9 @@ function App() {
     }
   }, [isSuccess, dispatch]);
 
-  if (!homeData) {
-    return <LogoAnimation />;
-  }
+  // if (!homeData) {
+  //   return <LogoAnimation />;
+  // }
 
   return (
     <div className="app">

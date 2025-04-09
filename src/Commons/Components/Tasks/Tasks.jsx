@@ -12,11 +12,11 @@ const Tasks = () => {
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (token) {
-  //     dispatch(getHomePageDataThunk({ token }));
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (token) {
+      dispatch(getHomePageDataThunk({ token }));
+    }
+  }, []);
   return (
     <>
       <img src={fon} alt="fon" className="fon" />

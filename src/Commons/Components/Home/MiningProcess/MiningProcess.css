@@ -1,129 +1,136 @@
-
-
-.mining{
-    border-radius: 23px;
-    padding: 20px 12px 14px 13px;
-    background-color: rgba(159, 160, 172, 0.2);
-    margin-top: 14px;
+.mining {
+  border-radius: 23px;
+  padding: 20px 12px 14px 13px;
+  background-color: rgba(159, 160, 172, 0.2);
+  margin-top: 14px;
 }
 
-.mining .miningText{
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 29px;
-    color: #F9F7F7;
-    margin: 0;
+.mining .miningText {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  color: #f9f7f7;
+  margin: 0;
 }
 
-.mining .miningHeader{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 14px;
+.mining .miningHeader {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 14px;
 }
 
-.mining .miningHeader span{
-    font-weight: 700;
-    font-size: 14px;
-    color: #64FFFF;
-    margin-left: 6px;
+.mining .miningHeader span {
+  font-weight: 700;
+  font-size: 14px;
+  color: #64ffff;
+  margin-left: 6px;
 }
 
-.mining .squares{
-    position: relative;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 8px;
-    z-index: 2;
-    margin-top: 22px;
+.mining .squares {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+  margin-top: 22px;
 }
 
-.mining .squares .squareItem{
-    width: 33px;
-    height: 30px;
-    background-color: #64FFFF ;
-    border: 1px solid #64FFFF ;
-    border-radius: 6px;
+.mining .squares .squareItem {
+  width: 33px;
+  height: 30px;
+  background-color: #64ffff;
+  border: 1px solid #64ffff;
+  border-radius: 6px;
 }
 
-
-.mining .miningTime{
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-top: 12px;
+.mining .miningTime {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 12px;
 }
 
-.miningTime span{
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 29px;
-    color: #F9F7F7;
+.miningTime span {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  color: #f9f7f7;
 }
 
-.miningTime span:nth-child(1){
-    font-family: "Instrument Sans", serif;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    color: #F9F7F7;
+.miningTime span:nth-child(1) {
+  font-family: "Instrument Sans", serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #f9f7f7;
 }
 
-.mining .miningCompleted{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 32px;
+.mining .miningCompleted {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
 }
 
-
-.miningCompleted .squareCompleted img{
-
+.miningCompleted .squareCompleted img {
 }
 
-
-.miningCompleted .squareCompleted .completedText{
-
+.miningCompleted .squareCompleted .completedText {
 }
 
-.miningCompleted .completedText p{
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 22px;
-    color: #FFFFFF;
-    margin: 0;
+.miningCompleted .completedText p {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: #ffffff;
+  margin: 0;
 }
 
-
-
-
-
-
-.mining .miningCompleted button{
-    font-weight: 700;
-    font-size: 16px;
-    color: #02040F;
-    line-height: 20px;
-    width: 101px;
-    height: 26px;
-    border-radius: 18px;
-    background: linear-gradient(to right, #3F4050, #D5D7E9, #424459);
-    position: relative;
-    border: none;
-    z-index: 2;
+.mining .miningCompleted button {
+  font-weight: 700;
+  font-size: 16px;
+  color: #02040f;
+  line-height: 20px;
+  width: 101px;
+  height: 26px;
+  border-radius: 18px;
+  background: linear-gradient(to right, #3f4050, #d5d7e9, #424459);
+  position: relative;
+  border: none;
+  z-index: 2;
 }
-
 
 .mining .miningCompleted button::before {
-    content: "";
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(to right, #3F4050, #D5D7E9, #424459);
-    z-index: -1;
-    border-radius: inherit;
-    filter: blur(10px);
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(to right, #3f4050, #d5d7e9, #424459);
+  z-index: -1;
+  border-radius: inherit;
+  filter: blur(10px);
+}
+
+.miningAnimation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  margin-left: auto;
+  top: -10px;
+  left: -27px;
+}
+
+.miningAnimation p {
+  position: absolute;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  color: #222;
 }

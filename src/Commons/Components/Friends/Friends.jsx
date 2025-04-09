@@ -2,80 +2,57 @@ import "./Friends.css";
 import "./Toast.css";
 import { toast } from "react-toastify";
 import fon from "../../../Assets/fon.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import friendSuccessIcon from "../../../Assets/Friends/friend-success.svg";
 import friendSuccessIconCopy from "../../../Assets/Friends/friend-success-copy.svg";
 import friendsCancelIcon from "../../../Assets/Friends/friend-cancel.svg";
 import "share-api-polyfill";
+import { getHomePageDataThunk } from "../../../Store/Middlewares/homePageData";
+import { useDispatch, useSelector } from "react-redux";
 
 const Friends = () => {
   const [arr, setArr] = useState(Array(8).fill(false));
   const [linkCopied, setLinkCopied] = useState("");
   const [referralLink, setReferralLink] = useState(window.location.href);
+  const token = useSelector((state) => state?.telegramLogin?.token);
+
+  const dispatch = useDispatch();
 
   const copyReferalLink = () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: "Check out this referral link!",
-          text: "Use my referral link to sign up:",
-          url: referralLink,
-        })
-        .then(() => {
-          setLinkCopied(referralLink);
-          toast.success(
-            <div className="friendsSuccessDiv">
-              <p className="friendSuccess">Success</p>
-              <p className="friendSuccessText">Link shared successfully!</p>
-            </div>,
-            {
-              icon: <img src={friendSuccessIcon} alt="friendSuccessIcon" />,
-              closeButton: false,
-            },
-          );
-        })
-        .catch((err) => {
-          toast.error(
-            <div className="friendsSuccessDiv">
-              <p className="friendCancel">Cancel</p>
-              <p className="friendSuccessText">Something went wrong!</p>
-            </div>,
-            {
-              icon: <img src={friendsCancelIcon} alt="friendsCancelIcon" />,
-              closeButton: false,
-            },
-          );
-        });
-    } else {
-      navigator.clipboard
-        .writeText(referralLink)
-        .then(() => {
-          setLinkCopied(referralLink);
-          toast.success(
-            <div className="friendsSuccessDiv">
-              <p className="friendSuccess">Success</p>
-              <p className="friendSuccessText">Your link copied!</p>
-            </div>,
-            {
-              icon: <img src={friendSuccessIcon} alt="friendSuccessIcon" />,
-              closeButton: false,
-            },
-          );
-        })
-        .catch((err) => {
-          toast.error(
-            <div className="friendsSuccessDiv">
-              <p className="friendCancel">Cancel</p>
-              <p className="friendSuccessText">Something went wrong!</p>
-            </div>,
-            {
-              icon: <img src={friendsCancelIcon} alt="friendsCancelIcon" />,
-              closeButton: false,
-            },
-          );
-        });
-    }
+    navigator.clipboard
+      .writeText(referralLink)
+      .then(() => {
+        setLinkCopied(referralLink);
+        toast.success(
+          <div className="friendsSuccessDiv">
+            <p className="friendSuccess">Success</p>
+            <p className="friendSuccessText">Your link copied!</p>
+          </div>,
+          {
+            icon: <img src={friendSuccessIconCopy} alt="friendSuccessIcon" />,
+            closeButton: false
+          }
+        );
+      })
+      .catch((err) => {
+        toast.error(
+          <div className="friendsSuccessDiv">
+            <p className="friendCancel">Cancel</p>
+            <p className="friendSuccessText">Something went wrong!</p>
+          </div>,
+          {
+            icon: <img src={friendsCancelIcon} alt="friendsCancelIcon" />,
+            closeButton: false
+          }
+        );
+      });
   };
+
+  useEffect(() => {
+    if (token) {
+      dispatch(getHomePageDataThunk({ token }));
+    }
+  }, []);
 
   return (
     <>
@@ -89,7 +66,6 @@ const Friends = () => {
           </div>
 
           <div className="myFriendsClaim">
-            <button>Claim all</button>
             <p>Total amount: 800 CP</p>
           </div>
         </div>
@@ -128,7 +104,7 @@ const Friends = () => {
           <a
             className="invite"
             href={`https://t.me/share/url?url=${encodeURIComponent(
-              referralLink,
+              referralLink
             )}`}
             target="_blank"
             rel="noopener noreferrer"

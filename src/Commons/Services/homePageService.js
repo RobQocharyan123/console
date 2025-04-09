@@ -28,7 +28,7 @@ export const loginPostUserData = async (userData) => {
   }
 
   try {
-    const response = await axios.post("http://localhost:3030/auth/telegram", {
+    const response = await pureClient.post("auth/telegram", {
       id: userData.id,
       first_name: userData.first_name,
       last_name: userData.last_name || "",

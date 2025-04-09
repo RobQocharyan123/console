@@ -3,13 +3,15 @@ import upgrade1 from "../../../../../Assets/Home/Upgrade/upgrade-1.svg";
 import upgradeLogoIcon from "../../../../../Assets/Home/Upgrade/upgrade-logo.svg";
 import upgradeTonIcon from "../../../../../Assets/Home/Upgrade/upgrade-ton.svg";
 import upgradeSuccessIcon from "../../../../../Assets/Home/Upgrade/upgrade-success.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UpgradePopUp from "./UpgradePopUp/UpgradePopUp";
+import { useDispatch } from "react-redux";
+import TonWallet from "./../../../TonConnect/TonWallet";
 
 const Upgrade = ({ data }) => {
   const [show, setShow] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
-
+  const dispatch = useDispatch();
   const handleOPenPopUp = (item) => {
     setShow(true);
     setSelectedItem(item);
@@ -43,7 +45,16 @@ const Upgrade = ({ data }) => {
                     <img src={upgradeLogoIcon} alt="logo" />
                     <img src={upgradeTonIcon} alt="Ton" />
                   </div>
-                  <button onClick={() => handleOPenPopUp(i)}>Buy</button>
+                  <button
+                    disabled={i?.is_active}
+                    onClick={() => handleOPenPopUp(i)}
+                    style={{
+                      color: i?.is_active ? "#FFF" : "",
+                      backgroundColor: i?.is_active ? "gray" : ""
+                    }}
+                  >
+                    Buy
+                  </button>
                 </div>
               </div>
               {index < data.length - 1 && <div className="greenLine"></div>}

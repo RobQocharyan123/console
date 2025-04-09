@@ -8,12 +8,13 @@ import axios from "axios";
 import { setUpdateHomeData } from "../../../../Store/Slices/homePageSlice";
 import { getHomePageDataThunk } from "../../../../Store/Middlewares/homePageData";
 import { toast } from "react-toastify";
+import miningAnimation from "../../../../Assets/Home/mining-animation.svg";
+import { motion } from "framer-motion";
 
-const MiningProcess = ({ homeData }) => {
-  console.log(homeData, "llllllllll");
+const MiningProcess = () => {
   const token = useSelector((state) => state?.telegramLogin?.token);
   const showSuccess = useSelector((state) => state?.homePage?.showSuccess);
-
+  const homeData = useSelector((state) => state?.homePage?.homeData);
   const totalSquares = 8;
 
   const miningDuration =
@@ -27,11 +28,6 @@ const MiningProcess = ({ homeData }) => {
   );
 
   const emptySquares = totalSquares - initialFilledSquares;
-  const fillInterval =
-    emptySquares > 0
-      ? homeData?.user_mining_data?.mining_left_second / emptySquares
-      : 0;
-
   const dispatch = useDispatch();
   const [squares, setSquares] = useState(
     Array(totalSquares)
@@ -162,10 +158,19 @@ const MiningProcess = ({ homeData }) => {
   };
 
   useEffect(() => {
-    if (token) {
-      dispatch(getHomePageDataThunk({ token }));
+    if (
+      homeData?.user_mining_data?.mining_left_second &&
+      homeData?.user_mining_data?.boost_speed
+    ) {
+      const miningDuration =
+        homeData.user_mining_data.mining_left_second /
+        homeData.user_mining_data.boost_speed;
+
+      if (!isNaN(miningDuration)) {
+        setMiningTimeLeft(miningDuration);
+      }
     }
-  }, []);
+  }, [homeData]); // This effect runs when homeData is updated
 
   return (
     <>
@@ -182,6 +187,15 @@ const MiningProcess = ({ homeData }) => {
               </>
             )}
           </div>
+
+          <motion.div
+            className="miningAnimation"
+            animate={{ y: [0, 15, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <img src={miningAnimation} alt={miningAnimation} />
+            <p>{homeData?.user_mining_data?.upgrade_speed}</p>
+          </motion.div>
         </div>
 
         <div className="squares">

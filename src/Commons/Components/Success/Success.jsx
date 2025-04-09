@@ -16,7 +16,6 @@ const Success = () => {
 
   const onCancelSuccess = () => {
     dispatch(setCloseSuccess());
-    dispatch(getHomePageDataThunk({ token }));
     // navigate("/home");
   };
 
@@ -24,9 +23,10 @@ const Success = () => {
     <>
       <div className="successOverlay" onClick={onCancelSuccess}></div>
       <div className="success">
-        <h2>Success</h2>
-        <p>
-          You have approved claim. {showSuccess?.dailyClaimPoint || showSuccess}
+        <h3>Success</h3>
+        <p>You have approved claim</p>
+        <p className="amount">
+          $CP {showSuccess?.dailyClaimPoint || showSuccess}
         </p>
         <button onClick={onCancelSuccess}>OK</button>
       </div>

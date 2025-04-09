@@ -1,62 +1,66 @@
-
-
-.new{
-    margin-top: 30px;
-    padding-bottom: 150px;
-
+.new {
+  margin-top: 30px;
+  padding-bottom: 150px;
 }
 
-
-.new .newContent{
-
+.new .newContent {
 }
 
-.newContent .newItem{
-    position: relative;
-    background-color: rgba(217, 217, 217, 0.2);
-    border-radius: 23px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 10px 13px 16px;
-    margin-top: 16px;
-
+.newContent .newItem {
+  position: relative;
+  background-color: rgba(217, 217, 217, 0.2);
+  border-radius: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 10px 13px 16px;
+  margin-top: 16px;
 }
 
-.newContent .newItem img{
-
+.newContent .newItem img {
 }
 
-.newContent .newItem .newText{
-
+.newContent .newItem .newText {
 }
 
-
-.newContent .newItem .newText h2{
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 22px;
-    color: #F9F7F7;
-    margin: 0;
+.newContent .newItem .newText h2 {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: #f9f7f7;
+  margin: 0;
 }
 
-.newContent .newItem .newText p{
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    color: #F9F7F7;
-    margin: 0;
-    margin-top: 6px;
+.newContent .newItem .newText p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #f9f7f7;
+  margin: 0;
+  margin-top: 6px;
 }
-.newContent .newItem button{
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 19px;
-    width: 91px;
-    height:26px;
-    color: #02040F;
-    border-radius: 18px;
-    background-color: #64FFFF ;
-    border: none;
-    z-index: 2;
+.newContent .newItem button {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  width: 91px;
+  height: 26px;
+  color: #02040f;
+  border-radius: 18px;
+  background-color: #64ffff;
+  border: none;
+  z-index: 2;
+}
+
+.newContent .newItem button:hover {
+  border: none;
+  background-color: transparent;
+  color: transparent;
+}
+
+.ant-btn-variant-outlined:not(:disabled):not(.ant-btn-disabled):hover,
+.ant-btn-variant-dashed:not(:disabled):not(.ant-btn-disabled):hover {
+  color: #02040f;
+  border-color: none;
+  background: #64ffff;
 }

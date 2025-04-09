@@ -1,4 +1,3 @@
-import axios from "axios";
 import pureClient from ".";
 
 export const boostData = async (token) => {

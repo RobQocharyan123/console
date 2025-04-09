@@ -71,7 +71,7 @@ const BoostPage = ({ data }) => {
                   </div>
                   <button
                     onClick={() => handleOPenPopUp(item)}
-                    disabled={item?.is_active}
+                    // disabled={item?.is_active}
                   >
                     {item?.is_free ? "Free" : "Buy"}
                   </button>

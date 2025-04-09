@@ -39,12 +39,6 @@ const Home = () => {
     dispatch(sendDailyPointThunk({ token }));
   };
 
-  useEffect(() => {
-    if (token) {
-      dispatch(getHomePageDataThunk({ token }));
-    }
-  }, [showSuccess]);
-
   return (
     <>
       {showSuccess && <Success />}
@@ -99,7 +93,7 @@ const Home = () => {
               </div>
             </div>
 
-            <MiningProcess homeData={homeData} />
+            <MiningProcess />
 
             <h2>Daily Claim</h2>
             <div className="dailyClaim">

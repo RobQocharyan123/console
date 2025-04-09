@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { upgradeBuyThunk } from "./../Middlewares/upgradeServiceBuy";
 import {
   getHomePageDataThunk,
   sendDailyCodeThunk,
@@ -19,8 +20,29 @@ const homePageSlice = createSlice({
       state.showSuccess = false;
     },
     setUpdateHomeData: (state, action) => {
-      state.homeData = action.payload;
-      state.showSuccess = action.payload?.mining_claim_points;
+      const { user_mining_data, total_balance, mining_claim_points } =
+        action.payload || {};
+
+      if (state.homeData) {
+        if (user_mining_data) {
+          state.homeData.user_mining_data = user_mining_data;
+        }
+
+        if (typeof total_balance !== "undefined") {
+          state.homeData.total_balance = total_balance;
+        }
+      }
+
+      if (typeof mining_claim_points !== "undefined") {
+        state.showSuccess = mining_claim_points;
+      }
+    },
+
+    setUpdateUbgradeData: (state, action) => {
+      if (state.homeData.booster.upgrades) {
+        state.homeData.booster.upgrades = action.payload?.upgrades;
+        state.homeData.total_balance = action.payload?.total_balance;
+      }
     }
   },
   extraReducers: (builder) => {
@@ -31,6 +53,7 @@ const homePageSlice = createSlice({
       .addCase(getHomePageDataThunk.fulfilled, (state, action) => {
         state.loading = false;
         state.homeData = action.payload;
+        state.showSuccess = action.payload?.initial_point;
       })
       .addCase(getHomePageDataThunk.rejected, (state, action) => {
         state.loading = false;
@@ -53,9 +76,25 @@ const homePageSlice = createSlice({
       .addCase(sendDailyPointThunk.rejected, (state, action) => {
         state.showSuccess = false;
       });
+
+    // .addCase(upgradeBuyThunk.pending, (state) => {
+    //   state.loading = true;
+    // })
+    // .addCase(upgradeBuyThunk.fulfilled, (state, action) => {
+    //   if (state.homeData.booster.upgrades) {
+    //     state.homeData.booster.upgrades = action.payload?.upgrades;
+    //     state.homeData.total_balance = action.payload?.total_balance;
+    //   }
+    //   state.loading = false;
+    // })
+    // .addCase(upgradeBuyThunk.rejected, (state, action) => {
+    //   state.loading = false;
+    //   state.error = action.payload;
+    // });
   }
 });
 
-export const { setCloseSuccess, setUpdateHomeData } = homePageSlice.actions;
+export const { setCloseSuccess, setUpdateHomeData, setUpdateUbgradeData } =
+  homePageSlice.actions;
 
 export default homePageSlice.reducer;

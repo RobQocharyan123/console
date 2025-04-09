@@ -1,0 +1,18 @@
+.tonButton {
+  width: 134px;
+  height: 46px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  color: #02040f;
+  border-radius: 18px;
+  background-color: #64ffff;
+  box-shadow: rgba(100, 255, 255, 0.5) 3.95px 3.95px 0.6px;
+  border: none;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}

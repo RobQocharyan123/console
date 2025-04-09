@@ -1,16 +1,27 @@
 import "./AirDrop.css";
 import fon from "../../../Assets/fon.png";
 import airdropImg from "../../../Assets/airdrop/airdrop.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LogoAnimation from "./../LogoAnimation/LogoAnimation";
+import { useDispatch, useSelector } from "react-redux";
+import { getHomePageDataThunk } from "../../../Store/Middlewares/homePageData";
 
 const AirDrop = () => {
   const [loading, setLoading] = useState(false);
+
+  const token = useSelector((state) => state?.telegramLogin?.token);
+
+  const dispatch = useDispatch();
 
   const handleImageLoad = () => {
     setLoading(true);
   };
 
+  useEffect(() => {
+    if (token) {
+      dispatch(getHomePageDataThunk({ token }));
+    }
+  }, []);
   return (
     <>
       <img src={fon} alt="fon" className="fon" />
