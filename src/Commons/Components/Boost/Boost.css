@@ -1,71 +1,66 @@
-
-
-.boost{
-    font-family: "Inria Serif", serif;
+.boost {
+  font-family: "Inria Serif", serif;
 }
 
-.boost h2{
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 38px;
-    color: #64FFFF ;
-    margin: 0;
-
+.boost h2 {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 38px;
+  color: #64ffff;
+  margin: 0;
 }
 
-.boost nav{
-    margin-top: 40px;
+.boost nav {
+  margin-top: 40px;
 }
 
-
-.boost nav ul{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0;
+.boost nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
 }
 
-.boost nav li{
-    list-style-type: none;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 29px;
-    color: #F9F7F7;
-    padding: 8px 15px;
-    position: relative;
-    z-index: 1;
-
+.boost nav li {
+  list-style-type: none;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+  color: #f9f7f7;
+  padding: 8px 15px;
+  position: relative;
+  z-index: 1;
 }
 
-.boost nav ul .activePage{
-    position: relative;
-    background-color: transparent;
-    color: #64FFFF ;
-    border-bottom: 0.3px solid #64FFFF;
-
+.boost nav ul .activePage {
+  position: relative;
+  background-color: transparent;
+  color: #64ffff;
+  border-bottom: 0.3px solid #64ffff;
 }
 
-.boost nav ul .activePage:after{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: #64FFFF ;
-    filter: blur(25px);
-    pointer-events: none;
-    border-radius: 50px;
-
+.boost nav ul .activePage:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #64ffff;
+  filter: blur(25px);
+  pointer-events: none;
+  border-radius: 50px;
 }
 
 nav ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    gap: 20px;
-  }
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
 
-  nav ul li {
+@media screen and (max-width: 400px) {
+  .boost nav {
+    margin-top: 10px;
   }
-
+}

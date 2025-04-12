@@ -1,34 +1,23 @@
-
-
-.header{
-    height: 56px;
-    border-bottom: 0.3px solid #64FFFF ;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 26px 18px 44px;
-    position: relative;
-    z-index: 2;
-    background: inherit;
+.header {
+  height: 20px;
+  border-bottom: 0.3px solid #64ffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 26px 18px 44px;
+  position: relative;
+  z-index: 2;
+  background: inherit;
 }
 
-
-.header .logo{
-
+.header .logo {
 }
 
-
-.header .logo svg{
-
+.header .logo svg {
 }
 
-
-.header .arrow{
-
+.header .arrow {
 }
 
-
-.header .arrow svg{
-
+.header .arrow svg {
 }
-

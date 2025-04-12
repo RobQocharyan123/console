@@ -64,3 +64,9 @@
   font-size: 32px !important;
   color: #64ffff !important;
 }
+
+@media screen and (max-width: 400px) {
+  .success {
+    width: 210px;
+  }
+}

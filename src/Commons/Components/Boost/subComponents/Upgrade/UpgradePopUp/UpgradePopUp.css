@@ -138,3 +138,9 @@
   width: 111%;
   margin-top: 34px;
 }
+
+@media screen and (max-width: 400px) {
+  .upgradePopUp {
+    width: 290px;
+  }
+}

@@ -43,7 +43,7 @@ const Home = () => {
     <>
       {showSuccess && <Success />}
 
-      {/* <img src={fon} alt="fon" className="fon" /> */}
+      <img src={fon} alt="fon" className="fon" />
 
       {loading && <LogoAnimation />}
       <div className="home">
@@ -77,8 +77,8 @@ const Home = () => {
                   onChange={(e) => setDailyCode(e.target.value)}
                   value={dailyCode}
                   disabled={
-                    homeData?.is_used_daily_code ||
-                    homeData?.is_used_daily_code === undefined
+                    !homeData?.is_used_daily_code ||
+                    !homeData?.is_used_daily_code === undefined
                   }
                 />
                 <button

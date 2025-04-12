@@ -238,3 +238,15 @@
 .tonButton .go1140934594 {
   color: #02040f;
 }
+
+@media screen and (max-width: 400px) {
+  .profil {
+    padding-top: 10px;
+  }
+  .profil .profilWallet h2 {
+    font-size: 20px;
+  }
+  .profil .profilWallet {
+    margin-top: 10px;
+  }
+}

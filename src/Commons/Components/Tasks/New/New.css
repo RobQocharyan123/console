@@ -64,3 +64,21 @@
   border-color: none;
   background: #64ffff;
 }
+
+@media screen and (max-width: 400px) {
+  .newContent .newItem button {
+    width: 70px;
+  }
+
+  .newContent .newItem .newText h2 {
+    font-size: 16px;
+  }
+
+  .newContent .newItem {
+    padding: 5px;
+  }
+  .newContent .newItem .newText p {
+    margin-top: 0;
+    font-size: 14px;
+  }
+}

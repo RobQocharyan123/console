@@ -1,261 +1,294 @@
-
-
-.home{
-    padding: 30px 26px;
-    user-select: none;
-    overflow-y: auto;
-    box-sizing: border-box;
-    min-height: 100vh;
+.home {
+  padding: 30px 26px;
+  user-select: none;
+  overflow-y: auto;
+  box-sizing: border-box;
+  height: calc(100vh - 140px);
 }
 
 .home::-webkit-scrollbar {
-    width: 0;
-  }
-
-  .home::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .home::-webkit-scrollbar-thumb {
-    background: transparent;
-
-    border-radius: 5px;
-  }
-
-  .home::-webkit-scrollbar-thumb:hover {
-    background: transparent;
-
-  }
-
-input,button,p,span,h2{
-    font-family: "Inria Serif", serif;
-
+  width: 0;
 }
 
-.fon{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
+.home::-webkit-scrollbar-track {
+  background: transparent;
 }
 
+.home::-webkit-scrollbar-thumb {
+  background: transparent;
 
-.home .pointsBuster{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+  border-radius: 5px;
 }
 
-
-.pointsBuster .points{
-    background-color: rgba(159, 160, 172, 0.2);
-    padding: 11px  41px 7px 11px;
-    border-radius: 23px;
-    height: 105px;
-
+.home::-webkit-scrollbar-thumb:hover {
+  background: transparent;
 }
 
-.pointsBuster .points div{
-    display: flex;
-    align-items: center;
-    position: relative;
-    z-index: 2;
+input,
+button,
+p,
+span,
+h2 {
+  font-family: "Inria Serif", serif;
 }
 
-.pointsBuster .points img{
-
+.fon {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
 }
 
-
-.pointsBuster .points span{
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 23px;
-    color: rgba(249, 247, 247, 1);
-    margin-left: 15px;
+.home .pointsBuster {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-.pointsBuster .points p{
-    margin-top: 11px;
-    font-weight: 700;
-    font-size: 28px;
-    line-height: 33px;
-    color: #F9F7F7;
+.pointsBuster .points {
+  background-color: rgba(159, 160, 172, 0.2);
+  padding: 5px 41px 7px 11px;
+  border-radius: 23px;
+  height: 80px;
 }
 
+.pointsBuster .points div {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
 
+.pointsBuster .points img {
+}
+
+.pointsBuster .points span {
+  font-weight: 700;
+  font-size: 20px;
+  color: rgba(249, 247, 247, 1);
+  margin-left: 15px;
+}
+
+.pointsBuster .points p {
+  font-weight: 700;
+  font-size: 28px;
+  color: #f9f7f7;
+  margin-top: 4px;
+}
 
 .pointsBuster .boost {
-    background-color: rgba(159, 160, 172, 0.2);
-    padding: 10px  30px 8px 10px;
-    border-radius: 23px;
-    height: 105px;
-
+  background-color: rgba(159, 160, 172, 0.2);
+  padding: 5px 30px 8px 10px;
+  border-radius: 23px;
+  height: 80px;
 }
 
-
-.pointsBuster .boost div{
-    display: flex;
-    align-items: center;
+.pointsBuster .boost div {
+  display: flex;
+  align-items: center;
 }
 
-.pointsBuster .boost img{
-
+.pointsBuster .boost img {
 }
 
-
-.pointsBuster .boost span{
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 23px;
-    color: rgba(249, 247, 247, 1);
-    margin-left: 15px;
-
+.pointsBuster .boost span {
+  font-weight: 700;
+  font-size: 20px;
+  color: rgba(249, 247, 247, 1);
+  margin-left: 15px;
 }
 
-.pointsBuster .boost button{
-    margin-top: 11px;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 20px;
-    width: 101px;
-    height: 26px;
-    color: #02040F;
-    border-radius: 18px;
-    background-color: #64FFFF ;
-    box-shadow:rgba(100, 255, 255, 0.5) 3.95px 3.95px 0.6px;
-    position: relative;
-    right: -40px;
-    bottom: -10px;
-    border: none;
-    z-index: 2;
+.pointsBuster .boost button {
+  margin-top: 11px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  width: 101px;
+  height: 26px;
+  color: #02040f;
+  border-radius: 18px;
+  background-color: #64ffff;
+  box-shadow: rgba(100, 255, 255, 0.5) 3.95px 3.95px 0.6px;
+  position: relative;
+  right: -40px;
+  bottom: 10px;
+  border: none;
+  z-index: 2;
 }
-
 
 /* today */
 
-
-
-.home .todayCode{
-    margin-top: 26px;
+.home .todayCode {
+  margin-top: 26px;
 }
 
-
-
-.todayCode .todayText p{
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 29px;
-    color: #F9F7F7;
-    position: relative;
-    z-index: 2;
-    margin: 0;
+.todayCode .todayText p {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  color: #f9f7f7;
+  position: relative;
+  z-index: 2;
+  margin: 0;
 }
 
-.todayCode .todayContent{
-    margin-top: 6px;
-    border-radius: 23px;
-    padding: 8px 12px 6px 26px;
-    height: 43px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: rgba(217, 217, 217, 0.2);
+.todayCode .todayContent {
+  margin-top: 6px;
+  border-radius: 23px;
+  padding: 8px 12px 6px 26px;
+  height: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(217, 217, 217, 0.2);
 }
 
-.todayCode .todayContent input{
-    width: 180px;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 20px;
-    color: #F9F7F7;
-    position: relative;
-    z-index: 2;
+.todayCode .todayContent input {
+  width: 180px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: #f9f7f7;
+  position: relative;
+  z-index: 2;
 }
 
-.todayCode .todayContent input::placeholder{
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 20px;
-    color: rgba(249, 247, 247, 0.7);
+.todayCode .todayContent input::placeholder {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: rgba(249, 247, 247, 0.7);
 }
 
-.todayCode .todayContent button{
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 20px;
-    width: 101px;
-    height: 26px;
-    color: #02040F;
-    border-radius: 18px;
-    background-color: #64FFFF ;
-    box-shadow:rgba(100, 255, 255, 0.5) 3.95px 3.95px 0.6px;
-    border: none;
-    position: relative;
-    z-index: 2;
+.todayCode .todayContent button {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  width: 101px;
+  height: 26px;
+  color: #02040f;
+  border-radius: 18px;
+  background-color: #64ffff;
+  box-shadow: rgba(100, 255, 255, 0.5) 3.95px 3.95px 0.6px;
+  border: none;
+  position: relative;
+  z-index: 2;
 }
 
-
-.home h2{
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 29px;
-    color: #F9F7F7;
-    margin: 0;
-    margin-top: 24px;
+.home h2 {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  color: #f9f7f7;
+  margin: 0;
+  margin-top: 24px;
 }
-
-
 
 .home .dailyClaim {
-    background-color: rgba(217, 217, 217, 0.2);
-    box-shadow: rgb(204, 219, 232) 3px 3px 2px -1px inset, rgba(255, 255, 255, 0.5) -3px -9px 1px -8px;
-    padding: 20px 86px 26px 71px;
-    border-radius: 23px;
-    background-clip: padding-box;
-    margin-top: 18px;
-    margin-bottom: 110px;
+  background-color: rgba(217, 217, 217, 0.2);
+  box-shadow: rgb(204, 219, 232) 3px 3px 2px -1px inset,
+    rgba(255, 255, 255, 0.5) -3px -9px 1px -8px;
+  padding: 20px 86px 26px 71px;
+  border-radius: 23px;
+  background-clip: padding-box;
+  margin-top: 18px;
 }
 
+.dailyClaim p {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: #f9f7f7;
+  margin: 0;
+}
 
-.dailyClaim p{
-    font-weight: 700;
+.dailyClaim p:nth-child(2) {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  margin-top: 6px;
+  font-family: "Instrument Sans", serif;
+}
+.dailyClaim button {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  width: 101px;
+  height: 26px;
+  color: #02040f;
+  border-radius: 18px;
+  background-color: #64ffff;
+  box-shadow: rgba(100, 255, 255, 0.5) 3.95px 3.95px 0.6px;
+  border: none;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 24px;
+}
+
+@media screen and (max-width: 400px) {
+  .home {
+    padding: 20px;
+  }
+  .pointsBuster .points,
+  .pointsBuster .boost {
+    height: 65px;
+  }
+
+  .pointsBuster .points img,
+  .pointsBuster .boost img {
+    width: 30px;
+    height: 30px;
+  }
+  .pointsBuster .points,
+  .pointsBuster .boost {
+    padding-right: 10px;
+  }
+  .pointsBuster .points p {
+    font-size: 18px;
+  }
+
+  .pointsBuster .points span,
+  .pointsBuster .boost span {
+    font-size: 15px;
+    margin-left: 10px;
+  }
+
+  .pointsBuster .boost span {
+    margin-bottom: 3px;
+  }
+
+  .pointsBuster .boost button {
+    width: 75px;
+    right: -20px;
+  }
+
+  .todayCode .todayText p {
     font-size: 20px;
-    line-height: 24px;
-    color: #F9F7F7;
-    margin: 0;
-}
+  }
 
+  .todayCode .todayContent input {
+    width: 160px;
+  }
 
-.dailyClaim p:nth-child(2){
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 20px;
-    margin-top: 6px;
-    font-family: "Instrument Sans", serif;
-}
-.dailyClaim button{
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 20px;
-    width: 101px;
-    height: 26px;
-    color: #02040F;
-    border-radius: 18px;
-    background-color: #64FFFF ;
-    box-shadow:rgba(100, 255, 255, 0.5) 3.95px 3.95px 0.6px;
-    border: none;
-    position: relative;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    margin-top: 24px;
+  .home h2 {
+    font-size: 20px;
+  }
+
+  .dailyClaim p {
+    font-size: 18px;
+  }
+
+  .home .dailyClaim {
+    padding: 20px;
+  }
 }
