@@ -49,8 +49,9 @@ const UpgradePopUp = ({ setShow, data }) => {
         validUntil: Math.floor(Date.now() / 1000) + 600, // Valid for 10 minutes
         messages: [
           {
-            address: destinationAddress,
-            amount: amountNeeded.toString() // Amount in nanoTON
+            address: destinationAddress, //here need  backend adreess
+            amount: amountNeeded.toString() // Amount in nanoTON  need add backend amount
+            // payload:paymentId   here need add backend paymentID
           }
         ]
       };
