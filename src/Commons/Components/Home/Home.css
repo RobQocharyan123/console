@@ -251,7 +251,7 @@ h2 {
   }
   .pointsBuster .points,
   .pointsBuster .boost {
-    padding-right: 10px;
+    padding-right: 20px;
   }
   .pointsBuster .points p {
     font-size: 18px;
@@ -268,8 +268,8 @@ h2 {
   }
 
   .pointsBuster .boost button {
-    width: 75px;
-    right: -20px;
+    width: 101px;
+    right: 0px;
   }
 
   .todayCode .todayText p {
