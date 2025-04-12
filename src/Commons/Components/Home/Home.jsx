@@ -43,7 +43,7 @@ const Home = () => {
     <>
       {showSuccess && <Success />}
 
-      <img src={fon} alt="fon" className="fon" />
+      {/* <img src={fon} alt="fon" className="fon" /> */}
 
       {loading && <LogoAnimation />}
       <div className="home">
