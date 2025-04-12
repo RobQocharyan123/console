@@ -71,7 +71,7 @@ function App() {
             <Route path="boost" element={<Boost />} />
           </Route>
 
-          <Route path="/airDrop" element={<AirDrop />}></Route>
+          <Route path="/airdrop" element={<AirDrop />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
           <Route path="/friends" element={<Friends />}></Route>
         </Routes>
