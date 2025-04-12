@@ -214,3 +214,27 @@
   background-color: rgba(217, 217, 217, 0.2);
   border-radius: 23px;
 }
+
+.tonButton {
+  width: 212px;
+  height: 43px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 11px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #02040f;
+  border-radius: 18px;
+  background-color: #64ffff;
+  box-shadow: rgba(100, 255, 255, 0.5) 3.95px 3.95px 0.6px;
+  position: relative;
+  border: none;
+  z-index: 2;
+}
+
+.tonButton .go1140934594 {
+  color: #02040f;
+}

@@ -6,24 +6,22 @@ import { useEffect, useState } from "react";
 import ProfileModal from "./ProfileModal";
 import { useDispatch, useSelector } from "react-redux";
 import { getHomePageDataThunk } from "../../../Store/Middlewares/homePageData";
-import TonWallet from "./../TonConnect/TonWallet";
+import { TonConnectButton, useTonWallet } from "@tonconnect/ui-react";
+import { useTonConnectUI } from "@tonconnect/ui-react";
 
 const Profile = () => {
-  const [arr, setArr] = useState([{ id: "1", title: "52U...1hd.." }]);
-  const [deleteIndex, setDeleteIndex] = useState(null);
-
   const [profileImg, setProfileImg] = useState(profileDefaultImg);
   const [showModal, setShowModal] = useState(false);
+  const [tonConnectUI] = useTonConnectUI();
 
   const token = useSelector((state) => state?.telegramLogin?.token);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (token) {
       dispatch(getHomePageDataThunk({ token }));
     }
-  }, []);
+  }, [token, dispatch]);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -32,31 +30,42 @@ const Profile = () => {
       setProfileImg(imageUrl);
     }
   };
+  // 🟢 Get wallet info
+  const wallet = useTonWallet();
 
-  const handleDelete = () => {
-    setArr((prevArr) => prevArr.filter((_, index) => index !== deleteIndex));
-    setShowModal(false);
+  // 🟢 Shorten address for display
+  const getShortAddress = (address) => {
+    return address.slice(0, 4) + "..." + address.slice(-4);
   };
+
+  const handleDelete = async () => {
+    try {
+      if (wallet?.account?.address) {
+        await tonConnectUI.disconnect();
+        console.log("Wallet disconnected");
+      }
+    } catch (err) {
+      if (err.message === "Operation aborted") {
+        console.warn("User aborted the disconnect operation.");
+      } else {
+        console.error("Unexpected disconnect error:", err);
+      }
+    } finally {
+      setShowModal(false);
+    }
+  };
+  console.log(wallet, "this is wallet");
 
   return (
     <>
       <img src={fon} alt="fon" className="fon" />
-      {/* <button onClick={() => document.getElementById("fileInput").click()}>
-        Change Photo
-      </button>
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageChange}
-        style={{ display: "none" }}
-        id="fileInput"
-      /> */}
+
       <div className="profil">
         <div className="imgAndName">
           <div className="profilImg">
             <img src={profileImg} alt="profileDefaultImg" />
           </div>
-          <h2>Jason State </h2>
+          <h2>Jason State</h2>
         </div>
 
         <div className="profilBalance">
@@ -69,30 +78,37 @@ const Profile = () => {
         <div className="profilWallet">
           <h2>Wallet</h2>
 
-          {Array.isArray(arr) && arr.length > 0 ? (
-            arr.map((item, index) => (
-              <div className="profilWalletItem" key={index}>
-                <p>{item.title}</p>
-                <img
-                  src={profileWalletCancelIcon}
-                  alt="profileWalletCancelIcon"
-                  onClick={() => {
-                    setShowModal(true);
-                    setDeleteIndex(index);
-                  }}
-                />
-              </div>
-            ))
+          {wallet?.account?.address ? (
+            <div className="profilWalletItem">
+              <p>{getShortAddress(wallet.account.address)}</p>
+              <img
+                src={profileWalletCancelIcon}
+                alt="profileWalletCancelIcon"
+                onClick={() => {
+                  setShowModal(true);
+                }}
+              />
+            </div>
           ) : (
             <p>You have no wallet connected.</p>
           )}
         </div>
-        <TonWallet text={"TON Connect"} isProfile={true} />
+
+        {/* 🟢 Always show TON Connect button here */}
+        <button
+          className="tonButton"
+          disabled={wallet?.account?.address ? true : false}
+          onClick={() => tonConnectUI.openModal()}
+        >
+          TON Connect
+        </button>
       </div>
+
       {showModal && (
         <ProfileModal setShowModal={setShowModal} handleDelete={handleDelete} />
       )}
     </>
   );
 };
+
 export default Profile;

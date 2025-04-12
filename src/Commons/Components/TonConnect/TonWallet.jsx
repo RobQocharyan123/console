@@ -1,64 +1,57 @@
-import React, { useState } from "react";
-import { TonClient } from "@ton/ton";
+import React, { useEffect, useState } from "react";
+import { useTonWallet, useTonConnectUI } from "@tonconnect/ui-react";
 import { getHttpEndpoint } from "@orbs-network/ton-access";
-import "./TonWallet.css";
+import { TonClient } from "@ton/ton";
 import { toast } from "react-toastify";
 import LogoAnimation from "./../LogoAnimation/LogoAnimation";
+import "./TonWallet.css";
 
 const TonWallet = ({ text, isProfile }) => {
+  const [tonConnectUI] = useTonConnectUI();
+  const wallet = useTonWallet();
   const [balance, setBalance] = useState(null);
-  const [walletAddress, setWalletAddress] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [showPurchaseModal, setShowPurchaseModal] = useState(false);
 
-  const handleConnect = async () => {
+  const fetchBalance = async () => {
+    if (!wallet?.account?.address) return;
     setLoading(true);
     try {
-      // Check if the TON wallet extension is available
-      if (typeof window.ton !== "undefined") {
-        const wallet = window.ton; // Use the Tonkeeper/Tonhub wallet extension
-        await wallet.connect(); // Connect to the wallet
-
-        // Get the wallet address (public key)
-        const address = wallet.address.toString();
-        setWalletAddress(address);
-
-        // Fetch the balance from the TON network
-        const endpoint = await getHttpEndpoint();
-        const client = new TonClient({ endpoint });
-        const walletContract = client.open(wallet); // Open the wallet contract
-        const walletBalance = await walletContract.getBalance();
-        setBalance(walletBalance / 1e9); // Convert to TON (nanoTON to TON)
-      } else {
-        toast.error(
-          "TON wallet not found. Please install Tonkeeper or Tonhub."
-        );
-      }
+      const endpoint = await getHttpEndpoint();
+      const client = new TonClient({ endpoint });
+      const walletBalance = await client.getBalance(wallet.account.address);
+      setBalance(walletBalance / 1e9);
     } catch (err) {
-      console.error("Error connecting to TON wallet:", err);
-
-      toast.error("Failed to connect to TON wallet.");
+      toast.error("Failed to fetch TON balance.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (wallet?.account?.address) {
+      fetchBalance();
+    }
+  }, [wallet?.account?.address]);
+
+  const handleConnect = () => {
+    if (wallet?.account?.address) {
+      // If wallet is connected, open purchase modal
+      setShowPurchaseModal(true);
+    } else {
+      // If wallet is not connected, open TON Connect modal
+      tonConnectUI.openModal();
     }
   };
 
   return (
     <>
       {loading && <LogoAnimation />}
+      <button className="tonButton" onClick={handleConnect}>
+        {text}
+      </button>
 
-      {isProfile ? (
-        <button
-          className="tonButton"
-          onClick={handleConnect}
-          disabled={!!walletAddress || loading} // disabled if connected or loading
-        >
-          {walletAddress ? "Connected" : text}
-        </button>
-      ) : (
-        <button className="tonButton" onClick={handleConnect}>
-          {text}
-        </button>
-      )}
+      {/* Show purchase modal if wallet is connected */}
     </>
   );
 };
