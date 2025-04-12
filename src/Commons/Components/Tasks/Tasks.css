@@ -11,28 +11,26 @@
   padding: 30px 26px;
   user-select: none;
   overflow-y: auto;
-  min-height: 100vh;
+  height: 100vh;
   box-sizing: border-box;
   position: relative;
   z-index: 1;
 }
 
 .task::-webkit-scrollbar {
-  width: 0;
+  width: 3px;
 }
 
 .task::-webkit-scrollbar-track {
-  background: transparent;
+  background: #a0a1b1;
 }
 
 .task::-webkit-scrollbar-thumb {
-  background: transparent;
-
-  border-radius: 5px;
+  background: #64ffff;
+  border-radius: 1.5px;
 }
-
 .task::-webkit-scrollbar-thumb:hover {
-  background: transparent;
+  background: #64ffff;
 }
 
 input,

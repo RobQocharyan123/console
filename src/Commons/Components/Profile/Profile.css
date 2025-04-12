@@ -11,11 +11,26 @@
   padding: 30px 26px;
   user-select: none;
   overflow-y: auto;
-  min-height: calc(100vh - 115px);
+  height: calc(100vh - 115px);
   box-sizing: border-box;
   padding-bottom: 150px;
   position: relative;
   z-index: 1;
+}
+.profil::-webkit-scrollbar {
+  width: 3px;
+}
+
+.profil::-webkit-scrollbar-track {
+  background: #a0a1b1;
+}
+
+.profil::-webkit-scrollbar-thumb {
+  background: #64ffff;
+  border-radius: 1.5px;
+}
+.profil::-webkit-scrollbar-thumb:hover {
+  background: #64ffff;
 }
 
 .profil .imgAndName {
@@ -244,11 +259,16 @@
 @media screen and (max-width: 400px) {
   .profil {
     padding-top: 10px;
+    padding-bottom: 80px;
   }
   .profil .profilWallet h2 {
     font-size: 20px;
   }
   .profil .profilWallet {
+    margin-top: 10px;
+  }
+
+  .profil .imgAndName {
     margin-top: 10px;
   }
 }

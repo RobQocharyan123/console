@@ -3,9 +3,6 @@
   padding-bottom: 150px;
 }
 
-.new .newContent {
-}
-
 .newContent .newItem {
   position: relative;
   background-color: rgba(217, 217, 217, 0.2);
@@ -15,12 +12,6 @@
   justify-content: space-between;
   padding: 14px 10px 13px 16px;
   margin-top: 16px;
-}
-
-.newContent .newItem img {
-}
-
-.newContent .newItem .newText {
 }
 
 .newContent .newItem .newText h2 {

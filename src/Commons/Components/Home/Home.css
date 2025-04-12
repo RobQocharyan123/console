@@ -8,21 +8,19 @@
 }
 
 .home::-webkit-scrollbar {
-  width: 0;
+  width: 3px;
 }
 
 .home::-webkit-scrollbar-track {
-  background: transparent;
+  background: #a0a1b1;
 }
 
 .home::-webkit-scrollbar-thumb {
-  background: transparent;
-
-  border-radius: 5px;
+  background: #64ffff;
+  border-radius: 1.5px;
 }
-
 .home::-webkit-scrollbar-thumb:hover {
-  background: transparent;
+  background: #64ffff;
 }
 
 input,
