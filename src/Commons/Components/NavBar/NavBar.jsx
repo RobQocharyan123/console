@@ -4,7 +4,6 @@ import friendsIcon from "../../../Assets/NavBar/friends-icon.svg";
 import homeIcon from "../../../Assets/NavBar/home-icon.svg";
 import profileIcon from "../../../Assets/NavBar/profile-icon.svg";
 import tasksIcon from "../../../Assets/NavBar/tasks-icon.svg";
-import { Link } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const NavBar = () => {

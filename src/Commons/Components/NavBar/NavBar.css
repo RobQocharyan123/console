@@ -10,7 +10,6 @@
   padding: 6px 0;
   z-index: 999;
   background: inherit;
-  pointer-events: none;
 }
 
 .navBar div {
