@@ -8,6 +8,8 @@
 }
 
 .airdrop {
+  height: calc(100vh - 50px);
+  overflow-y: scroll;
   padding: 25px 26px;
   padding-bottom: 0;
   box-sizing: border-box;

@@ -8,6 +8,8 @@
 }
 
 .friends {
+  height: calc(100vh - 50px);
+  overflow-y: scroll;
   padding: 30px 26px;
   user-select: none;
   overflow-y: auto;
@@ -170,7 +172,6 @@
 
 .friends .friendsButton {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   gap: 9px;
   margin-top: 22px;
@@ -229,5 +230,13 @@
   }
   .friends .myFriends .myFriendsClaim p {
     font-size: 12px;
+  }
+
+  .friends .friendsButton .copy {
+    font-size: 15px;
+  }
+
+  .friends .friendsButton a {
+    font-size: 15px;
   }
 }

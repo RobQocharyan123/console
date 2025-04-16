@@ -4,6 +4,13 @@
 /*  font-family: "Inria Serif", serif;
     font-family: "Instrument Sans", serif; */
 
+html,
+body,
+#root,
 .app {
   background-color: #02040f;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* prevent scroll leaks to Telegram */
 }

@@ -98,9 +98,6 @@ const Friends = () => {
         </div>
 
         <div className="friendsButton">
-          <button className="copy" onClick={copyReferalLink}>
-            Copy referral link
-          </button>
           <a
             className="invite"
             href={`https://t.me/share/url?url=${encodeURIComponent(
@@ -111,6 +108,9 @@ const Friends = () => {
           >
             Invite Friends
           </a>
+          <button className="copy" onClick={copyReferalLink}>
+            Copy referral link
+          </button>
         </div>
       </div>
     </>
