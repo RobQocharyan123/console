@@ -12,5 +12,13 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* prevent scroll leaks to Telegram */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* iOS smooth scroll */
 }

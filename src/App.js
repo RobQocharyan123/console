@@ -58,22 +58,20 @@ function App() {
     <div className="app">
       <Suspense fallback={<LogoAnimation />}>
         <Header />
-        <Routes>
-          {/* <Route path="/" element={<TelegramLogin />} /> */}
-          <Route path="/home" element={<Home />}>
-            <Route path="boost" element={<Boost />} />
-          </Route>
-
-          {/* Other routes go here */}
-
-          <Route path="/tasks" element={<Tasks />}>
-            <Route path="boost" element={<Boost />} />
-          </Route>
-
-          <Route path="/airdrop" element={<AirDrop />}></Route>
-          <Route path="/profile" element={<Profile />}></Route>
-          <Route path="/friends" element={<Friends />}></Route>
-        </Routes>
+        <div className="main-scroll">
+          {/* 👈 Scrollable wrapper */}
+          <Routes>
+            <Route path="/home" element={<Home />}>
+              <Route path="boost" element={<Boost />} />
+            </Route>
+            <Route path="/tasks" element={<Tasks />}>
+              <Route path="boost" element={<Boost />} />
+            </Route>
+            <Route path="/airdrop" element={<AirDrop />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/friends" element={<Friends />} />
+          </Routes>
+        </div>
         <NavBar />
         <ToastContainer />
       </Suspense>
