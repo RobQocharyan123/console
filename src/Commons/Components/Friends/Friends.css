@@ -12,8 +12,6 @@
   overflow-y: scroll;
   padding: 30px 26px;
   user-select: none;
-  overflow-y: auto;
-  min-height: calc(100vh - 115px);
   box-sizing: border-box;
   padding-bottom: 150px;
   position: relative;

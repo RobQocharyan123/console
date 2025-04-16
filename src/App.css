@@ -19,6 +19,5 @@ body,
 
 .main-scroll {
   flex: 1;
-  overflow-y: auto;
   -webkit-overflow-scrolling: touch; /* iOS smooth scroll */
 }

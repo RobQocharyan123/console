@@ -54,6 +54,25 @@ function App() {
   //   return <LogoAnimation />;
   // }
 
+  useEffect(() => {
+    const mainScroll = document.querySelector(".main-scroll");
+
+    const preventPullDown = (e) => {
+      // If scrolled to the top and user swipes down
+      if (mainScroll.scrollTop === 0 && e.touches[0].clientY > 5) {
+        e.preventDefault();
+      }
+    };
+
+    mainScroll?.addEventListener("touchmove", preventPullDown, {
+      passive: false
+    });
+
+    return () => {
+      mainScroll?.removeEventListener("touchmove", preventPullDown);
+    };
+  }, []);
+
   return (
     <div className="app">
       <Suspense fallback={<LogoAnimation />}>
