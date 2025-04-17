@@ -56,7 +56,7 @@ function App() {
                 {
                   text: 'Open App',
                   web_app: {
-                    url: 'https://your-app-url.vercel.app', // Replace with your actual app URL
+                    url: 'https://console-iota-two.vercel.app/home', // Replace with your actual app URL
                   },
                 },
               ],
