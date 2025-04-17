@@ -25,25 +25,34 @@ const Friends = lazy(() => import('./Commons/Components/Friends/Friends'));
 
 function App() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const tg = window.Telegram.WebApp;
-  tg.expand();
 
-  const dispatch = useDispatch();
   const homeData = useSelector((state) => state?.homePage?.homeData);
-
   const isSuccess = useSelector((state) => state?.telegramLogin?.isSuccess);
   const token = useSelector((state) => state?.telegramLogin?.token);
-  console.log(tg, 'this is tg');
 
   useEffect(() => {
-    const userData = tg.initDataUnsafe.user;
-    console.log(userData, 'this is a userDatassssssssinio ');
+    if (!tg) {
+      console.log('Not running in Telegram - skipping WebApp init');
+      return;
+    }
+
+    tg.expand();
+    tg.disablePullToClose?.();
+    tg.MainButton?.show();
+    tg.BackButton?.hide();
+    tg.setHeaderColor?.('#02040F');
+
+    // Initialize user data if available
+    const userData = tg.initDataUnsafe?.user;
+    console.log(userData, 'it si userdataik');
 
     if (userData) {
       dispatch(loginTelegramBotThunk(userData));
     }
-  }, [dispatch, tg.initDataUnsafe.user]);
+  }, [dispatch, tg]);
 
   useEffect(() => {
     if (isSuccess) {
