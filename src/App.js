@@ -30,49 +30,56 @@ function App() {
   const isSuccess = useSelector((state) => state?.telegramLogin?.isSuccess);
   const token = useSelector((state) => state?.telegramLogin?.token);
 
+  const tg = window.Telegram?.WebApp;
+
   useEffect(() => {
-    const tg = window?.Telegram?.WebApp;
-
-    if (!tg) {
-      console.warn('❌ Not running inside Telegram WebApp.');
-      return;
-    }
-
-    try {
+    if (tg) {
       tg.ready();
-      tg.expand();
-      tg.enableClosingConfirmation?.();
-      tg.MainButton?.hide?.();
-      tg.BackButton?.hide?.();
-
       const user = tg.initDataUnsafe?.user;
-
       if (user) {
-        console.log('✅ Telegram WebApp User Info:', user);
-        console.log('User ID:', user.id);
-        console.log('First Name:', user.first_name);
-        console.log('Username:', user.username);
-        console.log('Language Code:', user.language_code);
+        console.log('User Info:', user);
 
-        dispatch(loginTelegramBotThunk(user));
-      } else {
-        console.error(
-          '❌ No user data found in initDataUnsafe. Likely not opened via Telegram button.'
-        );
+        // Replace with your Telegram bot token
+        const botToken = '8061156654:AAGeTofj4seD_wKt1tgYg8LSfSoIJH6sFwg';
+        const userId = user.id;
+
+        // Telegram API URL to send the message
+        const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+        // Message content
+        const messageData = {
+          chat_id: userId,
+          text: 'Welcome to the app!',
+          reply_markup: {
+            inline_keyboard: [
+              [
+                {
+                  text: 'Open App',
+                  web_app: {
+                    url: 'https://your-app-url.vercel.app', // Replace with your actual app URL
+                  },
+                },
+              ],
+            ],
+          },
+        };
+
+        // Send the message to the user
+        fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(messageData),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log('Telegram API Response:', data);
+          })
+          .catch((error) => {
+            console.error('Error sending message:', error);
+          });
       }
-
-      // Debug other values if needed
-      console.log('🌐 Platform:', tg.platform);
-      console.log('🎨 Theme:', tg.themeParams);
-    } catch (err) {
-      console.error('🚨 Error initializing Telegram WebApp:', err);
     }
-
-    return () => {
-      tg.offEvent?.('viewportChanged');
-      tg.offEvent?.('themeChanged');
-    };
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (isSuccess && token) {
