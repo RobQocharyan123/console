@@ -38,6 +38,8 @@ function App() {
 
   useEffect(() => {
     const userData = tg.initDataUnsafe.user;
+    console.log(userData, 'this is a userData ');
+
     if (userData) {
       dispatch(loginTelegramBotThunk(userData));
     }
@@ -56,31 +58,18 @@ function App() {
 
   useEffect(() => {
     const tg = window.Telegram?.WebApp;
-    if (!tg) return; // Skip if not in Telegram
-
-    tg.expand(); // Always expand the app
-
-    // Disable pull-to-close if available
-    if (tg.disablePullToClose) {
-      tg.disablePullToClose();
+    if (!tg) {
+      console.log('Not running in Telegram, skipping WebApp init.');
+      return;
     }
 
-    // Enable closing confirmation if available (Telegram-specific)
-    if (tg.enableClosingConfirmation) {
-      tg.enableClosingConfirmation();
-    } else {
-      console.log(
-        'enableClosingConfirmation not available (running outside Telegram)'
-      );
-    }
+    // Expand & disable pull-to-close
+    tg.expand();
+    tg.disablePullToClose?.();
 
-    // Set theme colors if available
-    if (tg.setHeaderColor) {
-      tg.setHeaderColor('#02040f');
-    }
-    if (tg.backgroundColor) {
-      tg.backgroundColor = '#02040f';
-    }
+    // Optional: Set UI colors
+    tg.setHeaderColor?.('#02040f');
+    tg.backgroundColor = '#02040f';
   }, []);
   return (
     <div className="app">
