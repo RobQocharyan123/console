@@ -31,40 +31,48 @@ function App() {
   const token = useSelector((state) => state?.telegramLogin?.token);
 
   useEffect(() => {
-    const tg = window.Telegram?.WebApp;
+    const tg = window?.Telegram?.WebApp;
 
     if (!tg) {
       console.warn('❌ Not running inside Telegram WebApp.');
       return;
     }
 
-    tg.ready();
-    tg.expand();
-    tg.enableClosingConfirmation?.();
-    tg.MainButton?.hide?.();
-    tg.BackButton?.hide?.();
+    try {
+      tg.ready();
+      tg.expand();
+      tg.enableClosingConfirmation?.();
+      tg.MainButton?.hide?.();
+      tg.BackButton?.hide?.();
 
-    const user = tg.initDataUnsafe?.user;
+      const user = tg.initDataUnsafe?.user;
 
-    if (user) {
-      console.log('✅ Telegram WebApp User Info:', user);
+      if (user) {
+        console.log('✅ Telegram WebApp User Info:', user);
+        console.log('User ID:', user.id);
+        console.log('First Name:', user.first_name);
+        console.log('Username:', user.username);
+        console.log('Language Code:', user.language_code);
 
-      // Optional: show individual fields
-      console.log('User ID:', user.id);
-      console.log('First Name:', user.first_name);
-      console.log('Username:', user.username);
-      console.log('Language Code:', user.language_code);
+        dispatch(loginTelegramBotThunk(user));
+      } else {
+        console.error(
+          '❌ No user data found in initDataUnsafe. Likely not opened via Telegram button.'
+        );
+      }
 
-      dispatch(loginTelegramBotThunk(user));
-    } else {
-      console.error('❌ No user data found. Maybe opened outside Telegram?');
+      // Debug other values if needed
+      console.log('🌐 Platform:', tg.platform);
+      console.log('🎨 Theme:', tg.themeParams);
+    } catch (err) {
+      console.error('🚨 Error initializing Telegram WebApp:', err);
     }
 
     return () => {
       tg.offEvent?.('viewportChanged');
       tg.offEvent?.('themeChanged');
     };
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (isSuccess && token) {
@@ -72,14 +80,6 @@ function App() {
       navigate('/home', { replace: true });
     }
   }, [isSuccess, token, dispatch, navigate]);
-
-  // if (!homeData) {
-  //   return (
-  //     <Suspense fallback={null}>
-  //       <LogoAnimation />
-  //     </Suspense>
-  //   );
-  // }
 
   return (
     <div className="app">
