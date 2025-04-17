@@ -27,11 +27,11 @@ function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const tg = window.Telegram.WebApp;
-
   const homeData = useSelector((state) => state?.homePage?.homeData);
   const isSuccess = useSelector((state) => state?.telegramLogin?.isSuccess);
   const token = useSelector((state) => state?.telegramLogin?.token);
+
+  const tg = window.Telegram.WebApp;
 
   useEffect(() => {
     if (!tg) {
@@ -39,15 +39,15 @@ function App() {
       return;
     }
 
+    // Log the user data immediately
+    const userData = tg.initDataUnsafe?.user;
+    console.log('Telegram User Data:', userData);
+
     tg.expand();
     tg.disablePullToClose?.();
     tg.MainButton?.show();
     tg.BackButton?.hide();
     tg.setHeaderColor?.('#02040F');
-
-    // Initialize user data if available
-    const userData = tg.initDataUnsafe?.user;
-    console.log(userData, 'it si userdataik');
 
     if (userData) {
       dispatch(loginTelegramBotThunk(userData));
