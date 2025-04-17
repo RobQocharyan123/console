@@ -1,9 +1,8 @@
 import './App.css';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import { Suspense, lazy, useEffect, useState } from 'react';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { Suspense, lazy, useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { loginPostUserData } from './Commons/Services/homePageService.js';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getHomePageDataThunk,
@@ -32,108 +31,61 @@ function App() {
   const token = useSelector((state) => state?.telegramLogin?.token);
 
   useEffect(() => {
-    // Check if running in Telegram
-    if (window.Telegram?.WebApp) {
-      const tg = window.Telegram.WebApp;
-      tg.expand();
-
-      // Try both initData and initDataUnsafe
-      console.log('Full initData:', tg.initData);
-      console.log('initDataUnsafe:', tg.initDataUnsafe);
-
-      const user = tg.initDataUnsafe?.user;
-      console.log(user, 'userik');
-
-      if (user) {
-        dispatch(loginTelegramBotThunk(user));
-      } else {
-        console.warn(
-          'No user data available - make sure the bot is properly configured'
-        );
-      }
-    } else {
+    const tg = window.Telegram?.WebApp;
+    if (!tg) {
       console.warn('Not running in Telegram WebApp environment');
-      // You might want to add mock data for development here
+      return;
     }
+
+    // Initialize Telegram WebApp
+    tg.ready();
+    tg.expand();
+    tg.enableClosingConfirmation();
+    tg.MainButton.hide();
+    tg.BackButton.hide();
+
+    // Process Telegram data
+    console.log('Telegram WebApp Data:', {
+      user: tg.initDataUnsafe?.user,
+      platform: tg.platform,
+      theme: tg.themeParams,
+    });
+
+    if (tg.initDataUnsafe?.user) {
+      dispatch(loginTelegramBotThunk(tg.initDataUnsafe.user));
+    } else {
+      console.error('No user data found in Telegram WebApp');
+    }
+
+    // Clean up function
+    return () => {
+      tg.offEvent('viewportChanged');
+      tg.offEvent('themeChanged');
+    };
   }, [dispatch]);
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && token) {
       dispatch(getHomePageDataThunk({ token }));
-      navigate('/home');
+      navigate('/home', { replace: true });
     }
-  }, [isSuccess, dispatch]);
+  }, [isSuccess, token, dispatch, navigate]);
 
-  // if (!homeData) {
-  //   return <LogoAnimation />;
-  // }
+  if (!homeData) {
+    return (
+      <Suspense fallback={null}>
+        <LogoAnimation />
+      </Suspense>
+    );
+  }
 
-  // useEffect(() => {
-  //   const tg = window.Telegram?.WebApp;
-  //   if (tg) {
-  //     // 1. Telegram WebApp Configuration
-  //     tg.expand();
-  //     tg.disablePullToClose(); // Disables swipe-down-to-minimize
-
-  //     // 2. Make the app appear non-dismissable
-  //     tg.MainButton.show(); // Helps prevent closing
-  //     tg.BackButton.hide(); // Remove exit points
-  //     tg.setHeaderColor('#02040F'); // Match your theme
-  //   }
-
-  //   // 3. DOM Touch Event Blocking
-  //   const mainScroll = document.querySelector('.main-scroll');
-  //   if (!mainScroll) return;
-
-  //   let startY = 0;
-  //   let isBlocking = false;
-
-  //   const handleTouchStart = (e) => {
-  //     startY = e.touches[0].clientY;
-  //     isBlocking =
-  //       mainScroll.scrollTop === 0 ||
-  //       mainScroll.scrollHeight - mainScroll.scrollTop <=
-  //         mainScroll.clientHeight + 1;
-  //   };
-
-  //   const handleTouchMove = (e) => {
-  //     if (!isBlocking) return;
-
-  //     const currentY = e.touches[0].clientY;
-  //     const deltaY = currentY - startY;
-
-  //     // Block overscroll in both directions
-  //     if (
-  //       (deltaY > 0 && mainScroll.scrollTop === 0) ||
-  //       (deltaY < 0 &&
-  //         mainScroll.scrollHeight - mainScroll.scrollTop <=
-  //           mainScroll.clientHeight + 1)
-  //     ) {
-  //       e.preventDefault();
-  //       e.stopPropagation();
-  //       return false;
-  //     }
-  //   };
-
-  //   mainScroll.addEventListener('touchstart', handleTouchStart, {
-  //     passive: false,
-  //   });
-  //   mainScroll.addEventListener('touchmove', handleTouchMove, {
-  //     passive: false,
-  //   });
-
-  //   return () => {
-  //     mainScroll.removeEventListener('touchstart', handleTouchStart);
-  //     mainScroll.removeEventListener('touchmove', handleTouchMove);
-  //   };
-  // }, []);
   return (
     <div className="app">
       <Suspense fallback={<LogoAnimation />}>
         <Header />
         <div className="main-scroll">
-          {/* 👈 Scrollable wrapper */}
           <Routes>
+            <Route path="/" element={<Navigate to="/home" replace />} />
             <Route path="/home" element={<Home />}>
               <Route path="boost" element={<Boost />} />
             </Route>
@@ -143,6 +95,7 @@ function App() {
             <Route path="/airdrop" element={<AirDrop />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/friends" element={<Friends />} />
+            <Route path="*" element={<Navigate to="/home" replace />} />
           </Routes>
         </div>
         <NavBar />
