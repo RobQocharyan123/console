@@ -31,6 +31,7 @@ function App() {
   const token = useSelector((state) => state?.telegramLogin?.token);
 
   useEffect(() => {
+    debugger;
     const tg = window.Telegram?.WebApp;
     if (!tg) {
       console.warn('Not running in Telegram WebApp environment');
@@ -62,7 +63,7 @@ function App() {
       tg.offEvent('viewportChanged');
       tg.offEvent('themeChanged');
     };
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     if (isSuccess && token) {
