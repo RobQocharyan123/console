@@ -21,7 +21,7 @@ if (typeof window.Telegram === "undefined") {
   };
 }
 
-export const loginPostUserData = async (userData) => {
+export const loginPostUserData = async (fullUserData) => {
   if (!fullUserData) {
     console.log("User data is missing!");
     return;
