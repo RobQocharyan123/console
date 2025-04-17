@@ -31,8 +31,6 @@ function App() {
   const isSuccess = useSelector((state) => state?.telegramLogin?.isSuccess);
   const token = useSelector((state) => state?.telegramLogin?.token);
 
-  const tg = window.Telegram.WebApp;
-
   useEffect(() => {
     // Check if running in Telegram
     if (window.Telegram?.WebApp) {
@@ -70,65 +68,65 @@ function App() {
   //   return <LogoAnimation />;
   // }
 
-  useEffect(() => {
-    const tg = window.Telegram?.WebApp;
-    if (tg) {
-      // 1. Telegram WebApp Configuration
-      tg.expand();
-      tg.disablePullToClose(); // Disables swipe-down-to-minimize
+  // useEffect(() => {
+  //   const tg = window.Telegram?.WebApp;
+  //   if (tg) {
+  //     // 1. Telegram WebApp Configuration
+  //     tg.expand();
+  //     tg.disablePullToClose(); // Disables swipe-down-to-minimize
 
-      // 2. Make the app appear non-dismissable
-      tg.MainButton.show(); // Helps prevent closing
-      tg.BackButton.hide(); // Remove exit points
-      tg.setHeaderColor('#02040F'); // Match your theme
-    }
+  //     // 2. Make the app appear non-dismissable
+  //     tg.MainButton.show(); // Helps prevent closing
+  //     tg.BackButton.hide(); // Remove exit points
+  //     tg.setHeaderColor('#02040F'); // Match your theme
+  //   }
 
-    // 3. DOM Touch Event Blocking
-    const mainScroll = document.querySelector('.main-scroll');
-    if (!mainScroll) return;
+  //   // 3. DOM Touch Event Blocking
+  //   const mainScroll = document.querySelector('.main-scroll');
+  //   if (!mainScroll) return;
 
-    let startY = 0;
-    let isBlocking = false;
+  //   let startY = 0;
+  //   let isBlocking = false;
 
-    const handleTouchStart = (e) => {
-      startY = e.touches[0].clientY;
-      isBlocking =
-        mainScroll.scrollTop === 0 ||
-        mainScroll.scrollHeight - mainScroll.scrollTop <=
-          mainScroll.clientHeight + 1;
-    };
+  //   const handleTouchStart = (e) => {
+  //     startY = e.touches[0].clientY;
+  //     isBlocking =
+  //       mainScroll.scrollTop === 0 ||
+  //       mainScroll.scrollHeight - mainScroll.scrollTop <=
+  //         mainScroll.clientHeight + 1;
+  //   };
 
-    const handleTouchMove = (e) => {
-      if (!isBlocking) return;
+  //   const handleTouchMove = (e) => {
+  //     if (!isBlocking) return;
 
-      const currentY = e.touches[0].clientY;
-      const deltaY = currentY - startY;
+  //     const currentY = e.touches[0].clientY;
+  //     const deltaY = currentY - startY;
 
-      // Block overscroll in both directions
-      if (
-        (deltaY > 0 && mainScroll.scrollTop === 0) ||
-        (deltaY < 0 &&
-          mainScroll.scrollHeight - mainScroll.scrollTop <=
-            mainScroll.clientHeight + 1)
-      ) {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-      }
-    };
+  //     // Block overscroll in both directions
+  //     if (
+  //       (deltaY > 0 && mainScroll.scrollTop === 0) ||
+  //       (deltaY < 0 &&
+  //         mainScroll.scrollHeight - mainScroll.scrollTop <=
+  //           mainScroll.clientHeight + 1)
+  //     ) {
+  //       e.preventDefault();
+  //       e.stopPropagation();
+  //       return false;
+  //     }
+  //   };
 
-    mainScroll.addEventListener('touchstart', handleTouchStart, {
-      passive: false,
-    });
-    mainScroll.addEventListener('touchmove', handleTouchMove, {
-      passive: false,
-    });
+  //   mainScroll.addEventListener('touchstart', handleTouchStart, {
+  //     passive: false,
+  //   });
+  //   mainScroll.addEventListener('touchmove', handleTouchMove, {
+  //     passive: false,
+  //   });
 
-    return () => {
-      mainScroll.removeEventListener('touchstart', handleTouchStart);
-      mainScroll.removeEventListener('touchmove', handleTouchMove);
-    };
-  }, []);
+  //   return () => {
+  //     mainScroll.removeEventListener('touchstart', handleTouchStart);
+  //     mainScroll.removeEventListener('touchmove', handleTouchMove);
+  //   };
+  // }, []);
   return (
     <div className="app">
       <Suspense fallback={<LogoAnimation />}>
