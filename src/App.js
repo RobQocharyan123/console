@@ -1,27 +1,27 @@
-import "./App.css";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import { Suspense, lazy, useEffect } from "react";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { loginPostUserData } from "./Commons/Services/homePageService.js";
-import { useDispatch, useSelector } from "react-redux";
+import './App.css';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Suspense, lazy, useEffect, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { loginPostUserData } from './Commons/Services/homePageService.js';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   getHomePageDataThunk,
-  loginTelegramBotThunk
-} from "./Store/Middlewares/homePageData.js";
+  loginTelegramBotThunk,
+} from './Store/Middlewares/homePageData.js';
 
 // Lazy load components
-const Header = lazy(() => import("./Commons/Components/Header/Header"));
-const Home = lazy(() => import("./Commons/Components/Home/Home"));
-const NavBar = lazy(() => import("./Commons/Components/NavBar/NavBar"));
-const Boost = lazy(() => import("./Commons/Components/Boost/Boost"));
+const Header = lazy(() => import('./Commons/Components/Header/Header'));
+const Home = lazy(() => import('./Commons/Components/Home/Home'));
+const NavBar = lazy(() => import('./Commons/Components/NavBar/NavBar'));
+const Boost = lazy(() => import('./Commons/Components/Boost/Boost'));
 const LogoAnimation = lazy(() =>
-  import("./Commons/Components/LogoAnimation/LogoAnimation")
+  import('./Commons/Components/LogoAnimation/LogoAnimation')
 );
-const Tasks = lazy(() => import("./Commons/Components/Tasks/Tasks"));
-const AirDrop = lazy(() => import("./Commons/Components/AirDrop/AirDrop"));
-const Profile = lazy(() => import("./Commons/Components/Profile/Profile"));
-const Friends = lazy(() => import("./Commons/Components/Friends/Friends"));
+const Tasks = lazy(() => import('./Commons/Components/Tasks/Tasks'));
+const AirDrop = lazy(() => import('./Commons/Components/AirDrop/AirDrop'));
+const Profile = lazy(() => import('./Commons/Components/Profile/Profile'));
+const Friends = lazy(() => import('./Commons/Components/Friends/Friends'));
 
 function App() {
   const navigate = useNavigate();
@@ -34,11 +34,13 @@ function App() {
 
   const isSuccess = useSelector((state) => state?.telegramLogin?.isSuccess);
   const token = useSelector((state) => state?.telegramLogin?.token);
+  const [isInitialized, setIsInitialized] = useState(false);
   console.log(homeData);
 
   useEffect(() => {
     const userData = tg.initDataUnsafe.user;
     if (userData) {
+      setIsInitialized(true);
       dispatch(loginTelegramBotThunk(userData));
     }
   }, [dispatch, tg.initDataUnsafe.user]);
@@ -46,7 +48,7 @@ function App() {
   useEffect(() => {
     if (isSuccess) {
       dispatch(getHomePageDataThunk({ token }));
-      navigate("/home");
+      navigate('/home');
     }
   }, [isSuccess, dispatch]);
 
@@ -55,23 +57,34 @@ function App() {
   // }
 
   useEffect(() => {
-    const mainScroll = document.querySelector(".main-scroll");
+    if (!isInitialized) return;
 
-    const preventPullDown = (e) => {
-      // If scrolled to the top and user swipes down
-      if (mainScroll.scrollTop === 0 && e.touches[0].clientY > 5) {
+    const mainScroll = document.querySelector('.main-scroll');
+    let startY = 0;
+
+    const handleTouchStart = (e) => {
+      startY = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e) => {
+      // Only prevent if pulling down from top
+      if (mainScroll.scrollTop === 0 && e.touches[0].clientY > startY) {
         e.preventDefault();
       }
     };
 
-    mainScroll?.addEventListener("touchmove", preventPullDown, {
-      passive: false
+    mainScroll?.addEventListener('touchstart', handleTouchStart, {
+      passive: true,
+    });
+    mainScroll?.addEventListener('touchmove', handleTouchMove, {
+      passive: false,
     });
 
     return () => {
-      mainScroll?.removeEventListener("touchmove", preventPullDown);
+      mainScroll?.removeEventListener('touchstart', handleTouchStart);
+      mainScroll?.removeEventListener('touchmove', handleTouchMove);
     };
-  }, []);
+  }, [isInitialized]);
 
   return (
     <div className="app">
