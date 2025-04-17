@@ -3,13 +3,16 @@ import { useEffect } from "react";
 
 function App() {
   useEffect(() => {
-    const tg = window.Telegram.WebApp;
-
-    if (tg?.initDataUnsafe?.user) {
-      console.log("Telegram User:", tg.initDataUnsafe.user);
+    if (window.Telegram && window.Telegram.WebApp) {
+      const user = window.Telegram.WebApp.initDataUnsafe?.user;
+      if (user) {
+        console.log("Telegram User:", user);
+      } else {
+        console.log("No user data available.");
+      }
     } else {
-      console.log(
-        "No user info found. Make sure the app is opened via Telegram."
+      console.warn(
+        "Telegram WebApp API not available. Are you outside Telegram?"
       );
     }
   }, []);
