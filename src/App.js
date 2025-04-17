@@ -55,21 +55,31 @@ function App() {
   // }
 
   useEffect(() => {
-    const tg = window.Telegram.WebApp;
-    tg.expand();
-    tg.enableClosingConfirmation(); // This will show a confirmation before closing
-    // OR
-    tg.MainButton.show(); // Showing the main button also prevents pull-to-close
+    const tg = window.Telegram?.WebApp;
+    if (!tg) return; // Skip if not in Telegram
 
-    // Alternatively, you can completely disable the pull-to-close behavior:
-    tg.setHeaderColor('#02040f'); // Set your app's background color
-    tg.backgroundColor = '#02040f'; // Set your app's background color
-    tg.isClosingConfirmationEnabled = true;
+    tg.expand(); // Always expand the app
 
-    // This is the most direct way to prevent pull-to-close:
-    if (tg.platform !== 'unknown') {
-      // Check if running in Telegram
+    // Disable pull-to-close if available
+    if (tg.disablePullToClose) {
       tg.disablePullToClose();
+    }
+
+    // Enable closing confirmation if available (Telegram-specific)
+    if (tg.enableClosingConfirmation) {
+      tg.enableClosingConfirmation();
+    } else {
+      console.log(
+        'enableClosingConfirmation not available (running outside Telegram)'
+      );
+    }
+
+    // Set theme colors if available
+    if (tg.setHeaderColor) {
+      tg.setHeaderColor('#02040f');
+    }
+    if (tg.backgroundColor) {
+      tg.backgroundColor = '#02040f';
     }
   }, []);
   return (
