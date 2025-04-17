@@ -58,18 +58,46 @@ function App() {
 
   useEffect(() => {
     const tg = window.Telegram?.WebApp;
-    if (!tg) {
-      console.log('Not running in Telegram, skipping WebApp init.');
-      return;
-    }
+    if (!tg) return; // Skip if not in Telegram
 
-    // Expand & disable pull-to-close
+    // 1. Telegram API settings to discourage closing
     tg.expand();
-    tg.disablePullToClose?.();
+    tg.disablePullToClose?.(); // Blocks swipe-down-to-close
+    tg.BackButton.hide(); // Hides the back button (optional)
+    tg.MainButton.show(); // Showing MainButton helps prevent closing
 
-    // Optional: Set UI colors
-    tg.setHeaderColor?.('#02040f');
-    tg.backgroundColor = '#02040f';
+    // 2. Aggressive touch event blocking
+    const mainScroll = document.querySelector('.main-scroll');
+    let startY = 0;
+
+    const handleTouchStart = (e) => {
+      startY = e.touches[0].clientY;
+    };
+
+    const handleTouchMove = (e) => {
+      const currentY = e.touches[0].clientY;
+      const isPullingDown = currentY > startY;
+      const isPullingUp = currentY < startY;
+
+      // Block ALL edge-scroll behaviors that could minimize
+      if (isPullingDown || isPullingUp) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+    };
+
+    mainScroll?.addEventListener('touchstart', handleTouchStart, {
+      passive: false,
+    });
+    mainScroll?.addEventListener('touchmove', handleTouchMove, {
+      passive: false,
+    });
+
+    return () => {
+      mainScroll?.removeEventListener('touchstart', handleTouchStart);
+      mainScroll?.removeEventListener('touchmove', handleTouchMove);
+    };
   }, []);
   return (
     <div className="app">
