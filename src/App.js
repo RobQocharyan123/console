@@ -14,7 +14,7 @@ function App() {
     }
   }, []);
 
-  return <div className="app">Telegram Bot</div>;
+  return <div className="app">Telegram Boto</div>;
 }
 
 export default App;
