@@ -22,20 +22,20 @@ if (typeof window.Telegram === "undefined") {
 }
 
 export const loginPostUserData = async (userData) => {
-  if (!userData) {
+  if (!fullUserData) {
     console.log("User data is missing!");
     return;
   }
 
   try {
     const response = await pureClient.post("auth/telegram", {
-      id: userData.id,
-      first_name: userData.first_name,
-      last_name: userData.last_name || "",
-      username: userData.username || "",
-      language: userData.language_code,
-      photo_url: userData.photo_url || "",
-      hash: userData.hash || ""
+      id: fullUserData?.userData.id,
+      first_name: fullUserData?.userData.first_name,
+      last_name: fullUserData?.userData.last_name || "",
+      username: fullUserData?.userData.username || "",
+      language: fullUserData?.userData.language_code,
+      photo_url: fullUserData?.userData.photo_url || "",
+      hash: fullUserData.hash || ""
     });
 
     return response;

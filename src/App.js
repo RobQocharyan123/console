@@ -36,12 +36,16 @@ function App() {
     const tg = window.Telegram?.WebApp;
 
     const userData = tg?.initDataUnsafe?.user;
+    const hash = tg?.initDataUnsafe?.hash;
 
-    if (userData) {
-      dispatch(loginTelegramBotThunk(userData));
-      console.log("✅ Telegram User Info:", userData);
+    if (userData && hash) {
+      const fullUserData = { ...userData, hash };
+      dispatch(loginTelegramBotThunk(fullUserData));
+      console.log("✅ Telegram User Info with hash:", fullUserData);
     } else {
-      console.warn("⚠️ User not available. Open inside Telegram WebApp.");
+      console.warn(
+        "⚠️ User or hash not available. Make sure it's opened via Telegram."
+      );
     }
   }, []);
 

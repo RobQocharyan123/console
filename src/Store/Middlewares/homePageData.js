@@ -9,9 +9,9 @@ import Success from "../../Commons/Components/Success/Success";
 
 export const loginTelegramBotThunk = createAsyncThunk(
   "post/login/userData",
-  async (userData) => {
+  async (fullUserData) => {
     try {
-      const response = await loginPostUserData(userData);
+      const response = await loginPostUserData(fullUserData);
       return response.data;
     } catch (err) {
       console.error(err);
