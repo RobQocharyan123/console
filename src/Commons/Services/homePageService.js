@@ -30,13 +30,13 @@ export const loginPostUserData = async (fullUserData) => {
 
   try {
     const response = await pureClient.post("auth/telegram", {
-      id: fullUserData?.userData.id,
-      first_name: fullUserData?.userData.first_name,
-      last_name: fullUserData?.userData.last_name || "",
-      username: fullUserData?.userData.username || "",
-      language: fullUserData?.userData.language_code,
-      photo_url: fullUserData?.userData.photo_url || "",
-      hash: fullUserData.hash || ""
+      id: fullUserData?.id,
+      first_name: fullUserData?.first_name,
+      last_name: fullUserData?.last_name || "",
+      username: fullUserData?.username || "",
+      language: fullUserData?.language_code,
+      photo_url: fullUserData?.photo_url || "",
+      hash: fullUserData?.hash || ""
     });
 
     return response;

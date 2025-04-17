@@ -35,8 +35,20 @@ function App() {
   useEffect(() => {
     const tg = window.Telegram?.WebApp;
 
-    const userData = tg?.initDataUnsafe?.user;
-    const hash = tg?.initDataUnsafe?.hash;
+    const userData = tg?.initDataUnsafe?.user || {
+      id: "1802368420",
+      first_name: "",
+      last_name: "Poghosyan",
+      username: "Poghos_kkk",
+      language_code: "en",
+      photo_url:
+        "https://t.me/i/userpic/320/R6kP81fplPdhuT-LUfFQPEUXqqKPrvaTLmqSgpUeMfc.jpg",
+      hash: "a2ab797fbc1d209a618725edb826dc0736dee5d2a120bcdd7ae6b7d88415ab18"
+    };
+
+    const hash =
+      tg?.initDataUnsafe?.hash ||
+      "a2ab797fbc1d209a618725edb826dc0736dee5d2a120bcdd7ae6b7d88415ab18";
 
     if (userData) {
       const fullUserData = { ...userData, hash };
