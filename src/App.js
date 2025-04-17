@@ -34,11 +34,11 @@ function App() {
 
   const isSuccess = useSelector((state) => state?.telegramLogin?.isSuccess);
   const token = useSelector((state) => state?.telegramLogin?.token);
-  console.log(homeData);
+  console.log(tg, 'this is tg');
 
   useEffect(() => {
     const userData = tg.initDataUnsafe.user;
-    console.log(userData, 'this is a userData ');
+    console.log(userData, 'this is a userDatassssssss ');
 
     if (userData) {
       dispatch(loginTelegramBotThunk(userData));
