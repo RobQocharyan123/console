@@ -17,10 +17,16 @@ const telegramLoginSLice = createSlice({
         state.loading = true;
       })
       .addCase(loginTelegramBotThunk.fulfilled, (state, action) => {
+        if (action.payload?.status === 200) {
+          state.isSuccess = true;
+          state.token = action.payload.accessToken;
+        } else {
+          state.isSuccess = false;
+          state.token = null;
+        }
         state.loading = false;
-        state.isSuccess = true;
-        state.token = action.payload?.accessToken;
       })
+
       .addCase(loginTelegramBotThunk.rejected, (state, action) => {
         state.loading = false;
         state.isSuccess = false;
