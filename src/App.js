@@ -56,30 +56,33 @@ function App() {
     const tg = window.Telegram?.WebApp;
 
     if (tg) {
-      tg.expand();
+      tg.expand(); // Expand the app initially to avoid minimizing
 
       tg.onEvent("viewport_changed", (event) => {
-        const { width, height, is_expanded } = event.data;
+        const { is_expanded } = event.data;
 
+        // If the app is minimized, expand it again
         if (!is_expanded) {
           tg.expand();
         }
 
-        console.log(
-          `Viewport changed: width=${width}, height=${height}, is_expanded=${is_expanded}`
-        );
+        console.log("Viewport expanded:", is_expanded);
       });
     }
 
-    if (!homeData) {
-      return <LogoAnimation />;
-    }
+    // Cleanup event listener on unmount
     return () => {
+      const tg = window.Telegram?.WebApp;
       if (tg) {
         tg.offEvent("viewport_changed");
       }
     };
   }, []);
+
+  // Conditionally render content (for example, loading logo animation if data is not loaded)
+  if (!homeData) {
+    return <LogoAnimation />;
+  }
 
   return (
     <div className="app">
