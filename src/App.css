@@ -16,8 +16,7 @@ body,
   display: flex;
   flex-direction: column;
 }
-
 .main-scroll {
-  overscroll-behavior-y: none;
-  touch-action: none; /* Disables all touch gestures */
+  overscroll-behavior-y: contain; /* Blocks browser overscroll */
+  touch-action: pan-y; /* Allows vertical scroll but prevents zoom/pull */
 }

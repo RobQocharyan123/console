@@ -38,7 +38,7 @@ function App() {
 
   useEffect(() => {
     const userData = tg.initDataUnsafe.user;
-    console.log(userData, 'this is a userDatassssssss ');
+    console.log(userData, 'this is a userDatassssssssinio ');
 
     if (userData) {
       dispatch(loginTelegramBotThunk(userData));
@@ -58,45 +58,61 @@ function App() {
 
   useEffect(() => {
     const tg = window.Telegram?.WebApp;
-    if (!tg) return; // Skip if not in Telegram
+    if (tg) {
+      // 1. Telegram WebApp Configuration
+      tg.expand();
+      tg.disablePullToClose(); // Disables swipe-down-to-minimize
 
-    // 1. Telegram API settings to discourage closing
-    tg.expand();
-    tg.disablePullToClose?.(); // Blocks swipe-down-to-close
-    tg.BackButton.hide(); // Hides the back button (optional)
-    tg.MainButton.show(); // Showing MainButton helps prevent closing
+      // 2. Make the app appear non-dismissable
+      tg.MainButton.show(); // Helps prevent closing
+      tg.BackButton.hide(); // Remove exit points
+      tg.setHeaderColor('#02040F'); // Match your theme
+    }
 
-    // 2. Aggressive touch event blocking
+    // 3. DOM Touch Event Blocking
     const mainScroll = document.querySelector('.main-scroll');
+    if (!mainScroll) return;
+
     let startY = 0;
+    let isBlocking = false;
 
     const handleTouchStart = (e) => {
       startY = e.touches[0].clientY;
+      isBlocking =
+        mainScroll.scrollTop === 0 ||
+        mainScroll.scrollHeight - mainScroll.scrollTop <=
+          mainScroll.clientHeight + 1;
     };
 
     const handleTouchMove = (e) => {
-      const currentY = e.touches[0].clientY;
-      const isPullingDown = currentY > startY;
-      const isPullingUp = currentY < startY;
+      if (!isBlocking) return;
 
-      // Block ALL edge-scroll behaviors that could minimize
-      if (isPullingDown || isPullingUp) {
+      const currentY = e.touches[0].clientY;
+      const deltaY = currentY - startY;
+
+      // Block overscroll in both directions
+      if (
+        (deltaY > 0 && mainScroll.scrollTop === 0) ||
+        (deltaY < 0 &&
+          mainScroll.scrollHeight - mainScroll.scrollTop <=
+            mainScroll.clientHeight + 1)
+      ) {
         e.preventDefault();
         e.stopPropagation();
         return false;
       }
     };
 
-    mainScroll?.addEventListener('touchstart', handleTouchStart, {
+    mainScroll.addEventListener('touchstart', handleTouchStart, {
       passive: false,
     });
-    mainScroll?.addEventListener('touchmove', handleTouchMove, {
+    mainScroll.addEventListener('touchmove', handleTouchMove, {
       passive: false,
     });
 
     return () => {
-      mainScroll?.removeEventListener('touchstart', handleTouchStart);
-      mainScroll?.removeEventListener('touchmove', handleTouchMove);
+      mainScroll.removeEventListener('touchstart', handleTouchStart);
+      mainScroll.removeEventListener('touchmove', handleTouchMove);
     };
   }, []);
   return (

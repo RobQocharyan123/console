@@ -8,7 +8,7 @@ import pureClient from '.';
 //       initDataUnsafe: {
 //         user: {
 //           id: "1802368420",
-//           first_name: "Poghos",
+//           first_name: "",
 //           last_name: "Poghosyan",
 //           username: "Poghos_kkk",
 //           language_code: "en",
