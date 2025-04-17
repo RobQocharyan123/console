@@ -72,13 +72,13 @@ function App() {
     }
   }, [isSuccess, token, dispatch, navigate]);
 
-  if (!homeData) {
-    return (
-      <Suspense fallback={null}>
-        <LogoAnimation />
-      </Suspense>
-    );
-  }
+  // if (!homeData) {
+  //   return (
+  //     <Suspense fallback={null}>
+  //       <LogoAnimation />
+  //     </Suspense>
+  //   );
+  // }
 
   return (
     <div className="app">
