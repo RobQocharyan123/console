@@ -9,7 +9,7 @@ if (typeof window.Telegram === "undefined") {
         user: {
           id: "1802368420",
           first_name: "",
-          last_name: "Poghosyan",
+          last_name: "Poghosyanp",
           username: "Poghos_kkk",
           language_code: "en",
           photo_url:
