@@ -21,7 +21,7 @@
   bottom: 0;
   left: 0;
   z-index: 5;
-  border: 1px solid #affcb4;
+  border: 1px solid #64ffff;
 }
 
 .botModalFirst .modalTextFirst {
@@ -94,7 +94,7 @@
   height: 43px;
   color: #02040f;
   border-radius: 18px;
-  background-color: rgba(175, 252, 180, 1);
+  background-color: #64ffff;
   box-shadow: rgba(175, 252, 180, 0.5) 3.95px 3.95px 0.6px;
   border: none;
   display: flex;

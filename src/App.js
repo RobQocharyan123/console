@@ -34,13 +34,11 @@ function App() {
 
   const isSuccess = useSelector((state) => state?.telegramLogin?.isSuccess);
   const token = useSelector((state) => state?.telegramLogin?.token);
-  const [isInitialized, setIsInitialized] = useState(false);
   console.log(homeData);
 
   useEffect(() => {
     const userData = tg.initDataUnsafe.user;
     if (userData) {
-      setIsInitialized(true);
       dispatch(loginTelegramBotThunk(userData));
     }
   }, [dispatch, tg.initDataUnsafe.user]);
@@ -57,35 +55,23 @@ function App() {
   // }
 
   useEffect(() => {
-    if (!isInitialized) return;
+    const tg = window.Telegram.WebApp;
+    tg.expand();
+    tg.enableClosingConfirmation(); // This will show a confirmation before closing
+    // OR
+    tg.MainButton.show(); // Showing the main button also prevents pull-to-close
 
-    const mainScroll = document.querySelector('.main-scroll');
-    let startY = 0;
+    // Alternatively, you can completely disable the pull-to-close behavior:
+    tg.setHeaderColor('#02040f'); // Set your app's background color
+    tg.backgroundColor = '#02040f'; // Set your app's background color
+    tg.isClosingConfirmationEnabled = true;
 
-    const handleTouchStart = (e) => {
-      startY = e.touches[0].clientY;
-    };
-
-    const handleTouchMove = (e) => {
-      // Only prevent if pulling down from top
-      if (mainScroll.scrollTop === 0 && e.touches[0].clientY > startY) {
-        e.preventDefault();
-      }
-    };
-
-    mainScroll?.addEventListener('touchstart', handleTouchStart, {
-      passive: true,
-    });
-    mainScroll?.addEventListener('touchmove', handleTouchMove, {
-      passive: false,
-    });
-
-    return () => {
-      mainScroll?.removeEventListener('touchstart', handleTouchStart);
-      mainScroll?.removeEventListener('touchmove', handleTouchMove);
-    };
-  }, [isInitialized]);
-
+    // This is the most direct way to prevent pull-to-close:
+    if (tg.platform !== 'unknown') {
+      // Check if running in Telegram
+      tg.disablePullToClose();
+    }
+  }, []);
   return (
     <div className="app">
       <Suspense fallback={<LogoAnimation />}>
