@@ -1,19 +1,16 @@
-import "./App.css";
 import { useEffect } from "react";
+import "./App.css";
 
 function App() {
   useEffect(() => {
-    if (window.Telegram && window.Telegram.WebApp) {
-      const user = window.Telegram.WebApp.initDataUnsafe?.user;
-      if (user) {
-        console.log("Telegram User:", user);
-      } else {
-        console.log("No user data available.");
-      }
+    const tg = window.Telegram?.WebApp;
+
+    const user = tg?.initDataUnsafe?.user;
+
+    if (user) {
+      console.log("✅ Telegram User Info:", user); // Will log the user info here
     } else {
-      console.warn(
-        "Telegram WebApp API not available. Are you outside Telegram?"
-      );
+      console.warn("⚠️ User not available. Open inside Telegram WebApp.");
     }
   }, []);
 
