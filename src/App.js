@@ -31,37 +31,38 @@ function App() {
   const token = useSelector((state) => state?.telegramLogin?.token);
 
   useEffect(() => {
-    debugger;
     const tg = window.Telegram?.WebApp;
+
     if (!tg) {
-      console.warn('Not running in Telegram WebApp environment');
+      console.warn('❌ Not running inside Telegram WebApp.');
       return;
     }
 
-    // Initialize Telegram WebApp
     tg.ready();
     tg.expand();
-    tg.enableClosingConfirmation();
-    tg.MainButton.hide();
-    tg.BackButton.hide();
+    tg.enableClosingConfirmation?.();
+    tg.MainButton?.hide?.();
+    tg.BackButton?.hide?.();
 
-    // Process Telegram data
-    console.log('Telegram WebApp Data:', {
-      user: tg.initDataUnsafe?.user,
-      platform: tg.platform,
-      theme: tg.themeParams,
-    });
+    const user = tg.initDataUnsafe?.user;
 
-    if (tg.initDataUnsafe?.user) {
-      dispatch(loginTelegramBotThunk(tg.initDataUnsafe.user));
+    if (user) {
+      console.log('✅ Telegram WebApp User Info:', user);
+
+      // Optional: show individual fields
+      console.log('User ID:', user.id);
+      console.log('First Name:', user.first_name);
+      console.log('Username:', user.username);
+      console.log('Language Code:', user.language_code);
+
+      dispatch(loginTelegramBotThunk(user));
     } else {
-      console.error('No user data found in Telegram WebApp');
+      console.error('❌ No user data found. Maybe opened outside Telegram?');
     }
 
-    // Clean up function
     return () => {
-      tg.offEvent('viewportChanged');
-      tg.offEvent('themeChanged');
+      tg.offEvent?.('viewportChanged');
+      tg.offEvent?.('themeChanged');
     };
   }, []);
 
