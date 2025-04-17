@@ -38,7 +38,7 @@ function App() {
     const userData = tg?.initDataUnsafe?.user;
     const hash = tg?.initDataUnsafe?.hash;
 
-    if (userData && hash) {
+    if (userData) {
       const fullUserData = { ...userData, hash };
       dispatch(loginTelegramBotThunk(fullUserData));
       console.log("✅ Telegram User Info with hash:", fullUserData);
@@ -56,37 +56,10 @@ function App() {
     }
   }, [isSuccess, dispatch]);
 
-  useEffect(() => {
-    const tg = window.Telegram?.WebApp;
-
-    if (tg) {
-      tg.expand(); // Expand the app initially to avoid minimizing
-
-      tg.onEvent("viewport_changed", (event) => {
-        const { is_expanded } = event.data;
-
-        // If the app is minimized, expand it again
-        if (!is_expanded) {
-          tg.expand();
-        }
-
-        console.log("Viewport expanded:", is_expanded);
-      });
-    }
-
-    // Cleanup event listener on unmount
-    return () => {
-      const tg = window.Telegram?.WebApp;
-      if (tg) {
-        tg.offEvent("viewport_changed");
-      }
-    };
-  }, []);
-
   // Conditionally render content (for example, loading logo animation if data is not loaded)
-  if (!homeData) {
-    return <LogoAnimation />;
-  }
+  // if (!homeData) {
+  //   return <LogoAnimation />;
+  // }
 
   return (
     <div className="app">
