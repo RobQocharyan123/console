@@ -34,25 +34,30 @@ function App() {
   const tg = window.Telegram.WebApp;
 
   useEffect(() => {
-    if (!tg) {
-      console.log('Not running in Telegram - skipping WebApp init');
-      return;
+    // Check if running in Telegram
+    if (window.Telegram?.WebApp) {
+      const tg = window.Telegram.WebApp;
+      tg.expand();
+
+      // Try both initData and initDataUnsafe
+      console.log('Full initData:', tg.initData);
+      console.log('initDataUnsafe:', tg.initDataUnsafe);
+
+      const user = tg.initDataUnsafe?.user;
+      console.log(user, 'userik');
+
+      if (user) {
+        dispatch(loginTelegramBotThunk(user));
+      } else {
+        console.warn(
+          'No user data available - make sure the bot is properly configured'
+        );
+      }
+    } else {
+      console.warn('Not running in Telegram WebApp environment');
+      // You might want to add mock data for development here
     }
-
-    // Log the user data immediately
-    const userData = tg.initDataUnsafe?.user;
-    console.log('Telegram User Data:', userData);
-
-    tg.expand();
-    tg.disablePullToClose?.();
-    tg.MainButton?.show();
-    tg.BackButton?.hide();
-    tg.setHeaderColor?.('#02040F');
-
-    if (userData) {
-      dispatch(loginTelegramBotThunk(userData));
-    }
-  }, [dispatch, tg]);
+  }, [dispatch]);
 
   useEffect(() => {
     if (isSuccess) {
