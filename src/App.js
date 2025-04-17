@@ -1,8 +1,9 @@
 import './App.css';
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { Suspense, lazy, useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { loginPostUserData } from './Commons/Services/homePageService.js';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getHomePageDataThunk,
@@ -24,77 +25,61 @@ const Friends = lazy(() => import('./Commons/Components/Friends/Friends'));
 
 function App() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
+  const tg = window.Telegram.WebApp;
+  tg.expand();
+
+  const dispatch = useDispatch();
   const homeData = useSelector((state) => state?.homePage?.homeData);
+
   const isSuccess = useSelector((state) => state?.telegramLogin?.isSuccess);
   const token = useSelector((state) => state?.telegramLogin?.token);
-
-  const tg = window.Telegram?.WebApp;
+  console.log(homeData);
 
   useEffect(() => {
-    if (tg) {
-      tg.ready();
-      const user = tg.initDataUnsafe?.user;
-      if (user) {
-        console.log('User Info:', user);
-
-        // Replace with your Telegram bot token
-        const botToken = '8061156654:AAGeTofj4seD_wKt1tgYg8LSfSoIJH6sFwg';
-        const userId = user.id;
-
-        // Telegram API URL to send the message
-        const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-
-        // Message content
-        const messageData = {
-          chat_id: userId,
-          text: 'Welcome to the app!',
-          reply_markup: {
-            inline_keyboard: [
-              [
-                {
-                  text: 'Open App',
-                  web_app: {
-                    url: 'https://console-iota-two.vercel.app/home', // Replace with your actual app URL
-                  },
-                },
-              ],
-            ],
-          },
-        };
-
-        // Send the message to the user
-        fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(messageData),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log('Telegram API Response:', data);
-          })
-          .catch((error) => {
-            console.error('Error sending message:', error);
-          });
-      }
+    const userData = tg.initDataUnsafe.user;
+    if (userData) {
+      dispatch(loginTelegramBotThunk(userData));
     }
-  }, []);
+  }, [dispatch, tg.initDataUnsafe.user]);
 
   useEffect(() => {
-    if (isSuccess && token) {
+    if (isSuccess) {
       dispatch(getHomePageDataThunk({ token }));
-      navigate('/home', { replace: true });
+      navigate('/home');
     }
-  }, [isSuccess, token, dispatch, navigate]);
+  }, [isSuccess, dispatch]);
+
+  // if (!homeData) {
+  //   return <LogoAnimation />;
+  // }
+
+  useEffect(() => {
+    const mainScroll = document.querySelector('.main-scroll');
+
+    const preventPullDown = (e) => {
+      // If scrolled to the top and user swipes down
+      if (mainScroll.scrollTop === 0 && e.touches[0].clientY > 5) {
+        e.preventDefault();
+      }
+    };
+
+    mainScroll?.addEventListener('touchmove', preventPullDown, {
+      passive: false,
+    });
+
+    return () => {
+      mainScroll?.removeEventListener('touchmove', preventPullDown);
+    };
+  }, []);
 
   return (
     <div className="app">
       <Suspense fallback={<LogoAnimation />}>
         <Header />
         <div className="main-scroll">
+          {/* 👈 Scrollable wrapper */}
           <Routes>
-            <Route path="/" element={<Navigate to="/home" replace />} />
             <Route path="/home" element={<Home />}>
               <Route path="boost" element={<Boost />} />
             </Route>
@@ -104,7 +89,6 @@ function App() {
             <Route path="/airdrop" element={<AirDrop />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/friends" element={<Friends />} />
-            <Route path="*" element={<Navigate to="/home" replace />} />
           </Routes>
         </div>
         <NavBar />
