@@ -45,7 +45,6 @@ const Home = () => {
 
       <img src={fon} alt="fon" className="fon" />
 
-      {loading && <LogoAnimation />}
       <div className="home">
         {!isBoostPage && (
           <>
@@ -77,8 +76,8 @@ const Home = () => {
                   onChange={(e) => setDailyCode(e.target.value)}
                   value={dailyCode}
                   disabled={
-                    !homeData?.is_used_daily_code ||
-                    !homeData?.is_used_daily_code === undefined
+                    homeData?.is_used_daily_code ||
+                    homeData?.is_used_daily_code === undefined
                   }
                 />
                 <button
@@ -93,7 +92,11 @@ const Home = () => {
               </div>
             </div>
 
-            <MiningProcess />
+            {loading ? (
+              <LogoAnimation />
+            ) : (
+              homeData && Object.keys(homeData).length > 0 && <MiningProcess />
+            )}
 
             <h2>Daily Claim</h2>
             <div className="dailyClaim">

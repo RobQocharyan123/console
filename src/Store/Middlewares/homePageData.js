@@ -6,6 +6,7 @@ import {
   loginPostUserData
 } from "./../../Commons/Services/homePageService";
 import Success from "../../Commons/Components/Success/Success";
+import { toast } from "react-toastify";
 
 export const loginTelegramBotThunk = createAsyncThunk(
   "post/login/userData",
@@ -36,8 +37,10 @@ export const sendDailyCodeThunk = createAsyncThunk(
   async ({ data, token }) => {
     try {
       const response = await homePageDailyCode(data, token);
+
       return response;
     } catch (err) {
+      toast.error(err?.response?.data?.msg);
       console.error(err);
     }
   }

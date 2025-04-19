@@ -10,11 +10,14 @@ import { getHomePageDataThunk } from "../../../../Store/Middlewares/homePageData
 import { toast } from "react-toastify";
 import miningAnimation from "../../../../Assets/Home/mining-animation.svg";
 import { motion } from "framer-motion";
+import pureClient from "../../../Services";
 
 const MiningProcess = () => {
   const token = useSelector((state) => state?.telegramLogin?.token);
   const showSuccess = useSelector((state) => state?.homePage?.showSuccess);
   const homeData = useSelector((state) => state?.homePage?.homeData);
+  const [endTime, setEndTime] = useState(null);
+
   const totalSquares = 8;
 
   const miningDuration =
@@ -29,11 +32,7 @@ const MiningProcess = () => {
 
   const emptySquares = totalSquares - initialFilledSquares;
   const dispatch = useDispatch();
-  const [squares, setSquares] = useState(
-    Array(totalSquares)
-      .fill(false)
-      .map((_, index) => index < initialFilledSquares)
-  );
+  const [squares, setSquares] = useState(Array(totalSquares).fill(false));
 
   const [miningTimeLeft, setMiningTimeLeft] = useState(
     miningDuration ? miningDuration : 1
@@ -113,8 +112,8 @@ const MiningProcess = () => {
 
   const handleClaim = async () => {
     try {
-      const response = await axios.put(
-        "http://localhost:3030/user/mining-claim",
+      const response = await pureClient.put(
+        "user/mining-claim",
         {},
         {
           headers: {
@@ -162,15 +161,34 @@ const MiningProcess = () => {
       homeData?.user_mining_data?.mining_left_second &&
       homeData?.user_mining_data?.boost_speed
     ) {
-      const miningDuration =
+      const duration =
         homeData.user_mining_data.mining_left_second /
         homeData.user_mining_data.boost_speed;
 
-      if (!isNaN(miningDuration)) {
-        setMiningTimeLeft(miningDuration);
+      if (!isNaN(duration)) {
+        const now = Date.now();
+        setEndTime(now + duration); // store end time in ms
       }
     }
-  }, [homeData]); // This effect runs when homeData is updated
+  }, [homeData]);
+
+  useEffect(() => {
+    if (!endTime) return;
+
+    const interval = setInterval(() => {
+      const now = Date.now();
+      const timeLeft = endTime - now;
+
+      if (timeLeft <= 0) {
+        setMiningTimeLeft(0);
+        clearInterval(interval);
+      } else {
+        setMiningTimeLeft(timeLeft);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [endTime]);
 
   return (
     <>

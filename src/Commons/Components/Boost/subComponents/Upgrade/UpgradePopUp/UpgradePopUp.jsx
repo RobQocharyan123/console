@@ -78,7 +78,9 @@ const UpgradePopUp = ({ setShow, data }) => {
       type: "native"
     };
     const response = await upgradeServicePost({ obj, token });
-    dispatch(setUpdateUbgradeData(response?.data));
+    if (response) {
+      dispatch(setUpdateUbgradeData(response?.data));
+    }
     setShow(false);
   };
 
